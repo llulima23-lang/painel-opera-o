@@ -396,7 +396,17 @@ function renderOperadores() {
 
     if (!lista.length) {
         grid.innerHTML = '<p style="color:#64748b;padding:20px;">Nenhum operador encontrado.</p>';
+        const pnl = document.getElementById('motivational-panel');
+        if (pnl) pnl.style.display = 'none';
         return;
+    }
+    
+    if (!G.isAdmin && G.currentMatricula && lista.length > 0) {
+        const result = getOperatorStatusAndDetails(lista[0]);
+        renderMotivational(result.status, result.details);
+    } else {
+        const pnl = document.getElementById('motivational-panel');
+        if (pnl) pnl.style.display = 'none';
     }
 
     // Ordena: meta batida primeiro (só admin vê todos)
@@ -515,4 +525,134 @@ function renderOperadores() {
         `;
         grid.appendChild(card);
     });
+}
+
+// ─────────────────────────────────────────────────────────
+//  MOTIVACIONAL E STATUS DO OPERADOR
+// ─────────────────────────────────────────────────────────
+const MOTIVATIONAL_QUOTES = [
+    "O sucesso é a soma de pequenos esforços repetidos dia após dia.",
+    "Acredite que você pode, assim você já está no meio do caminho.",
+    "Não espere por oportunidades, crie-as.",
+    "A persistência é o caminho do êxito.",
+    "Seja a melhor versão de si mesmo todos os dias.",
+    "Grandes conquistas exigem grandes dedicações.",
+    "O segredo do sucesso é a constância do propósito.",
+    "O único lugar onde o sucesso vem antes do trabalho é no dicionário.",
+    "Cada novo dia é uma nova chance de fazer melhor.",
+    "Seu futuro é criado pelo que você faz hoje.",
+    "A motivação te faz começar, o hábito te faz continuar.",
+    "Foque no seu objetivo e não nas dificuldades.",
+    "Desafios são oportunidades disfarçadas.",
+    "O sucesso não é um acidente, é trabalho duro e aprendizado.",
+    "Pequenos progressos diários levam a grandes resultados.",
+    "Não importa o quão devagar você vá, desde que você não pare.",
+    "O impossível é apenas uma palavra até que alguém o faça.",
+    "Acredite no seu potencial e supere seus limites.",
+    "A energia que você coloca no universo é a mesma que retorna para você.",
+    "Cada passo à frente, por menor que seja, é um avanço.",
+    "A disciplina é a ponte entre metas e realizações.",
+    "Celebre as pequenas vitórias; elas te levarão ao grande sucesso.",
+    "O otimismo é a fé em ação.",
+    "Sucesso é ir de fracasso em fracasso sem perder o entusiasmo.",
+    "A excelência não é um ato, mas um hábito.",
+    "Mantenha o foco, a força e a fé em si mesmo.",
+    "Não limite seus desafios, desafie seus limites.",
+    "Sua atitude determina sua altitude.",
+    "Acredite no processo e continue avançando.",
+    "O amanhã começa com as escolhas de hoje.",
+    "Você é mais forte e capaz do que imagina."
+];
+
+function getOperatorStatusAndDetails(op) {
+    const metaRow = op.metasMap[G.mesSelecionado];
+    const tm = op.tempoMes;
+    
+    let isBad = false, isAlert = false;
+    let goodList = [];
+    let badList = [];
+    
+    if (metaRow && metaRow.meta_prom > 0) {
+        const pct = metaRow.promessas / metaRow.meta_prom * 100;
+        if (pct < 80) { isBad = true; badList.push('Promessas'); }
+        else if (pct < 100) { isAlert = true; badList.push('Promessas'); }
+        else { goodList.push('Promessas'); }
+    }
+    if (metaRow && metaRow.qualidade !== null) {
+        if (metaRow.qualidade < 90) { isBad = true; badList.push('Qualidade'); }
+        else if (metaRow.qualidade < 95) { isAlert = true; badList.push('Qualidade'); }
+        else { goodList.push('Qualidade'); }
+    }
+    if (metaRow && metaRow.abs_dias > 0) {
+        const du = ((EMBEDDED_DATA.meta || {})[G.mesSelecionado] || {}).du || 22;
+        const absPct = metaRow.abs_dias / du * 100;
+        if (absPct > 5) { isBad = true; badList.push('Faltas'); }
+        else if (absPct > 2) { isAlert = true; badList.push('Faltas'); }
+        else { goodList.push('Faltas'); }
+    } else if (metaRow && metaRow.abs_dias === 0) {
+        goodList.push('Faltas');
+    }
+    
+    if (tm && tm.media_pausa_pct !== null) {
+        if (tm.media_pausa_pct > 18) { isBad = true; badList.push('Pausas'); }
+        else if (tm.media_pausa_pct > 15.5) { isAlert = true; badList.push('Pausas'); }
+        else { goodList.push('Pausas'); }
+    }
+    
+    let status = 'good';
+    if (isBad) status = 'bad';
+    else if (isAlert) status = 'alert';
+    
+    return { status, details: { good: goodList, bad: badList } };
+}
+
+function renderMotivational(status, details) {
+    const pnl = document.getElementById('motivational-panel');
+    if (!pnl) return;
+    
+    const hoje = new Date();
+    // Usa o dia do mês para rotacionar a frase.
+    const quote = MOTIVATIONAL_QUOTES[hoje.getDate() % MOTIVATIONAL_QUOTES.length];
+    
+    let title = "", imgSrc = "", cls = "";
+    if (status === 'good') {
+        title = "Excelente Trabalho! 🏆";
+        imgSrc = "status_good.png";
+        cls = "good";
+    } else if (status === 'alert') {
+        title = "Atenção: Foco nos indicadores! 🧭";
+        imgSrc = "status_alert.png";
+        cls = "alert";
+    } else {
+        title = "Aviso: Precisamos melhorar! 📢";
+        imgSrc = "status_bad.png";
+        cls = "bad";
+    }
+    
+    let detailsHtml = "";
+    if (details.good.length > 0) {
+        detailsHtml += `<span><strong class="status-good-text">✅ Excelente em:</strong> ${details.good.join(', ')}</span>`;
+    }
+    if (details.bad.length > 0) {
+        detailsHtml += `<span><strong class="status-bad-text">⚠️ Precisamos melhorar:</strong> ${details.bad.join(', ')}</span>`;
+    }
+    if (detailsHtml === "") {
+        detailsHtml = `<span>Ainda não há dados suficientes neste mês.</span>`;
+    }
+    
+    pnl.className = 'motivational-container';
+    pnl.innerHTML = `
+        <div class="status-card ${cls}">
+            <img src="${imgSrc}" class="status-img" alt="${status}">
+            <div class="status-content">
+                <div class="status-title">${title}</div>
+                <div class="status-details">${detailsHtml}</div>
+            </div>
+        </div>
+        <div class="quote-card">
+            <img src="motivation_art.png" class="quote-img" alt="Motivação">
+            <div class="quote-text">"${quote}"</div>
+        </div>
+    `;
+    pnl.style.display = 'flex';
 }
