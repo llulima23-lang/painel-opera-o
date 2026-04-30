@@ -518,13 +518,25 @@ function renderOperadores() {
                     </div>
                     <div class="bh-item bh-saldo" style="border-top:1px dashed var(--border);padding-top:8px;margin-top:4px;">
                         <div class="bh-label"><strong>Saldo Final</strong></div>
-                        <div class="bh-val" style="font-size:17px;font-weight:700;color:${saldoBh>=0?'#10b981':'#ef4444'}">${secToStr(saldoBh)}</div>
+                        <div class="bh-val" style="font-size:19px;font-weight:700;color:${saldoBh>=0?'#10b981':'#ef4444'}">${secToStr(saldoBh)}</div>
                     </div>
                 </div>
             </div>
         `;
         grid.appendChild(card);
     });
+
+    if (!G.isAdmin && G.currentMatricula && lista.length === 1) {
+        const hoje = new Date();
+        const quote = MOTIVATIONAL_QUOTES[hoje.getDate() % MOTIVATIONAL_QUOTES.length];
+        const quoteCard = document.createElement('div');
+        quoteCard.className = 'quote-card';
+        quoteCard.innerHTML = `
+            <img src="motivation_art_callcenter.png" class="quote-img" alt="Motivação">
+            <div class="quote-text">"${quote}"</div>
+        `;
+        grid.appendChild(quoteCard);
+    }
 }
 
 // ─────────────────────────────────────────────────────────
@@ -610,10 +622,6 @@ function renderMotivational(status, details) {
     const pnl = document.getElementById('motivational-panel');
     if (!pnl) return;
     
-    const hoje = new Date();
-    // Usa o dia do mês para rotacionar a frase.
-    const quote = MOTIVATIONAL_QUOTES[hoje.getDate() % MOTIVATIONAL_QUOTES.length];
-    
     let title = "", imgSrc = "", cls = "";
     if (status === 'good') {
         title = "Excelente Trabalho! 🏆";
@@ -648,10 +656,6 @@ function renderMotivational(status, details) {
                 <div class="status-title">${title}</div>
                 <div class="status-details">${detailsHtml}</div>
             </div>
-        </div>
-        <div class="quote-card">
-            <img src="motivation_art.png" class="quote-img" alt="Motivação">
-            <div class="quote-text">"${quote}"</div>
         </div>
     `;
     pnl.style.display = 'flex';
