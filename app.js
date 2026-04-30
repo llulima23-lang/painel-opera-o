@@ -159,12 +159,10 @@ function iniciarApp(isAdmin, matricula) {
         });
     });
 
-    // Filtros globais (só admin)
-    if (isAdmin) {
-        buildSelectores();
-        buildFeriadosPanel();
-        registrarEventosFiltros();
-    }
+    // Filtros globais (Mês e Feriados disponíveis para operadores também)
+    buildSelectores();
+    buildFeriadosPanel();
+    registrarEventosFiltros();
 
     buildOperadores();
     renderTudo();
