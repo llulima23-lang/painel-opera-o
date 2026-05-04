@@ -107,8 +107,22 @@ function tentarLogin() {
 }
 
 // ─────────────────────────────────────────────────────────
-//  INICIAR APP
+//  AGENDAMENTO DIÁRIO E INICIAR APP
 // ─────────────────────────────────────────────────────────
+function agendarAtualizacaoDiaria() {
+    const agora = new Date();
+    let proxAtualizacao = new Date(agora.getFullYear(), agora.getMonth(), agora.getDate(), 0, 0, 59);
+    if (agora >= proxAtualizacao) {
+        proxAtualizacao.setDate(proxAtualizacao.getDate() + 1);
+    }
+    const msAteAtualizar = proxAtualizacao - agora;
+    
+    setTimeout(() => {
+        if (!G.isAdmin) renderOperadores();
+        agendarAtualizacaoDiaria();
+    }, msAteAtualizar);
+}
+
 function iniciarApp(isAdmin, matricula) {
     G.isAdmin          = isAdmin;
     G.currentMatricula = matricula;
@@ -166,6 +180,8 @@ function iniciarApp(isAdmin, matricula) {
 
     buildOperadores();
     renderTudo();
+    
+    agendarAtualizacaoDiaria();
 }
 
 // ─────────────────────────────────────────────────────────
@@ -529,10 +545,13 @@ function renderOperadores() {
     if (!G.isAdmin && G.currentMatricula && lista.length === 1) {
         const hoje = new Date();
         const quote = MOTIVATIONAL_QUOTES[hoje.getDate() % MOTIVATIONAL_QUOTES.length];
+        const imgs = ['motivation_art_new_month.png', 'motivation_art_callcenter.png', 'motivation_art.png', 'motivation_art_funny.png'];
+        const img = imgs[hoje.getDate() % imgs.length];
+        
         const quoteCard = document.createElement('div');
         quoteCard.className = 'quote-card';
         quoteCard.innerHTML = `
-            <img src="motivation_art_callcenter.png" class="quote-img" alt="Motivação">
+            <img src="${img}" class="quote-img" alt="Motivação">
             <div class="quote-text">"${quote}"</div>
         `;
         grid.appendChild(quoteCard);
@@ -547,7 +566,7 @@ const MOTIVATIONAL_QUOTES = [
     "Acredite que você pode, assim você já está no meio do caminho.",
     "Não espere por oportunidades, crie-as.",
     "A persistência é o caminho do êxito.",
-    "Seja a melhor versão de si mesmo todos os dias.",
+    "Mês novo, foco renovado! 🚀 Que a força do café (e a vontade de bater meta) estejam com você!",
     "Grandes conquistas exigem grandes dedicações.",
     "O segredo do sucesso é a constância do propósito.",
     "O único lugar onde o sucesso vem antes do trabalho é no dicionário.",

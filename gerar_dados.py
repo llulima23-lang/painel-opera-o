@@ -246,10 +246,10 @@ def process_excel():
         'operacoes':  sorted(operacoes_set),
         'updated_at': datetime.datetime.now().isoformat()
     }
-    js_content = f"const EMBEDDED_DATA = {json.dumps(output, ensure_ascii=False, default=str)};\n"
+    js_content = f"const EMBEDDED_DATA = {json.dumps(output, ensure_ascii=False, default=str, indent=4)};\n"
     with open(JS_OUTPUT, 'w', encoding='utf-8') as f:
         f.write(js_content)
-    print("  OK! data_embedded.js gerado com sucesso!")
+    print("  OK! data_embedded.js gerado com sucesso formatado!")
 
 if __name__ == "__main__":
     process_excel()
