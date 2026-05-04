@@ -1193,6 +1193,11 @@ const EMBEDDED_DATA = {
             "debito_sec": 4320
         },
         {
+            "data": "2026-04-13",
+            "nome": "Aniversário de Fortaleza",
+            "debito_sec": 4320
+        },
+        {
             "data": "2026-04-21",
             "nome": "Tiradentes",
             "debito_sec": 4320
@@ -1246,5 +1251,5 @@ const EMBEDDED_DATA = {
         "ALARES/AGORACRED",
         "M.DIAS"
     ],
-    "updated_at": "2026-05-04T14:26:11.057143"
+    "updated_at": "2026-05-04T15:10:39.991751"
 };

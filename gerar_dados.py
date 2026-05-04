@@ -27,6 +27,7 @@ FERIADOS_2026 = [
     {"data": "2026-03-19", "nome": "São José (CE)",           "debito_sec": 4320},
     {"data": "2026-03-25", "nome": "Data Magna do Ceará",     "debito_sec": 4320},
     {"data": "2026-04-03", "nome": "Paixão de Cristo",        "debito_sec": 4320},
+    {"data": "2026-04-13", "nome": "Aniversário de Fortaleza","debito_sec": 4320},
     {"data": "2026-04-21", "nome": "Tiradentes",              "debito_sec": 4320},
     {"data": "2026-05-01", "nome": "Dia do Trabalho",         "debito_sec": 4320},
     {"data": "2026-06-04", "nome": "Corpus Christi",          "debito_sec": 4320},
