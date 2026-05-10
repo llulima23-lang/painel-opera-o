@@ -2,15 +2,13 @@
 //  CONSTANTES
 // ═══════════════════════════════════════════════════════════
 const ADMIN_SENHA       = '1926';
-const DEBITO_FERIADO_SEC = 4320;  // 01:12:00
 const DATA_CORTE        = new Date(2026, 2, 16);
 
-const MES_MAP = {
-    'METAS JANEIRO2026':   '2026-01',
-    'METAS FEVEREIRO2026': '2026-02',
-    'METAS MARÇO2026':     '2026-03',
-    'METAS ABRIL2026':     '2026-04',
-};
+// Mapeamento dinâmico será construído na inicialização
+let MES_MAP = {};
+
+let lastUpdatedAt = null;
+let pollInterval  = null;
 
 // ═══════════════════════════════════════════════════════════
 //  ESTADO GLOBAL
@@ -18,11 +16,10 @@ const MES_MAP = {
 let G = {
     isAdmin:         false,
     currentMatricula: null,   // null = admin, string = operador
-    mesSelecionado:  'METAS ABRIL2026',
-    mesStr:          '2026-04',
+    mesSelecionado:  'METAS MAIO2026',
+    mesStr:          '2026-05',
     filtroOperacao:  '',
     filtroNome:      '',
-    feriadosSel:     new Set(),
     operadores:      [],
 };
 
@@ -111,7 +108,8 @@ function tentarLogin() {
 // ─────────────────────────────────────────────────────────
 function agendarAtualizacaoDiaria() {
     const agora = new Date();
-    let proxAtualizacao = new Date(agora.getFullYear(), agora.getMonth(), agora.getDate(), 0, 0, 59);
+    // Agendado para as 07:55:00
+    let proxAtualizacao = new Date(agora.getFullYear(), agora.getMonth(), agora.getDate(), 7, 55, 0);
     if (agora >= proxAtualizacao) {
         proxAtualizacao.setDate(proxAtualizacao.getDate() + 1);
     }
@@ -127,21 +125,14 @@ function iniciarApp(isAdmin, matricula) {
     G.isAdmin          = isAdmin;
     G.currentMatricula = matricula;
 
+
+
     document.getElementById('login-screen').style.display   = 'none';
     document.getElementById('loading-screen').style.display = 'none';
     document.getElementById('app-wrapper').style.display    = 'flex';
 
-    // Atualização
-    const dt = new Date(EMBEDDED_DATA.updated_at);
-    const lastUpd = dt.toLocaleDateString('pt-BR') + ' ' + dt.toLocaleTimeString('pt-BR');
-
     // Info do usuário na sidebar
-    if (isAdmin) {
-        document.getElementById('user-info').textContent = '👤 Admin | Atualizado: ' + lastUpd;
-    } else {
-        const op = (EMBEDDED_DATA.adm || []).find(o => o.matricula === matricula);
-        document.getElementById('user-info').textContent = op ? op.nome : 'Operador ' + matricula;
-    }
+    atualizarInfoUsuario();
 
     // Oculta elementos admin-only se não for admin
     document.querySelectorAll('.admin-only').forEach(el => {
@@ -174,14 +165,102 @@ function iniciarApp(isAdmin, matricula) {
     });
 
     // Filtros globais (Mês e Feriados disponíveis para operadores também)
+    buildMesMap();
     buildSelectores();
-    buildFeriadosPanel();
     registrarEventosFiltros();
 
     buildOperadores();
     renderTudo();
     
     agendarAtualizacaoDiaria();
+    iniciarAutoUpdate();
+}
+
+// ─────────────────────────────────────────────────────────
+//  AUTO UPDATE (POLLING)
+// ─────────────────────────────────────────────────────────
+function iniciarAutoUpdate() {
+    if (pollInterval) clearInterval(pollInterval);
+    lastUpdatedAt = EMBEDDED_DATA.updated_at;
+    
+    // Verifica a cada 10 segundos
+    pollInterval = setInterval(verificarNovosDados, 10000);
+}
+
+function verificarNovosDados() {
+    const script = document.createElement('script');
+    // Adiciona timestamp para evitar cache do navegador
+    script.src = 'data_embedded.js?t=' + Date.now();
+    script.onload = () => {
+        if (lastUpdatedAt && EMBEDDED_DATA.updated_at !== lastUpdatedAt) {
+            console.log('🔄 Dados atualizados detectados em: ' + EMBEDDED_DATA.updated_at);
+            lastUpdatedAt = EMBEDDED_DATA.updated_at;
+            
+            // Re-processa e re-renderiza tudo
+            buildOperadores();
+            renderTudo();
+            
+            // Atualiza o texto de "Última atualização" na sidebar
+            atualizarInfoUsuario();
+            
+            // Feedback visual rápido no botão de atualizar
+            const btn = document.getElementById('btn-atualizar');
+            if (btn) {
+                btn.style.transform = 'rotate(360deg)';
+                btn.style.transition = 'transform 0.5s ease';
+                setTimeout(() => { btn.style.transform = 'none'; }, 500);
+            }
+        }
+        script.remove();
+    };
+    script.onerror = () => script.remove();
+    document.head.appendChild(script);
+}
+
+function atualizarInfoUsuario() {
+    const dt = new Date(EMBEDDED_DATA.updated_at);
+    const lastUpd = dt.toLocaleDateString('pt-BR') + ' ' + dt.toLocaleTimeString('pt-BR');
+
+    if (G.isAdmin) {
+        document.getElementById('user-info').textContent = '👤 Admin | Atualizado: ' + lastUpd;
+    } else {
+        const op = (EMBEDDED_DATA.adm || []).find(o => o.matricula === G.currentMatricula);
+        document.getElementById('user-info').textContent = (op ? op.nome : 'Operador ' + G.currentMatricula) + ' | ' + lastUpd;
+    }
+}
+
+// ─────────────────────────────────────────────────────────
+//  MAPEAMENTO DE MESES
+// ─────────────────────────────────────────────────────────
+function buildMesMap() {
+    const metaKeys = Object.keys(EMBEDDED_DATA.meta || {});
+    metaKeys.forEach(k => {
+        // Tenta extrair o mês do nome da aba (ex: METAS ABRIL2026)
+        const match = k.match(/METAS\s+(JANEIRO|FEVEREIRO|MARCO|MARÇO|ABRIL|MAIO|JUNHO|JULHO|AGOSTO|SETEMBRO|OUTUBRO|NOVEMBRO|DEZEMBRO)(\d{4})?/i);
+        if (match) {
+            const mesNome = match[1].toUpperCase();
+            const ano = match[2] || '2026';
+            const meses = {
+                'JANEIRO': '01', 'FEVEREIRO': '02', 'MARCO': '03', 'MARÇO': '03',
+                'ABRIL': '04', 'MAIO': '05', 'JUNHO': '06', 'JULHO': '07',
+                'AGOSTO': '08', 'SETEMBRO': '09', 'OUTUBRO': '10', 'NOVEMBRO': '11', 'DEZEMBRO': '12'
+            };
+            MES_MAP[k] = `${ano}-${meses[mesNome]}`;
+        }
+    });
+    
+    // Atualiza o seletor de meses no HTML se necessário
+    const selMes = document.getElementById('mes-filter');
+    if (selMes) {
+        selMes.innerHTML = '';
+        Object.keys(MES_MAP).sort((a,b) => MES_MAP[b].localeCompare(MES_MAP[a])).forEach(k => {
+            const opt = document.createElement('option');
+            opt.value = k;
+            opt.textContent = k.replace('METAS ', '');
+            if (k === G.mesSelecionado) opt.selected = true;
+            selMes.appendChild(opt);
+        });
+    }
 }
 
 // ─────────────────────────────────────────────────────────
@@ -205,33 +284,7 @@ function buildSelectores() {
     });
 }
 
-// ─────────────────────────────────────────────────────────
-//  FERIADOS
-// ─────────────────────────────────────────────────────────
-function buildFeriadosPanel() {
-    const grid = document.getElementById('feriados-grid');
-    (EMBEDDED_DATA.feriados || []).forEach(f => {
-        const d = new Date(f.data + 'T12:00:00');
-        const lbl = document.createElement('label');
-        lbl.className = 'feriado-item';
-        lbl.innerHTML = `
-            <input type="checkbox" class="feriado-check" value="${f.data}">
-            <span class="feriado-data">${d.toLocaleDateString('pt-BR')}</span>
-            <span class="feriado-nome">${f.nome}</span>
-            <span class="feriado-debito">−01:12</span>
-        `;
-        lbl.querySelector('input').addEventListener('change', e => {
-            if (e.target.checked) G.feriadosSel.add(f.data);
-            else G.feriadosSel.delete(f.data);
-            atualizaBadge(); renderTudo();
-        });
-        grid.appendChild(lbl);
-    });
-}
 
-function atualizaBadge() {
-    document.getElementById('feriados-badge').textContent = G.feriadosSel.size;
-}
 
 // ─────────────────────────────────────────────────────────
 //  EVENTOS FILTROS
@@ -256,26 +309,21 @@ function registrarEventosFiltros() {
         renderTudo();
     });
     document.getElementById('btn-atualizar').addEventListener('click', () => location.reload());
-    document.getElementById('btn-feriados').addEventListener('click', () => {
-        const p = document.getElementById('feriados-panel');
-        p.style.display = p.style.display === 'none' ? 'block' : 'none';
-    });
-    document.getElementById('btn-marcar-todos').addEventListener('click', () => {
-        document.querySelectorAll('.feriado-check').forEach(cb => { cb.checked = true; G.feriadosSel.add(cb.value); });
-        atualizaBadge(); renderTudo();
-    });
-    document.getElementById('btn-desmarcar-todos').addEventListener('click', () => {
-        document.querySelectorAll('.feriado-check').forEach(cb => { cb.checked = false; });
-        G.feriadosSel.clear(); atualizaBadge(); renderTudo();
-    });
+
 }
 
 // ─────────────────────────────────────────────────────────
 //  MONTA OPERADORES
 // ─────────────────────────────────────────────────────────
+const COMPENSACAO_FERIADO = 26400; // 07:20:00 em segundos
+
 function buildOperadores() {
     const adm    = EMBEDDED_DATA.adm    || [];
     const tempos = EMBEDDED_DATA.tempos || [];
+    
+    // Build photo map
+    const fotoMap = {};
+    adm.forEach(a => { if (a.foto) fotoMap[a.nome_norm] = a.foto; });
 
     const temposIdx = {};
     tempos.forEach(t => { temposIdx[t.nome_norm + '|' + t.mes] = t; });
@@ -290,16 +338,30 @@ function buildOperadores() {
     G.operadores = adm.map(op => {
         const nNorm = op.nome_norm;
         const tempoMes = temposIdx[nNorm + '|' + G.mesStr] || null;
-        const bh = bhTotal[nNorm] || { credito: 0, deficit: 0 };
+        
+        // Saldo do mês vs Saldo Acumulado
+        const bh = G.mesSelecionado ? 
+                   (tempoMes ? { credito: tempoMes.credito_sec, deficit: tempoMes.deficit_sec } : { credito: 0, deficit: 0 }) :
+                   (bhTotal[nNorm] || { credito: 0, deficit: 0 });
+
+        // Captura o Saldo Inicial do RESUMO (que é um débito histórico)
+        const bhResumo = EMBEDDED_DATA.resumo ? (EMBEDDED_DATA.resumo[nNorm] || 0) : 0;
 
         const metasMap = {};
         Object.entries(EMBEDDED_DATA.meta || {}).forEach(([sh, shData]) => {
             metasMap[sh] = (shData.rows || []).find(r => r.nome_norm === nNorm) || null;
         });
 
-        return { nome: op.nome, nomeNorm: nNorm, admissao: op.admissao,
-                 matricula: op.matricula, operacao: op.operacao,
-                 tempoMes, bhCredito: bh.credito, bhDeficit: bh.deficit, metasMap };
+        return { 
+            ...op,
+            nome: op.nome, nomeNorm: nNorm, admissao: op.admissao,
+            matricula: op.matricula, operacao: op.operacao,
+            foto: fotoMap[nNorm] || null,
+            tempoMes, bhCredito: bh.credito, 
+            bhDeficit: bh.deficit,
+            bhResumo,
+            metasMap 
+        };
     });
 }
 
@@ -329,14 +391,25 @@ function operadoresFiltrados() {
     });
 }
 
-function calcDebitoFeriados(op) {
+function calcDebitosExtras(op) {
     const admDate = op.admissao ? new Date(op.admissao + 'T12:00:00') : null;
-    let debito = 0;
-    G.feriadosSel.forEach(dataISO => {
-        const f = new Date(dataISO + 'T12:00:00');
-        if (f >= DATA_CORTE && (!admDate || f >= admDate)) debito += DEBITO_FERIADO_SEC;
+    let compensaSec = 0;
+
+    // Datas de Compensa (DÉBITO de 07:12:00 cada - Faltas a compensar)
+    const datasCompensa = (EMBEDDED_DATA.compensa || {})[op.nomeNorm] || [];
+    datasCompensa.forEach(dataISO => {
+        const d = new Date(dataISO + 'T12:00:00');
+        if (d >= DATA_CORTE && (!admDate || d >= admDate)) {
+            compensaSec += (7 * 3600 + 12 * 60); // 07:12:00 = 25920s
+        }
     });
-    return debito;
+
+    // Retorna como penalidades (valores que serão subtraídos do saldo)
+    return { 
+        total: compensaSec,
+        compensaSec, 
+        numComp: datasCompensa.length 
+    };
 }
 
 // ─────────────────────────────────────────────────────────
@@ -370,7 +443,11 @@ function renderDashboard() {
     const absPct    = (absSum / ((lista.length || 1) * du)) * 100;
 
     const comTempo   = lista.filter(o => o.tempoMes);
-    const pausaMedia = comTempo.length > 0 ? comTempo.reduce((a,o) => a+(o.tempoMes.media_pausa_pct||0),0)/comTempo.length : 0;
+    // Cálculo ponderado de pausas do time (Total Pausas / Total Tempo Logado)
+    const totalPausasSec = comTempo.reduce((a,o) => a + ((o.tempoMes.media_pausas_total_sec || 0) * o.tempoMes.dias_trabalhados), 0);
+    const totalTempoSec  = comTempo.reduce((a,o) => a + ((o.tempoMes.media_tempo_sec || 0) * o.tempoMes.dias_trabalhados), 0);
+    const pausaMedia     = totalTempoSec > 0 ? (totalPausasSec / totalTempoSec * 100) : 0;
+    
     const tempoMedia = comTempo.length > 0 ? comTempo.reduce((a,o) => a+(o.tempoMes.media_tempo_sec||0),0)/comTempo.length : 0;
 
     setKpi('kpi-atingimento', atingPct.toFixed(1)+'%',
@@ -382,21 +459,19 @@ function renderDashboard() {
     setKpi('kpi-tempo-medio',  secToStr(Math.round(tempoMedia)), cor(tempoMedia, 7*3600+12*60));
 
     // BH
-    let posTotal = 0, negTotal = 0, ferTotal = 0;
+    let posTotal = 0, negTotal = 0;
     lista.forEach(op => {
-        const d = calcDebitoFeriados(op);
-        const s = op.bhCredito - op.bhDeficit - d;
+        const extras = calcDebitosExtras(op);
+        // Saldo = Créditos - Débitos - BH_Inicial_Resumo - Extras (Feriados/Datas Compensa)
+        const s = op.bhCredito - op.bhDeficit - op.bhResumo - extras.total;
         if (s >= 0) posTotal += s; else negTotal += Math.abs(s);
-        ferTotal += d;
     });
     const saldo = posTotal - negTotal;
     setKpi('bh-positivo', secToStr(posTotal), '#10b981');
     setKpi('bh-negativo', secToStr(negTotal), '#ef4444');
-    setKpi('bh-feriados', secToStr(ferTotal), '#f59e0b');
     setKpi('bh-saldo',    secToStr(saldo),    saldo >= 0 ? '#10b981' : '#ef4444');
-    document.getElementById('feriados-qtd').textContent = G.feriadosSel.size + ' feriado(s) aplicado(s)';
     document.getElementById('dash-info').textContent =
-        `| ${du} dias úteis | ${lista.length} operadores`;
+        `| ${du} D.U | ${lista.length} operadores`;
 }
 
 // ─────────────────────────────────────────────────────────
@@ -442,6 +517,10 @@ function renderOperadores() {
         const metaProm  = metaRow ? (metaRow.meta_prom || 0) : 0;
         const qualidade = metaRow ? metaRow.qualidade : null;
         const absDias   = metaRow ? (metaRow.abs_dias || 0) : 0;
+        const ho        = metaRow ? (metaRow.ho || 0) : 0;
+        const comissao  = metaRow ? (metaRow.comissao || 0) : 0;
+        const metaPausas= metaRow ? (metaRow.pausas || 0) : 0;
+        const metaBh    = metaRow ? (metaRow.banco_horas || 0) : 0;
         const matricula = op.matricula || (metaRow && metaRow.matricula) || null;
 
         const bateouMeta = metaProm > 0 && promessas >= metaProm;
@@ -451,102 +530,93 @@ function renderOperadores() {
 
         const tm            = op.tempoMes;
         const mediaTempoSec = tm ? tm.media_tempo_sec : 0;
-        const metaDiariaSec = tm ? tm.meta_diaria_sec : (7*3600+12*60);
-        const diasTrab      = tm ? tm.dias_trabalhados : 0;
-        const mediaPausa    = tm ? tm.media_pausa_pct  : null;
-        const tempoVsMeta   = mediaTempoSec - metaDiariaSec;
 
-        const debFer  = calcDebitoFeriados(op);
-        const saldoBh = op.bhCredito - op.bhDeficit - debFer;
+        const resumoSaldo = EMBEDDED_DATA.resumo_saldo_final ? (EMBEDDED_DATA.resumo_saldo_final[op.nomeNorm] || null) : null;
+
+        const initials = op.nome.split(' ').filter(w => w.length > 1).slice(0,2).map(w => w[0]).join('');
+        const avatarHtml = op.foto
+            ? `<img src="${op.foto}" class="op-avatar" alt="${op.nome}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="op-avatar-initials" style="display:none">${initials}</div>`
+            : `<div class="op-avatar-initials">${initials}</div>`;
 
         const card = document.createElement('div');
         card.className = 'op-card' + (bateouMeta ? ' meta-batida' : '');
         card.innerHTML = `
-            ${bateouMeta ? '<div class="meta-badge">🏆 Meta Batida!</div>' : ''}
+            ${bateouMeta ? '<div class="meta-badge">\u{1F3C6} Meta Batida!</div>' : ''}
             <div class="op-header">
-                <h3>${op.nome}</h3>
-                <p>
-                    ${matricula ? `<span class="tag-mat">Mat. ${matricula}</span>` : ''}
-                    ${op.operacao ? `<span class="tag-op">${op.operacao}</span>` : ''}
-                    ${op.admissao ? ` Admissão: ${new Date(op.admissao+'T12:00:00').toLocaleDateString('pt-BR')}` : ''}
-                </p>
-            </div>
-
-            <div class="metrics-section">
-                <div class="section-label">📊 Metas — ${G.mesSelecionado.replace('METAS ','')}</div>
-                ${metaRow ? `
-                    <div class="op-metric">
-                        <span class="label">Promessas</span>
-                        <span class="val" style="color:${cor(pctProm,100)}">${promessas.toLocaleString('pt-BR')} / ${metaProm.toLocaleString('pt-BR')}</span>
-                    </div>
-                    <div class="progress-bar-wrap"><div class="progress-bar" style="width:${Math.min(pctProm,100).toFixed(1)}%;background:${cor(pctProm,100)};"></div></div>
-                    <div class="op-metric" style="margin-top:-4px;">
-                        <span class="label">${bateouMeta ? '✅ Meta atingida' : `Falta: ${faltaMeta.toLocaleString('pt-BR')}`}</span>
-                        <span class="val" style="color:${cor(pctProm,100)}">${pctProm.toFixed(1)}%</span>
-                    </div>
-                    <div class="op-metric">
-                        <span class="label">Qualidade</span>
-                        <span class="val" style="color:${qualidade!=null?cor(qualidade,95):'#64748b'}">${qualidade!=null?qualidade.toFixed(1)+'%':'N/D'}</span>
-                    </div>
-                    <div class="op-metric">
-                        <span class="label">ABS</span>
-                        <span class="val" style="color:${cor(absPct,2,false)}">${absDias} dia(s) — ${absPct.toFixed(2)}%</span>
-                    </div>
-                ` : '<p style="color:#64748b;font-size:12px;">Sem dados de metas neste mês.</p>'}
-            </div>
-
-            <div class="metrics-section">
-                <div class="section-label">⏱️ Tempos — Média ${G.mesStr}</div>
-                ${tm ? `
-                    <div class="op-metric">
-                        <span class="label">Média logado/dia</span>
-                        <span class="val" style="color:${tempoVsMeta>=0?'#10b981':'#ef4444'}">${secToStr(mediaTempoSec)}</span>
-                    </div>
-                    <div class="op-metric">
-                        <span class="label">Meta diária</span>
-                        <span class="val">${secToStr(metaDiariaSec)}</span>
-                    </div>
-                    <div class="op-metric">
-                        <span class="label">Dias no mês</span>
-                        <span class="val">${diasTrab}</span>
-                    </div>
-                    <div class="op-metric">
-                        <span class="label">Média pausas</span>
-                        <span class="val" style="color:${mediaPausa!=null?cor(mediaPausa,15.5,false):'#64748b'}">${mediaPausa!=null?mediaPausa.toFixed(2)+'%':'N/D'}</span>
-                    </div>
-                ` : `<p style="color:#64748b;font-size:12px;">Sem dados em ${G.mesStr}.</p>`}
-            </div>
-
-            <div class="metrics-section">
-                <div class="section-label">🏦 Banco de Horas (desde 16/03/2026)</div>
-                <div class="bh-grid">
-                    <div class="bh-item bh-cred">
-                        <div class="bh-label">Crédito</div>
-                        <div class="bh-val">${secToStr(op.bhCredito)}</div>
-                    </div>
-                    <div class="bh-item bh-def">
-                        <div class="bh-label">Déficit</div>
-                        <div class="bh-val">${secToStr(op.bhDeficit)}</div>
-                    </div>
-                    <div class="bh-item bh-fer">
-                        <div class="bh-label">Feriados (${G.feriadosSel.size})</div>
-                        <div class="bh-val">${secToStr(debFer)}</div>
-                    </div>
-                    <div class="bh-item bh-saldo" style="border-top:1px dashed var(--border);padding-top:8px;margin-top:4px;">
-                        <div class="bh-label"><strong>Saldo Final</strong></div>
-                        <div class="bh-val" style="font-size:19px;font-weight:700;color:${saldoBh>=0?'#10b981':'#ef4444'}">${secToStr(saldoBh)}</div>
-                    </div>
+                ${avatarHtml}
+                <div class="op-header-info">
+                    <h3>${op.nome}</h3>
+                    <p>
+                        ${matricula ? `<span class="tag-mat">Mat. ${matricula}</span>` : ''}
+                        ${op.operacao ? `<span class="tag-op">${op.operacao}</span>` : ''}
+                    </p>
                 </div>
+            </div>
+            <div class="metrics-section">
+                <div class="section-label">\u{1F4CA} Indicadores \u2014 ${G.mesSelecionado.replace('METAS ','')}</div>
+                ${metaRow ? `
+                <div class="op-metrics-grid">
+                    <div class="metric-item full-width">
+                        <div class="metric-label">Promessas</div>
+                        <div class="metric-val" style="color:${cor(pctProm,100)}">${promessas.toLocaleString('pt-BR')} / ${metaProm.toLocaleString('pt-BR')}</div>
+                        <div class="progress-bar-wrap"><div class="progress-bar" style="width:${Math.min(pctProm,100).toFixed(1)}%;background:${cor(pctProm,100)};"></div></div>
+                        <div class="metric-sub" style="color:${cor(pctProm,100)}">${bateouMeta ? '\u2705 Meta atingida!' : `Falta: ${faltaMeta.toLocaleString('pt-BR')}`} \u2014 ${pctProm.toFixed(1)}%</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-label">Qualidade</div>
+                        <div class="metric-val" style="color:${qualidade!=null?cor(qualidade,95):'var(--text-muted)'}">${qualidade!=null?qualidade.toFixed(1)+'%':'N/D'}</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-label">ABS</div>
+                        <div class="metric-val" style="color:${cor(absPct,2,false)}">${absDias} dia(s)</div>
+                        <div class="metric-sub">${absPct.toFixed(2)}%</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-label">H.O</div>
+                        <div class="metric-val">R$ ${(ho || 0).toLocaleString('pt-BR', {minimumFractionDigits: 2})}</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-label">Comiss\u00e3o</div>
+                        <div class="metric-val" style="color:var(--success)">R$ ${comissao.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-label">Pausas</div>
+                        <div class="metric-val">${(metaPausas || 0).toFixed(2)}%</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-label">Tempo Logado</div>
+                        <div class="metric-val">${tm ? secToStr(mediaTempoSec) : 'N/D'}</div>
+                        <div class="metric-sub">${tm ? tm.dias_trabalhados + ' dias' : ''}</div>
+                    </div>
+                    ${(() => {
+                        const val = resumoSaldo !== null ? resumoSaldo : (metaBh !== null ? metaBh : null);
+                        const corVal = val === null ? 'var(--text-muted)' : (val >= 0 ? 'var(--success)' : 'var(--danger)');
+                        const bgVal = val === null ? 'rgba(124,58,237,.06)' : (val >= 0 ? 'rgba(52,211,153,.08)' : 'rgba(248,113,113,.08)');
+                        const borderVal = val === null ? 'rgba(124,58,237,.15)' : (val >= 0 ? 'rgba(52,211,153,.2)' : 'rgba(248,113,113,.2)');
+                        const txt = val !== null ? secToStr(val) : 'N/D';
+                        return `
+                        <div class="metric-item full-width" style="background:${bgVal}; border-color:${borderVal}">
+                            <div class="metric-label">\u{1F3E6} Banco de Horas (Saldo Final)</div>
+                            <div class="metric-val" style="font-size:20px; color:${corVal}">${txt}</div>
+                        </div>`;
+                    })()}
+                </div>
+                ` : '<p style="color:var(--text-muted);font-size:12px;padding:8px 0;">Sem dados neste m\u00eas.</p>'}
             </div>
         `;
         grid.appendChild(card);
     });
 
+
+
+
     if (!G.isAdmin && G.currentMatricula && lista.length === 1) {
         const hoje = new Date();
-        const quote = MOTIVATIONAL_QUOTES[hoje.getDate() % MOTIVATIONAL_QUOTES.length];
+        const seed = hoje.getFullYear() * 366 + hoje.getMonth() * 32 + hoje.getDate();
+        
+        const quote = MOTIVATIONAL_QUOTES[seed % MOTIVATIONAL_QUOTES.length];
         const imgs = ['motivation_art_new_month.png', 'motivation_art_callcenter.png', 'motivation_art.png', 'motivation_art_funny.png'];
-        const img = imgs[hoje.getDate() % imgs.length];
+        const img = imgs[seed % imgs.length];
         
         const quoteCard = document.createElement('div');
         quoteCard.className = 'quote-card';
@@ -625,8 +695,8 @@ function getOperatorStatusAndDetails(op) {
     }
     
     if (tm && tm.media_pausa_pct !== null) {
-        if (tm.media_pausa_pct > 18) { isBad = true; badList.push('Pausas'); }
-        else if (tm.media_pausa_pct > 15.5) { isAlert = true; badList.push('Pausas'); }
+        // Unificado para 15.5% como no BANCO DE HORAS
+        if (tm.media_pausa_pct > 15.5) { isBad = true; badList.push('Pausas'); }
         else { goodList.push('Pausas'); }
     }
     
