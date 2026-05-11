@@ -386,6 +386,21 @@ body {
 .stat-row:last-child { border-bottom:none; }
 .stat-row span { color:var(--text-muted); font-size:13px; }
 .stat-row strong { font-size:15px; font-weight:700; }
+/* ── ABS por Operação ── */
+.abs-operacao-container {
+    display:grid; grid-template-columns:repeat(auto-fill, minmax(200px, 1fr)); gap:10px;
+    margin-bottom:22px;
+}
+.abs-op-item {
+    background:var(--bg-glass); backdrop-filter:blur(var(--glass-blur));
+    border:1px solid var(--border); border-radius:12px;
+    padding:14px 16px; display:flex; justify-content:space-between; align-items:center;
+    transition:all .3s;
+}
+.abs-op-item:hover { background:rgba(255,255,255,.08); border-color:rgba(124,58,237,.2); transform:translateY(-2px); }
+.abs-op-name { font-size:12px; color:var(--text-muted); font-weight:600; }
+.abs-op-val { font-size:18px; font-weight:800; }
+
 .text-success { color:var(--success)!important; }
 .text-danger  { color:var(--danger)!important; }
 .text-warning { color:var(--warning)!important; }

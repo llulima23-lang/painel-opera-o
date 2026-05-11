@@ -16,7 +16,8 @@ except:
 FILES = {
     'META': r'C:\Users\sup.luciana\Meu Drive\MF\MF\Indicadores de Cobrança\META GERAL 2026.xlsx',
     'TEMPOS': r'C:\Users\sup.luciana\Meu Drive\MF\MF\Indicadores de Cobrança\TEMPOS 2026.xlsx',
-    'ADM': r'C:\Users\sup.luciana\Meu Drive\MF\MF\Indicadores de Cobrança\ADM EQUIPES.xlsx'
+    'ADM': r'C:\Users\sup.luciana\Meu Drive\MF\MF\Indicadores de Cobrança\ADM EQUIPES.xlsx',
+    'ABS': r'C:\Users\sup.luciana\Meu Drive\MF\MF\ABS\TRATADO - ABS.xlsx'
 }
 JS_OUTPUT = r'C:\Users\sup.luciana\Desktop\AntiGravity\PAINEL OPERAÇÃO\data_embedded.js'
 
@@ -421,6 +422,10 @@ def process_excel():
     # ── 2.7 RESUMO (Banco de Horas Inicial e Saldo Final com cor de fonte) ──
     resumo_map = {} # adm_norm -> bh_inicial_sec
     resumo_saldo_final = {} # adm_norm -> saldo final em sec (coluna F)
+    resumo_credito_total = 0  # Soma total da coluna CRÉDITO
+    resumo_debito_total = 0   # Soma total da coluna Débito final
+    resumo_credito_individual = {}  # adm_norm -> credito_sec
+    resumo_debito_individual = {}   # adm_norm -> debito_final_sec
     try:
         # Usamos openpyxl para detectar a COR da fonte (vermelho = negativo)
         for attempt in range(3):
@@ -436,27 +441,41 @@ def process_excel():
         header_res = [str(c.value).upper() if c.value else '' for c in ws_res[1]]
         idx_nome = header_res.index('NOME') if 'NOME' in header_res else 0
         
-        # Procura coluna de Saldo Final (prioriza o nome exato SALDO FINAL)
+        # Coluna CRÉDITO (B)
+        idx_credito_res = -1
+        for i, h in enumerate(header_res):
+            hn = normalize(h)
+            if hn == 'CREDITO':
+                idx_credito_res = i
+                break
+        if idx_credito_res == -1: idx_credito_res = 1  # Fallback col B
+        
+        # Coluna Débito final (E)
+        idx_debito_final = -1
+        for i, h in enumerate(header_res):
+            hn = normalize(h)
+            if 'DEBITO FINAL' in hn:
+                idx_debito_final = i
+                break
+        if idx_debito_final == -1: idx_debito_final = 4  # Fallback col E
+        
+        # Procura coluna de Saldo Final
         idx_saldo = -1
-        # Primeiro tenta o exato
         for i, h in enumerate(header_res):
             if 'SALDO FINAL' == h:
                 idx_saldo = i
                 break
-        # Se não achou, tenta o parcial, mas excluindo DÉBITO FINAL se possível
         if idx_saldo == -1:
             for i, h in enumerate(header_res):
                 if 'SALDO FINAL' in h:
                     idx_saldo = i
                     break
-        # Se ainda não achou, pega DÉBITO FINAL
         if idx_saldo == -1:
             for i, h in enumerate(header_res):
                 if 'DEBITO FINAL' in h or 'DÉBITO FINAL' in h:
                     idx_saldo = i
                     break
-        
-        if idx_saldo == -1: idx_saldo = 5 # Fallback para coluna F (6ª coluna)
+        if idx_saldo == -1: idx_saldo = 5
 
         idx_bh_ini = 3 # Coluna D (banco de horas)
 
@@ -467,6 +486,9 @@ def process_excel():
             n_norm = normalize(nome_res)
             resolved = find_best_match(n_norm, adm_norm_set)
             if not resolved: resolved = n_norm
+            
+            # Verifica se é um operador real (não nota de rodapé)
+            is_operator = resolved in adm_norm_set
             
             # Banco de Horas Inicial (Coluna D)
             cell_bh = row[idx_bh_ini]
@@ -479,10 +501,21 @@ def process_excel():
             val_saldo = val_to_sec(cell_saldo.value)
             if is_red_font(cell_saldo): 
                 val_saldo = -abs(val_saldo)
-                
             resumo_saldo_final[resolved] = val_saldo
+            
+            # Crédito e Débito Final (para totais do dashboard)
+            if is_operator:
+                cell_cred = row[idx_credito_res]
+                val_cred = val_to_sec(cell_cred.value)
+                resumo_credito_total += val_cred
+                resumo_credito_individual[resolved] = val_cred
+                
+                cell_deb = row[idx_debito_final]
+                val_deb = val_to_sec(cell_deb.value)
+                resumo_debito_total += val_deb
+                resumo_debito_individual[resolved] = val_deb
 
-        print(f"  RESUMO: {len(resumo_map)} saldos iniciais | {len(resumo_saldo_final)} saldos finais (com detecção de cor)")
+        print(f"  RESUMO: {len(resumo_map)} saldos | Crédito Total={resumo_credito_total}s | Débito Total={resumo_debito_total}s")
     except Exception as e:
         print(f"  Erro ao ler RESUMO: {e}")
         traceback.print_exc()
@@ -592,6 +625,120 @@ def process_excel():
         saldo = bh['credito'] - bh['deficit'] - comp_sec
         print(f"    {bh['nome'][:35]:35} C={sec_fmt(bh['credito']):>10} D={sec_fmt(bh['deficit']):>10} Comp={len(comp_dates)}x07:12={sec_fmt(comp_sec):>10} SALDO={sec_fmt(saldo):>10}")
 
+    # ── 4. MÉDIA TEMPO LOGADO MENSAL (global) ────────────────────────
+    tempo_logado_media_mensal = {}
+    meses_tempos = {}
+    for t in tempos_list:
+        mes = t['mes']
+        if mes not in meses_tempos:
+            meses_tempos[mes] = {'total_sec': 0, 'count': 0}
+        meses_tempos[mes]['total_sec'] += t['media_tempo_sec']
+        meses_tempos[mes]['count'] += 1
+    for mes, v in meses_tempos.items():
+        if v['count'] > 0:
+            tempo_logado_media_mensal[mes] = int(v['total_sec'] / v['count'])
+    print(f"  TEMPO LOGADO MÉDIAS: {tempo_logado_media_mensal}")
+
+    # ── 5. ABSENTEÍSMO (TRATADO - ABS.xlsx) ───────────────────────────
+    abs_data = {
+        'geral_por_mes': {},        # mes_key -> abs_pct (linha 10)
+        'por_operacao_mes': {},     # mes_key -> [{operacao, abs_pct}]
+        'individual_mes': {},       # mes_key -> [{nome, nome_norm, total_dias, operacao}]
+        'geral_ultimos_3': 0.0,     # média dos últimos 3 meses
+    }
+    try:
+        wb_abs = openpyxl.load_workbook(FILES['ABS'], data_only=True)
+        # Pega abas 2026 (últimas disponíveis)
+        abs_sheets_2026 = [s for s in wb_abs.sheetnames if '2026' in s]
+        print(f"  ABS: Abas 2026 encontradas: {abs_sheets_2026}")
+
+        mes_name_map = {
+            'JANEIRO': '2026-01', 'FEVEREIRO': '2026-02', 'MARCO': '2026-03', 'MARÇO': '2026-03',
+            'ABRIL': '2026-04', 'MAIO': '2026-05', 'JUNHO': '2026-06', 'JULHO': '2026-07',
+            'AGOSTO': '2026-08', 'SETEMBRO': '2026-09', 'OUTUBRO': '2026-10',
+            'NOVEMBRO': '2026-11', 'DEZEMBRO': '2026-12'
+        }
+
+        for sn in abs_sheets_2026:
+            ws_abs = wb_abs[sn]
+            # Determinar mes_key a partir do nome da aba
+            sn_upper = normalize(sn).replace('ABS ', '').replace('2026', '').strip()
+            mes_key = mes_name_map.get(sn_upper, None)
+            if not mes_key:
+                for k, v in mes_name_map.items():
+                    if k in normalize(sn):
+                        mes_key = v
+                        break
+            if not mes_key:
+                print(f"    ⚠️  ABS: Não consegui determinar mês para aba '{sn}'")
+                continue
+
+            # Linha 10: ABS geral (totalização da equipe)
+            abs_geral_cell = ws_abs.cell(row=10, column=10)  # Coluna J (10)
+            abs_geral_val = abs_geral_cell.value
+            if abs_geral_val is not None:
+                try:
+                    abs_pct = float(abs_geral_val) * 100 if float(abs_geral_val) < 1 else float(abs_geral_val)
+                except:
+                    abs_pct = 0
+            else:
+                abs_pct = 0
+            abs_data['geral_por_mes'][mes_key] = round(abs_pct, 2)
+
+            # Linhas 6-9: ABS por operação
+            ops_abs = []
+            for r in range(6, 10):
+                gestao_cell = ws_abs.cell(row=r, column=3)  # Col C = GESTÃO/PRODUTO
+                abs_cell = ws_abs.cell(row=r, column=10)     # Col J = ABS
+                gestao = str(gestao_cell.value).strip() if gestao_cell.value else None
+                if not gestao or gestao == 'None': continue
+                abs_op_val = abs_cell.value
+                if abs_op_val is not None:
+                    try:
+                        abs_op_pct = float(abs_op_val) * 100 if float(abs_op_val) < 1 else float(abs_op_val)
+                    except:
+                        abs_op_pct = 0
+                else:
+                    abs_op_pct = 0
+                ops_abs.append({'operacao': gestao, 'abs_pct': round(abs_op_pct, 2)})
+            abs_data['por_operacao_mes'][mes_key] = ops_abs
+
+            # Linhas 14+: ABS individual (OPERADOR + TOTAL DE DIAS)
+            ind_abs = []
+            for r in range(14, ws_abs.max_row + 1):
+                op_cell = ws_abs.cell(row=r, column=1)   # Col A = OPERAÇÃO
+                nome_cell = ws_abs.cell(row=r, column=2) # Col B = OPERADOR
+                total_cell = ws_abs.cell(row=r, column=5) # Col E = TOTAL DE DIAS
+                nome_val = str(nome_cell.value).strip() if nome_cell.value else None
+                if not nome_val or nome_val == 'None': continue
+                op_val = str(op_cell.value).strip() if op_cell.value else ''
+                total_dias = 0
+                if total_cell.value is not None:
+                    try: total_dias = int(float(total_cell.value))
+                    except: total_dias = 0
+                nome_norm_abs = normalize(nome_val)
+                resolved_abs = find_best_match(nome_norm_abs, adm_norm_set) or nome_norm_abs
+                ind_abs.append({
+                    'nome': nome_val,
+                    'nome_norm': resolved_abs,
+                    'total_dias': total_dias,
+                    'operacao': op_val
+                })
+            abs_data['individual_mes'][mes_key] = ind_abs
+            print(f"    ABS {sn}: geral={abs_pct:.2f}% | {len(ops_abs)} operações | {len(ind_abs)} individuais")
+
+        # Média dos últimos 3 meses
+        sorted_meses = sorted(abs_data['geral_por_mes'].keys(), reverse=True)
+        ultimos_3 = sorted_meses[:3]
+        if ultimos_3:
+            abs_data['geral_ultimos_3'] = round(
+                sum(abs_data['geral_por_mes'][m] for m in ultimos_3) / len(ultimos_3), 2
+            )
+            print(f"  ABS Média últimos 3 meses ({ultimos_3}): {abs_data['geral_ultimos_3']}%")
+    except Exception as e:
+        print(f"  Erro ao ler ABS: {e}")
+        traceback.print_exc()
+
     # ── Salva ─────────────────────────────────────────────────────────
     output = {
         'meta':       meta_data,
@@ -600,6 +747,14 @@ def process_excel():
         'compensa':   compensa_map,
         'resumo':     resumo_map,
         'resumo_saldo_final': resumo_saldo_final,
+        'resumo_totals': {
+            'credito_total_sec': resumo_credito_total,
+            'debito_total_sec': resumo_debito_total,
+            'credito_individual': resumo_credito_individual,
+            'debito_individual': resumo_debito_individual,
+        },
+        'tempo_logado_media_mensal': tempo_logado_media_mensal,
+        'abs_data':   abs_data,
         'operacoes':  sorted(operacoes_set),
         'updated_at': datetime.datetime.now().isoformat()
     }

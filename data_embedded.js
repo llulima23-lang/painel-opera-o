@@ -2176,6 +2176,697 @@ var EMBEDDED_DATA = {
         "A COLUNA BANCO DE HORAS CONSTAM TODOS OS FERIADOS REFERNTES AOS MESES DE MARCO (25) E ABRIL ATE 01 DE MAIO": 8640,
         "PAGAMENTO DE HORAS ATE O DIA 30/04. APOS ISSO, SERA ENVIADO PARA DESCONTO.": 5640
     },
+    "resumo_totals": {
+        "credito_total_sec": 380815,
+        "debito_total_sec": 558346,
+        "credito_individual": {
+            "ANA LAYS GARCES LOPES": 36552,
+            "ANA LETICIA DO NASCIMENTO PAZ": 0,
+            "ANA LIDIA DA CRUZ MIRANDA": 5933,
+            "ANDREA DE SOUSA VIEIRA": 18098,
+            "ANTONIO YURI ANDREWS NOBRE E SILVA": 28996,
+            "ELINETE RIBEIRO COSTA": 28300,
+            "FRANCISCO IVONILDO SOUSA": 22190,
+            "IZALI DUTRA DA CUNHA MAGALHAES": 6130,
+            "JESSICA FRIDA PAIVA VASCONCELOS": 31796,
+            "LORENA RIBEIRO DOS SANTOS": 14014,
+            "MARIA DAYANE COSTA BARBOZA NOGUEIRA": 31503,
+            "MARIA DE FATIMA ANDRADE FERNANDES": 15523,
+            "MARIA NATALIA FARIAS": 36228,
+            "MARIANA MACIEL LIMA": 5833,
+            "MATEUS COSTA FRANCO": 21759,
+            "MILENA DOS REIS ANDRADE": 0,
+            "NICOLE SOARES FREITAS": 112,
+            "RUBENS DA SILVA BENTO": 9064,
+            "SHAYONARA SILVA CASTRO": 12981,
+            "VICTOR VASCONCELOS OLIVEIRA": 45222,
+            "VIVIANE FIRMINO FELISBERTO": 10581
+        },
+        "debito_individual": {
+            "ANA LAYS GARCES LOPES": 34535,
+            "ANA LETICIA DO NASCIMENTO PAZ": 38643,
+            "ANA LIDIA DA CRUZ MIRANDA": 15742,
+            "ANDREA DE SOUSA VIEIRA": 23446,
+            "ANTONIO YURI ANDREWS NOBRE E SILVA": 32186,
+            "ELINETE RIBEIRO COSTA": 28594,
+            "FRANCISCO IVONILDO SOUSA": 21711,
+            "IZALI DUTRA DA CUNHA MAGALHAES": 65570,
+            "JESSICA FRIDA PAIVA VASCONCELOS": 39019,
+            "LORENA RIBEIRO DOS SANTOS": 28639,
+            "MARIA DAYANE COSTA BARBOZA NOGUEIRA": 32287,
+            "MARIA DE FATIMA ANDRADE FERNANDES": 9644,
+            "MARIA NATALIA FARIAS": 12960,
+            "MARIANA MACIEL LIMA": 33327,
+            "MATEUS COSTA FRANCO": 31339,
+            "MILENA DOS REIS ANDRADE": 21600,
+            "NICOLE SOARES FREITAS": 14496,
+            "RUBENS DA SILVA BENTO": 9583,
+            "SHAYONARA SILVA CASTRO": 8640,
+            "VICTOR VASCONCELOS OLIVEIRA": 45758,
+            "VIVIANE FIRMINO FELISBERTO": 10627
+        }
+    },
+    "tempo_logado_media_mensal": {
+        "2026-03": 26066,
+        "2026-04": 25942,
+        "2026-05": 25669
+    },
+    "abs_data": {
+        "geral_por_mes": {
+            "2026-01": 2.31,
+            "2026-02": 1.28,
+            "2026-03": 3.92,
+            "2026-04": 4.17,
+            "2026-05": 0.91
+        },
+        "por_operacao_mes": {
+            "2026-01": [
+                {
+                    "operacao": "LUCIANA/AGORA CRED",
+                    "abs_pct": 3.85
+                },
+                {
+                    "operacao": "LUCIANA/ALARES",
+                    "abs_pct": 3.85
+                },
+                {
+                    "operacao": "LUCIANA/EDUCACÃO",
+                    "abs_pct": 0.0
+                },
+                {
+                    "operacao": "LUCIANA/M DIAS BRANCO",
+                    "abs_pct": 0.0
+                }
+            ],
+            "2026-02": [
+                {
+                    "operacao": "LUCIANA/AGORA CRED",
+                    "abs_pct": 0.0
+                },
+                {
+                    "operacao": "LUCIANA/ALARES",
+                    "abs_pct": 3.21
+                },
+                {
+                    "operacao": "LUCIANA/EDUCACÃO",
+                    "abs_pct": 0.0
+                },
+                {
+                    "operacao": "LUCIANA/M DIAS BRANCO",
+                    "abs_pct": 0.0
+                }
+            ],
+            "2026-03": [
+                {
+                    "operacao": "LUCIANA/AGORA CRED",
+                    "abs_pct": 2.78
+                },
+                {
+                    "operacao": "LUCIANA/ALARES",
+                    "abs_pct": 4.86
+                },
+                {
+                    "operacao": "LUCIANA/EDUCACÃO",
+                    "abs_pct": 0.0
+                },
+                {
+                    "operacao": "LUCIANA/M DIAS BRANCO",
+                    "abs_pct": 0.0
+                }
+            ],
+            "2026-04": [
+                {
+                    "operacao": "LUCIANA/AGORA CRED",
+                    "abs_pct": 0.0
+                },
+                {
+                    "operacao": "LUCIANA/ALARES",
+                    "abs_pct": 1.85
+                },
+                {
+                    "operacao": "LUCIANA/EDUCACÃO",
+                    "abs_pct": 0.0
+                },
+                {
+                    "operacao": "LUCIANA/M DIAS BRANCO",
+                    "abs_pct": 62.5
+                }
+            ],
+            "2026-05": [
+                {
+                    "operacao": "LUCIANA/AGORA CRED",
+                    "abs_pct": 0.0
+                },
+                {
+                    "operacao": "LUCIANA/ALARES",
+                    "abs_pct": 1.16
+                },
+                {
+                    "operacao": "LUCIANA/EDUCACÃO",
+                    "abs_pct": 0.0
+                },
+                {
+                    "operacao": "LUCIANA/M DIAS BRANCO",
+                    "abs_pct": 0.0
+                }
+            ]
+        },
+        "individual_mes": {
+            "2026-01": [
+                {
+                    "nome": "Ana Lays Garces Lopes",
+                    "nome_norm": "ANA LAYS GARCES LOPES",
+                    "total_dias": 0,
+                    "operacao": "002.03 - OPERAÇÃO/ALARES"
+                },
+                {
+                    "nome": "Carla Wardja Matias Marcolino",
+                    "nome_norm": "CARLA WARDJA MATIAS MARCOLINO",
+                    "total_dias": 0,
+                    "operacao": "002.03 - OPERAÇÃO/ALARES"
+                },
+                {
+                    "nome": "Francisco Ivonildo Sousa",
+                    "nome_norm": "FRANCISCO IVONILDO SOUSA",
+                    "total_dias": 0,
+                    "operacao": "002.03 - OPERAÇÃO/ALARES"
+                },
+                {
+                    "nome": "Mateus Costa Franco",
+                    "nome_norm": "MATEUS COSTA FRANCO",
+                    "total_dias": 0,
+                    "operacao": "002.03 - OPERAÇÃO/ALARES"
+                },
+                {
+                    "nome": "Milena dos Reis Andrade",
+                    "nome_norm": "MILENA DOS REIS ANDRADE",
+                    "total_dias": 5,
+                    "operacao": "002.03 - OPERAÇÃO/ALARES"
+                },
+                {
+                    "nome": "Mariana Maciel Lima",
+                    "nome_norm": "MARIANA MACIEL LIMA",
+                    "total_dias": 0,
+                    "operacao": "002.03 - OPERAÇÃO/ALARES"
+                },
+                {
+                    "nome": "Antônio Yuri Andrews Nobre e Silva",
+                    "nome_norm": "ANTONIO YURI ANDREWS NOBRE E SILVA",
+                    "total_dias": 1,
+                    "operacao": "002.03 - OPERAÇÃO/ALARES"
+                },
+                {
+                    "nome": "Maria Natalia Farias",
+                    "nome_norm": "MARIA NATALIA FARIAS",
+                    "total_dias": 0,
+                    "operacao": "002.03 - OPERAÇÃO/ALARES"
+                },
+                {
+                    "nome": "Celiane Lourenço",
+                    "nome_norm": "CELIANE LOURENCO",
+                    "total_dias": 0,
+                    "operacao": "002.26 - OPERAÇÃO/EDUCACIONAL"
+                },
+                {
+                    "nome": "Andrea de Sousa Vieira",
+                    "nome_norm": "ANDREA DE SOUSA VIEIRA",
+                    "total_dias": 0,
+                    "operacao": "002.26 - OPERAÇÃO/EDUCACIONAL"
+                },
+                {
+                    "nome": "Izali Dutra da Cunha Magalhães",
+                    "nome_norm": "IZALI DUTRA DA CUNHA MAGALHAES",
+                    "total_dias": 0,
+                    "operacao": "002.26 - OPERAÇÃO/EDUCACIONAL"
+                },
+                {
+                    "nome": "Romario Vasconcelos Oliveira",
+                    "nome_norm": "ROMARIO VASCONCELOS OLIVEIRA",
+                    "total_dias": 0,
+                    "operacao": "002.26 - OPERAÇÃO/EDUCACIONAL"
+                },
+                {
+                    "nome": "Victor Vasconcelos Oliveira",
+                    "nome_norm": "VICTOR VASCONCELOS OLIVEIRA",
+                    "total_dias": 0,
+                    "operacao": "002.26 - OPERAÇÃO/EDUCACIONAL"
+                },
+                {
+                    "nome": "Maria de Fátima Andrade Fernandes",
+                    "nome_norm": "MARIA DE FATIMA ANDRADE FERNANDES",
+                    "total_dias": 0,
+                    "operacao": "002.39 - Operação/M Dias Branco"
+                },
+                {
+                    "nome": "Ana Leticia do Nascimento Paz",
+                    "nome_norm": "ANA LETICIA DO NASCIMENTO PAZ",
+                    "total_dias": 1,
+                    "operacao": "004.23 - AGORACRED"
+                },
+                {
+                    "nome": "Elinete Ribeiro Costa",
+                    "nome_norm": "ELINETE RIBEIRO COSTA",
+                    "total_dias": 0,
+                    "operacao": "004.23 - AGORACRED"
+                },
+                {
+                    "nome": "Maria Dayane Costa Barboza Nogueira",
+                    "nome_norm": "MARIA DAYANE COSTA BARBOZA NOGUEIRA",
+                    "total_dias": 2,
+                    "operacao": "004.23 - AGORACRED"
+                }
+            ],
+            "2026-02": [
+                {
+                    "nome": "Ana Lays Garces Lopes",
+                    "nome_norm": "ANA LAYS GARCES LOPES",
+                    "total_dias": 0,
+                    "operacao": "002.03 - OPERAÇÃO/ALARES"
+                },
+                {
+                    "nome": "Francisco Ivonildo Sousa",
+                    "nome_norm": "FRANCISCO IVONILDO SOUSA",
+                    "total_dias": 0,
+                    "operacao": "002.03 - OPERAÇÃO/ALARES"
+                },
+                {
+                    "nome": "Mateus Costa Franco",
+                    "nome_norm": "MATEUS COSTA FRANCO",
+                    "total_dias": 1,
+                    "operacao": "002.03 - OPERAÇÃO/ALARES"
+                },
+                {
+                    "nome": "Milena dos Reis Andrade",
+                    "nome_norm": "MILENA DOS REIS ANDRADE",
+                    "total_dias": 2,
+                    "operacao": "002.03 - OPERAÇÃO/ALARES"
+                },
+                {
+                    "nome": "Mariana Maciel Lima",
+                    "nome_norm": "MARIANA MACIEL LIMA",
+                    "total_dias": 2,
+                    "operacao": "002.03 - OPERAÇÃO/ALARES"
+                },
+                {
+                    "nome": "Antônio Yuri Andrews Nobre e Silva",
+                    "nome_norm": "ANTONIO YURI ANDREWS NOBRE E SILVA",
+                    "total_dias": 0,
+                    "operacao": "002.03 - OPERAÇÃO/ALARES"
+                },
+                {
+                    "nome": "Maria Natalia Farias",
+                    "nome_norm": "MARIA NATALIA FARIAS",
+                    "total_dias": 0,
+                    "operacao": "002.03 - OPERAÇÃO/ALARES"
+                },
+                {
+                    "nome": "Celiane Lourenço",
+                    "nome_norm": "CELIANE LOURENCO",
+                    "total_dias": 0,
+                    "operacao": "002.26 - OPERAÇÃO/EDUCACIONAL"
+                },
+                {
+                    "nome": "Andrea de Sousa Vieira",
+                    "nome_norm": "ANDREA DE SOUSA VIEIRA",
+                    "total_dias": 0,
+                    "operacao": "002.26 - OPERAÇÃO/EDUCACIONAL"
+                },
+                {
+                    "nome": "Izali Dutra da Cunha Magalhães",
+                    "nome_norm": "IZALI DUTRA DA CUNHA MAGALHAES",
+                    "total_dias": 0,
+                    "operacao": "002.26 - OPERAÇÃO/EDUCACIONAL"
+                },
+                {
+                    "nome": "Romario Vasconcelos Oliveira",
+                    "nome_norm": "ROMARIO VASCONCELOS OLIVEIRA",
+                    "total_dias": 0,
+                    "operacao": "002.26 - OPERAÇÃO/EDUCACIONAL"
+                },
+                {
+                    "nome": "Victor Vasconcelos Oliveira",
+                    "nome_norm": "VICTOR VASCONCELOS OLIVEIRA",
+                    "total_dias": 0,
+                    "operacao": "002.26 - OPERAÇÃO/EDUCACIONAL"
+                },
+                {
+                    "nome": "Maria de Fátima Andrade Fernandes",
+                    "nome_norm": "MARIA DE FATIMA ANDRADE FERNANDES",
+                    "total_dias": 0,
+                    "operacao": "002.39 - Operação/M Dias Branco"
+                },
+                {
+                    "nome": "Ana Leticia do Nascimento Paz",
+                    "nome_norm": "ANA LETICIA DO NASCIMENTO PAZ",
+                    "total_dias": 0,
+                    "operacao": "004.23 - AGORACRED"
+                },
+                {
+                    "nome": "Elinete Ribeiro Costa",
+                    "nome_norm": "ELINETE RIBEIRO COSTA",
+                    "total_dias": 0,
+                    "operacao": "004.23 - AGORACRED"
+                },
+                {
+                    "nome": "Maria Dayane Costa Barboza Nogueira",
+                    "nome_norm": "MARIA DAYANE COSTA BARBOZA NOGUEIRA",
+                    "total_dias": 0,
+                    "operacao": "004.23 - AGORACRED"
+                }
+            ],
+            "2026-03": [
+                {
+                    "nome": "Ana Lays Garces Lopes",
+                    "nome_norm": "ANA LAYS GARCES LOPES",
+                    "total_dias": 0,
+                    "operacao": "002.03 - OPERAÇÃO/ALARES"
+                },
+                {
+                    "nome": "Francisco Ivonildo Sousa",
+                    "nome_norm": "FRANCISCO IVONILDO SOUSA",
+                    "total_dias": 0,
+                    "operacao": "002.03 - OPERAÇÃO/ALARES"
+                },
+                {
+                    "nome": "Mateus Costa Franco",
+                    "nome_norm": "MATEUS COSTA FRANCO",
+                    "total_dias": 5,
+                    "operacao": "002.03 - OPERAÇÃO/ALARES"
+                },
+                {
+                    "nome": "Mariana Maciel Lima",
+                    "nome_norm": "MARIANA MACIEL LIMA",
+                    "total_dias": 5,
+                    "operacao": "002.03 - OPERAÇÃO/ALARES"
+                },
+                {
+                    "nome": "Maria Natalia Farias",
+                    "nome_norm": "MARIA NATALIA FARIAS",
+                    "total_dias": 0,
+                    "operacao": "002.03 - OPERAÇÃO/ALARES"
+                },
+                {
+                    "nome": "Antônio Yuri Andrews Nobre e Silva",
+                    "nome_norm": "ANTONIO YURI ANDREWS NOBRE E SILVA",
+                    "total_dias": 0,
+                    "operacao": "002.03 - OPERAÇÃO/ALARES"
+                },
+                {
+                    "nome": "Lorena Ribeiro dos Santos",
+                    "nome_norm": "LORENA RIBEIRO DOS SANTOS",
+                    "total_dias": 2,
+                    "operacao": "002.03 - OPERAÇÃO/ALARES"
+                },
+                {
+                    "nome": "Celiane Lourenço de Sousa",
+                    "nome_norm": "CELIANE LOURENCO DE SOUSA",
+                    "total_dias": 0,
+                    "operacao": "002.03 - OPERAÇÃO/ALARES"
+                },
+                {
+                    "nome": "Victor Vasconcelos Oliveira",
+                    "nome_norm": "VICTOR VASCONCELOS OLIVEIRA",
+                    "total_dias": 2,
+                    "operacao": "002.03 - OPERAÇÃO/ALARES"
+                },
+                {
+                    "nome": "Izali Dutra da Cunha Magalhães",
+                    "nome_norm": "IZALI DUTRA DA CUNHA MAGALHAES",
+                    "total_dias": 0,
+                    "operacao": "002.03 - OPERAÇÃO/ALARES"
+                },
+                {
+                    "nome": "Andrea de Sousa Vieira",
+                    "nome_norm": "ANDREA DE SOUSA VIEIRA",
+                    "total_dias": 0,
+                    "operacao": "002.03 - OPERAÇÃO/ALARES"
+                },
+                {
+                    "nome": "Ana Leticia do Nascimento Paz",
+                    "nome_norm": "ANA LETICIA DO NASCIMENTO PAZ",
+                    "total_dias": 0,
+                    "operacao": "002.26 - OPERAÇÃO/EDUCACIONAL"
+                },
+                {
+                    "nome": "Maria de Fátima Andrade Fernandes",
+                    "nome_norm": "MARIA DE FATIMA ANDRADE FERNANDES",
+                    "total_dias": 0,
+                    "operacao": "002.39 - Operação/M Dias Branco"
+                },
+                {
+                    "nome": "Elinete Ribeiro Costa",
+                    "nome_norm": "ELINETE RIBEIRO COSTA",
+                    "total_dias": 0,
+                    "operacao": "004.23 - AGORACRED"
+                },
+                {
+                    "nome": "Jessica Frida Paiva Vasconcelos",
+                    "nome_norm": "JESSICA FRIDA PAIVA VASCONCELOS",
+                    "total_dias": 1,
+                    "operacao": "004.23 - AGORACRED"
+                },
+                {
+                    "nome": "Maria Dayane Costa Barboza Nogueira",
+                    "nome_norm": "MARIA DAYANE COSTA BARBOZA NOGUEIRA",
+                    "total_dias": 1,
+                    "operacao": "004.23 - AGORACRED"
+                }
+            ],
+            "2026-04": [
+                {
+                    "nome": "Ana Lays Garces Lopes",
+                    "nome_norm": "ANA LAYS GARCES LOPES",
+                    "total_dias": 0,
+                    "operacao": "002.03 - OPERAÇÃO/ALARES"
+                },
+                {
+                    "nome": "Francisco Ivonildo Sousa",
+                    "nome_norm": "FRANCISCO IVONILDO SOUSA",
+                    "total_dias": 0,
+                    "operacao": "002.03 - OPERAÇÃO/ALARES"
+                },
+                {
+                    "nome": "Mateus Costa Franco",
+                    "nome_norm": "MATEUS COSTA FRANCO",
+                    "total_dias": 0,
+                    "operacao": "002.03 - OPERAÇÃO/ALARES"
+                },
+                {
+                    "nome": "Maria Natalia Farias",
+                    "nome_norm": "MARIA NATALIA FARIAS",
+                    "total_dias": 0,
+                    "operacao": "002.03 - OPERAÇÃO/ALARES"
+                },
+                {
+                    "nome": "Antônio Yuri Andrews Nobre e Silva",
+                    "nome_norm": "ANTONIO YURI ANDREWS NOBRE E SILVA",
+                    "total_dias": 0,
+                    "operacao": "002.03 - OPERAÇÃO/ALARES"
+                },
+                {
+                    "nome": "Lorena Ribeiro dos Santos",
+                    "nome_norm": "LORENA RIBEIRO DOS SANTOS",
+                    "total_dias": 0,
+                    "operacao": "002.03 - OPERAÇÃO/ALARES"
+                },
+                {
+                    "nome": "Celiane Lourenço de Sousa",
+                    "nome_norm": "CELIANE LOURENCO DE SOUSA",
+                    "total_dias": 2,
+                    "operacao": "002.03 - OPERAÇÃO/ALARES"
+                },
+                {
+                    "nome": "Victor Vasconcelos Oliveira",
+                    "nome_norm": "VICTOR VASCONCELOS OLIVEIRA",
+                    "total_dias": 0,
+                    "operacao": "002.03 - OPERAÇÃO/ALARES"
+                },
+                {
+                    "nome": "Izali Dutra da Cunha Magalhães",
+                    "nome_norm": "IZALI DUTRA DA CUNHA MAGALHAES",
+                    "total_dias": 4,
+                    "operacao": "002.03 - OPERAÇÃO/ALARES"
+                },
+                {
+                    "nome": "Andrea de Sousa Vieira",
+                    "nome_norm": "ANDREA DE SOUSA VIEIRA",
+                    "total_dias": 0,
+                    "operacao": "002.03 - OPERAÇÃO/ALARES"
+                },
+                {
+                    "nome": "Elinete Ribeiro Costa",
+                    "nome_norm": "ELINETE RIBEIRO COSTA",
+                    "total_dias": 0,
+                    "operacao": "002.03 - OPERAÇÃO/ALARES"
+                },
+                {
+                    "nome": "Jessica Frida Paiva Vasconcelos",
+                    "nome_norm": "JESSICA FRIDA PAIVA VASCONCELOS",
+                    "total_dias": 2,
+                    "operacao": "002.03 - OPERAÇÃO/ALARES"
+                },
+                {
+                    "nome": "Ana Leticia do Nascimento Paz",
+                    "nome_norm": "ANA LETICIA DO NASCIMENTO PAZ",
+                    "total_dias": 0,
+                    "operacao": "002.26 - OPERAÇÃO/EDUCACIONAL"
+                },
+                {
+                    "nome": "Maria de Fátima Andrade Fernandes",
+                    "nome_norm": "MARIA DE FATIMA ANDRADE FERNANDES",
+                    "total_dias": 15,
+                    "operacao": "002.39 - Operação/M Dias Branco"
+                },
+                {
+                    "nome": "Mariana Maciel Lima",
+                    "nome_norm": "MARIANA MACIEL LIMA",
+                    "total_dias": 0,
+                    "operacao": "004.23 - AGORACRED"
+                },
+                {
+                    "nome": "Maria Dayane Costa Barboza Nogueira",
+                    "nome_norm": "MARIA DAYANE COSTA BARBOZA NOGUEIRA",
+                    "total_dias": 0,
+                    "operacao": "004.23 - AGORACRED"
+                }
+            ],
+            "2026-05": [
+                {
+                    "nome": "Ana Lays Garces Lopes",
+                    "nome_norm": "ANA LAYS GARCES LOPES",
+                    "total_dias": 3,
+                    "operacao": "002.03 - OPERAÇÃO/ALARES"
+                },
+                {
+                    "nome": "Andrea de Sousa Vieira",
+                    "nome_norm": "ANDREA DE SOUSA VIEIRA",
+                    "total_dias": 0,
+                    "operacao": "002.03 - OPERAÇÃO/ALARES"
+                },
+                {
+                    "nome": "Antonio Yuri Andrews Nobre e Silva",
+                    "nome_norm": "ANTONIO YURI ANDREWS NOBRE E SILVA",
+                    "total_dias": 0,
+                    "operacao": "002.03 - OPERAÇÃO/ALARES"
+                },
+                {
+                    "nome": "Celiane Lourenço de Sousa",
+                    "nome_norm": "CELIANE LOURENCO DE SOUSA",
+                    "total_dias": 0,
+                    "operacao": "002.03 - OPERAÇÃO/ALARES"
+                },
+                {
+                    "nome": "Elinete Ribeiro Costa",
+                    "nome_norm": "ELINETE RIBEIRO COSTA",
+                    "total_dias": 0,
+                    "operacao": "002.03 - OPERAÇÃO/ALARES"
+                },
+                {
+                    "nome": "Francisco Ivonildo Sousa",
+                    "nome_norm": "FRANCISCO IVONILDO SOUSA",
+                    "total_dias": 0,
+                    "operacao": "002.03 - OPERAÇÃO/ALARES"
+                },
+                {
+                    "nome": "Izali Dutra da Cunha Magalhães",
+                    "nome_norm": "IZALI DUTRA DA CUNHA MAGALHAES",
+                    "total_dias": 2,
+                    "operacao": "002.03 - OPERAÇÃO/ALARES"
+                },
+                {
+                    "nome": "Jessica Frida Paiva Vasconcelos",
+                    "nome_norm": "JESSICA FRIDA PAIVA VASCONCELOS",
+                    "total_dias": 0,
+                    "operacao": "002.03 - OPERAÇÃO/ALARES"
+                },
+                {
+                    "nome": "Lorena Ribeiro dos Santos",
+                    "nome_norm": "LORENA RIBEIRO DOS SANTOS",
+                    "total_dias": 0,
+                    "operacao": "002.03 - OPERAÇÃO/ALARES"
+                },
+                {
+                    "nome": "Maria Natalia Farias",
+                    "nome_norm": "MARIA NATALIA FARIAS",
+                    "total_dias": 0,
+                    "operacao": "002.03 - OPERAÇÃO/ALARES"
+                },
+                {
+                    "nome": "Mateus Costa Franco",
+                    "nome_norm": "MATEUS COSTA FRANCO",
+                    "total_dias": 0,
+                    "operacao": "002.03 - OPERAÇÃO/ALARES"
+                },
+                {
+                    "nome": "Milena dos Reis Andrade",
+                    "nome_norm": "MILENA DOS REIS ANDRADE",
+                    "total_dias": 0,
+                    "operacao": "002.03 - OPERAÇÃO/ALARES"
+                },
+                {
+                    "nome": "Victor Vasconcelos Oliveira",
+                    "nome_norm": "VICTOR VASCONCELOS OLIVEIRA",
+                    "total_dias": 0,
+                    "operacao": "002.03 - OPERAÇÃO/ALARES"
+                },
+                {
+                    "nome": "Rubens da Silva Bento",
+                    "nome_norm": "RUBENS DA SILVA BENTO",
+                    "total_dias": 0,
+                    "operacao": "002.03 - OPERAÇÃO/ALARES"
+                },
+                {
+                    "nome": "Ana Lidia da Cruz Miranda",
+                    "nome_norm": "ANA LIDIA DA CRUZ MIRANDA",
+                    "total_dias": 0,
+                    "operacao": "002.03 - OPERAÇÃO/ALARES"
+                },
+                {
+                    "nome": "Shayonara Silva Castro",
+                    "nome_norm": "SHAYONARA SILVA CASTRO",
+                    "total_dias": 0,
+                    "operacao": "002.03 - OPERAÇÃO/ALARES"
+                },
+                {
+                    "nome": "Nicole Soares Freitas",
+                    "nome_norm": "NICOLE SOARES FREITAS",
+                    "total_dias": 0,
+                    "operacao": "002.03 - OPERAÇÃO/ALARES"
+                },
+                {
+                    "nome": "Ana Leticia do Nascimento Paz",
+                    "nome_norm": "ANA LETICIA DO NASCIMENTO PAZ",
+                    "total_dias": 0,
+                    "operacao": "002.26 - OPERAÇÃO/EDUCACIONAL"
+                },
+                {
+                    "nome": "Maria de Fátima Andrade Fernandes",
+                    "nome_norm": "MARIA DE FATIMA ANDRADE FERNANDES",
+                    "total_dias": 0,
+                    "operacao": "002.39 - Operação/M Dias Branco"
+                },
+                {
+                    "nome": "Maria Dayane Costa Barboza Nogueira",
+                    "nome_norm": "MARIA DAYANE COSTA BARBOZA NOGUEIRA",
+                    "total_dias": 0,
+                    "operacao": "004.23 - AGORACRED"
+                },
+                {
+                    "nome": "Mariana Maciel Lima",
+                    "nome_norm": "MARIANA MACIEL LIMA",
+                    "total_dias": 0,
+                    "operacao": "004.23 - AGORACRED"
+                },
+                {
+                    "nome": "Viviane Firmino Felisberto",
+                    "nome_norm": "VIVIANE FIRMINO FELISBERTO",
+                    "total_dias": 0,
+                    "operacao": "004.23 - AGORACRED"
+                }
+            ]
+        },
+        "geral_ultimos_3": 3.0
+    },
     "operacoes": [
         "AGORACRED",
         "ALARES PA FIXA",
@@ -2184,5 +2875,5 @@ var EMBEDDED_DATA = {
         "ALARES/AGORACRED",
         "M.DIAS"
     ],
-    "updated_at": "2026-05-10T19:31:32.674470"
+    "updated_at": "2026-05-11T09:01:04.806792"
 };

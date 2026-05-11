@@ -440,7 +440,11 @@ function renderDashboard() {
 
     const atingPct  = totalMeta > 0 ? (totalProm / totalMeta * 100) : 0;
     const qualMedia = qualCnt   > 0 ? qualSum / qualCnt : 0;
-    const absPct    = (absSum / ((lista.length || 1) * du)) * 100;
+
+    // Absenteísmo: usa dados da planilha TRATADO-ABS
+    const absData = EMBEDDED_DATA.abs_data || {};
+    const absGeralUlt3 = absData.geral_ultimos_3 || 0;
+    const absGeralMes = (absData.geral_por_mes || {})[G.mesStr] || null;
 
     const comTempo   = lista.filter(o => o.tempoMes);
     // Cálculo ponderado de pausas do time (Total Pausas / Total Tempo Logado)
@@ -448,30 +452,74 @@ function renderDashboard() {
     const totalTempoSec  = comTempo.reduce((a,o) => a + ((o.tempoMes.media_tempo_sec || 0) * o.tempoMes.dias_trabalhados), 0);
     const pausaMedia     = totalTempoSec > 0 ? (totalPausasSec / totalTempoSec * 100) : 0;
     
-    const tempoMedia = comTempo.length > 0 ? comTempo.reduce((a,o) => a+(o.tempoMes.media_tempo_sec||0),0)/comTempo.length : 0;
+    // Média Tempo Logado: usa dados globais mensais da planilha
+    const tempoMediaGlobal = (EMBEDDED_DATA.tempo_logado_media_mensal || {})[G.mesStr] || 0;
 
     setKpi('kpi-atingimento', atingPct.toFixed(1)+'%',
         atingPct >= 100 ? '#10b981' : atingPct >= 80 ? '#f59e0b' : '#ef4444');
     setKpi('kpi-promessas-det', `${totalProm.toLocaleString('pt-BR')} / ${totalMeta.toLocaleString('pt-BR')} promessas`);
     setKpi('kpi-qualidade',    qualMedia.toFixed(1)+'%',  cor(qualMedia,  95));
-    setKpi('kpi-abs',          absPct.toFixed(2)+'%',     cor(absPct,     2, false));
+    
+    // ABS: mostra o mês selecionado como valor principal
+    const absDisplay = absGeralMes !== null ? absGeralMes : 0;
+    setKpi('kpi-abs', absDisplay.toFixed(2)+'%', cor(absDisplay, 2, false));
+    // Subtexto: Volta a ser a meta
+    const absSubEl = document.getElementById('kpi-abs-sub');
+    if (absSubEl) {
+        absSubEl.textContent = 'Meta: < 2%';
+    }
+    
     setKpi('kpi-pausas',       pausaMedia.toFixed(2)+'%', cor(pausaMedia, 15.5, false));
-    setKpi('kpi-tempo-medio',  secToStr(Math.round(tempoMedia)), cor(tempoMedia, 7*3600+12*60));
+    setKpi('kpi-tempo-medio',  secToStr(Math.round(tempoMediaGlobal)), cor(tempoMediaGlobal, 7*3600+12*60));
 
-    // BH
-    let posTotal = 0, negTotal = 0;
-    lista.forEach(op => {
-        const extras = calcDebitosExtras(op);
-        // Saldo = Créditos - Débitos - BH_Inicial_Resumo - Extras (Feriados/Datas Compensa)
-        const s = op.bhCredito - op.bhDeficit - op.bhResumo - extras.total;
-        if (s >= 0) posTotal += s; else negTotal += Math.abs(s);
-    });
+    // BH - usa totais diretos da planilha RESUMO
+    const resumoTotals = EMBEDDED_DATA.resumo_totals || {};
+    const posTotal = resumoTotals.credito_total_sec || 0;
+    const negTotal = resumoTotals.debito_total_sec || 0;
     const saldo = posTotal - negTotal;
     setKpi('bh-positivo', secToStr(posTotal), '#10b981');
     setKpi('bh-negativo', secToStr(negTotal), '#ef4444');
     setKpi('bh-saldo',    secToStr(saldo),    saldo >= 0 ? '#10b981' : '#ef4444');
     document.getElementById('dash-info').textContent =
         `| ${du} D.U | ${lista.length} operadores`;
+
+    // ABS por operação
+    renderAbsPorOperacao();
+}
+
+// ─────────────────────────────────────────────────────────
+//  ABS POR OPERAÇÃO (Dashboard)
+// ─────────────────────────────────────────────────────────
+function renderAbsPorOperacao() {
+    const container = document.getElementById('abs-operacao-grid');
+    if (!container) return;
+    
+    const absData = EMBEDDED_DATA.abs_data || {};
+    const opsAbs = (absData.por_operacao_mes || {})[G.mesStr] || [];
+    
+    if (!opsAbs.length) {
+        container.innerHTML = '<p style="color:var(--text-muted);font-size:13px;padding:8px;">Sem dados de ABS por operação neste mês.</p>';
+        return;
+    }
+    
+    container.innerHTML = opsAbs.map(op => {
+        const clr = op.abs_pct <= 2 ? '#10b981' : op.abs_pct <= 5 ? '#f59e0b' : '#ef4444';
+        return `<div class="abs-op-item">
+            <span class="abs-op-name">${op.operacao}</span>
+            <span class="abs-op-val" style="color:${clr}">${op.abs_pct.toFixed(2)}%</span>
+        </div>`;
+    }).join('');
+}
+
+// Helper: retorna ABS individual de um operador no mês selecionado
+function getIndividualAbs(nomeNorm) {
+    const absData = EMBEDDED_DATA.abs_data || {};
+    const indMes = absData.individual_mes || {};
+    // Usa estritamente o mês selecionado no filtro
+    const lista = indMes[G.mesStr] || [];
+    const found = lista.find(i => i.nome_norm === nomeNorm);
+    if (found) return { ...found, mes: G.mesStr };
+    return null;
 }
 
 // ─────────────────────────────────────────────────────────
@@ -567,9 +615,15 @@ function renderOperadores() {
                         <div class="metric-val" style="color:${qualidade!=null?cor(qualidade,95):'var(--text-muted)'}">${qualidade!=null?qualidade.toFixed(1)+'%':'N/D'}</div>
                     </div>
                     <div class="metric-item">
-                        <div class="metric-label">ABS</div>
-                        <div class="metric-val" style="color:${cor(absPct,2,false)}">${absDias} dia(s)</div>
-                        <div class="metric-sub">${absPct.toFixed(2)}%</div>
+                        <div class="metric-label">ABS (Planilha)</div>
+                        ${(() => {
+                            const indAbs = getIndividualAbs(op.nomeNorm);
+                            const totalDias = indAbs ? indAbs.total_dias : 0;
+                            const absIndPct = du > 0 ? (totalDias / du * 100) : 0;
+                            const clr = totalDias === 0 ? '#10b981' : absIndPct > 5 ? '#ef4444' : absIndPct > 2 ? '#f59e0b' : '#10b981';
+                            return `<div class="metric-val" style="color:${clr}">${totalDias} dia(s)</div>
+                                    <div class="metric-sub">${absIndPct.toFixed(2)}%</div>`;
+                        })()}
                     </div>
                     <div class="metric-item">
                         <div class="metric-label">H.O</div>
