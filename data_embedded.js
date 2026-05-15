@@ -733,19 +733,6 @@ var EMBEDDED_DATA = {
                     "banco_horas": 0
                 },
                 {
-                    "nome": "Jessica Frida Paiva Vasconcelos",
-                    "nome_norm": "JESSICA FRIDA PAIVA VASCONCELOS",
-                    "matricula": "886",
-                    "promessas": 74.0,
-                    "meta_prom": 150.0,
-                    "qualidade": 98.5,
-                    "abs_dias": 1.0,
-                    "ho": 454.61,
-                    "comissao": 0,
-                    "pausas": 0,
-                    "banco_horas": 0
-                },
-                {
                     "nome": "Maria Dayane Costa Barboza Nogueira",
                     "nome_norm": "MARIA DAYANE COSTA BARBOZA NOGUEIRA",
                     "matricula": "6288",
@@ -852,19 +839,6 @@ var EMBEDDED_DATA = {
                     "ho": 1210.9900000000002,
                     "comissao": 297.7,
                     "pausas": 16.04373339689689,
-                    "banco_horas": 0
-                },
-                {
-                    "nome": "Jessica Frida Paiva Vasconcelos",
-                    "nome_norm": "JESSICA FRIDA PAIVA VASCONCELOS",
-                    "matricula": "886",
-                    "promessas": 290.0,
-                    "meta_prom": 400.0,
-                    "qualidade": 95.0,
-                    "abs_dias": 2.0,
-                    "ho": 1149.9599999999998,
-                    "comissao": 301.38,
-                    "pausas": 13.681785416460542,
                     "banco_horas": 0
                 },
                 {
@@ -1045,10 +1019,10 @@ var EMBEDDED_DATA = {
                     "nome": "Ana Lays Garces Lopes",
                     "nome_norm": "ANA LAYS GARCES LOPES",
                     "matricula": "2212",
-                    "promessas": 552.0,
+                    "promessas": 644.0,
                     "meta_prom": 2200.0,
                     "qualidade": 100.0,
-                    "abs_dias": 3.0,
+                    "abs_dias": 7.0,
                     "ho": 0,
                     "comissao": 0,
                     "pausas": 14.000000000000002,
@@ -1058,20 +1032,20 @@ var EMBEDDED_DATA = {
                     "nome": "Ana Lidia da Cruz Miranda",
                     "nome_norm": "ANA LIDIA DA CRUZ MIRANDA",
                     "matricula": "7780",
-                    "promessas": 213.0,
+                    "promessas": 244.0,
                     "meta_prom": 400.0,
                     "qualidade": null,
                     "abs_dias": 0,
                     "ho": 0,
                     "comissao": 0,
-                    "pausas": 14.000000000000002,
+                    "pausas": 15.0,
                     "banco_horas": 7942
                 },
                 {
                     "nome": "Andrea de Sousa Vieira",
                     "nome_norm": "ANDREA DE SOUSA VIEIRA",
                     "matricula": "4990",
-                    "promessas": 115.0,
+                    "promessas": 139.0,
                     "meta_prom": 400.0,
                     "qualidade": 100.0,
                     "abs_dias": 0,
@@ -1084,40 +1058,40 @@ var EMBEDDED_DATA = {
                     "nome": "Antônio Yuri Andrews Nobre e Silva",
                     "nome_norm": "ANTONIO YURI ANDREWS NOBRE E SILVA",
                     "matricula": "1686",
-                    "promessas": 147.0,
+                    "promessas": 175.0,
                     "meta_prom": 400.0,
                     "qualidade": 95.0,
                     "abs_dias": 0,
                     "ho": 126.66999999999999,
                     "comissao": 0,
-                    "pausas": 15.0,
+                    "pausas": 14.000000000000002,
                     "banco_horas": 7804
                 },
                 {
                     "nome": "Elinete Ribeiro Costa",
                     "nome_norm": "ELINETE RIBEIRO COSTA",
                     "matricula": "6292",
-                    "promessas": 137.0,
+                    "promessas": 192.0,
                     "meta_prom": 400.0,
                     "qualidade": 100.0,
                     "abs_dias": 0,
                     "ho": 286.7700000000001,
                     "comissao": 0,
-                    "pausas": 11.0,
-                    "banco_horas": 41
+                    "pausas": 12.0,
+                    "banco_horas": 132
                 },
                 {
                     "nome": "Francisco Ivonildo Sousa",
                     "nome_norm": "FRANCISCO IVONILDO SOUSA",
                     "matricula": "5632",
-                    "promessas": 156.0,
+                    "promessas": 175.0,
                     "meta_prom": 400.0,
                     "qualidade": 100.0,
                     "abs_dias": 0,
                     "ho": 0,
                     "comissao": 0,
-                    "pausas": 13.0,
-                    "banco_horas": 652
+                    "pausas": 12.0,
+                    "banco_horas": 1423
                 },
                 {
                     "nome": "Izali Dutra da Cunha Magalhães",
@@ -1126,49 +1100,36 @@ var EMBEDDED_DATA = {
                     "promessas": 70.0,
                     "meta_prom": 400.0,
                     "qualidade": 100.0,
-                    "abs_dias": 2.0,
+                    "abs_dias": 4.0,
                     "ho": 175.92999999999998,
                     "comissao": 0,
-                    "pausas": 22.0,
+                    "pausas": 27.0,
                     "banco_horas": 59131
-                },
-                {
-                    "nome": "Jessica Frida Paiva Vasconcelos",
-                    "nome_norm": "JESSICA FRIDA PAIVA VASCONCELOS",
-                    "matricula": "886",
-                    "promessas": 140.0,
-                    "meta_prom": 400.0,
-                    "qualidade": 100.0,
-                    "abs_dias": 0,
-                    "ho": 105.84999999999998,
-                    "comissao": 0,
-                    "pausas": 15.0,
-                    "banco_horas": 8130
                 },
                 {
                     "nome": "Lorena Ribeiro dos Santos",
                     "nome_norm": "LORENA RIBEIRO DOS SANTOS",
                     "matricula": "7339",
-                    "promessas": 226.0,
+                    "promessas": 261.0,
                     "meta_prom": 400.0,
                     "qualidade": 100.0,
                     "abs_dias": 0,
                     "ho": 128.21,
                     "comissao": 0,
-                    "pausas": 12.0,
-                    "banco_horas": 14519
+                    "pausas": 11.0,
+                    "banco_horas": 13372
                 },
                 {
                     "nome": "Maria Natalia Farias",
                     "nome_norm": "MARIA NATALIA FARIAS",
                     "matricula": "640",
-                    "promessas": 39.0,
+                    "promessas": 53.0,
                     "meta_prom": 400.0,
                     "qualidade": 100.0,
                     "abs_dias": 0,
                     "ho": 7.1,
                     "comissao": 0,
-                    "pausas": 7.000000000000001,
+                    "pausas": 10.0,
                     "banco_horas": 26640
                 },
                 {
@@ -1201,53 +1162,53 @@ var EMBEDDED_DATA = {
                     "nome": "Nicole Soares Freitas",
                     "nome_norm": "NICOLE SOARES FREITAS",
                     "matricula": "7778",
-                    "promessas": 110.0,
+                    "promessas": 130.0,
                     "meta_prom": 400.0,
                     "qualidade": 100.0,
                     "abs_dias": 0,
                     "ho": 92.2,
                     "comissao": 0,
-                    "pausas": 18.0,
-                    "banco_horas": 15663
+                    "pausas": 17.0,
+                    "banco_horas": 17215
                 },
                 {
                     "nome": "Rubens da Silva Bento",
                     "nome_norm": "RUBENS DA SILVA BENTO",
                     "matricula": "7764",
-                    "promessas": 192.0,
+                    "promessas": 229.0,
                     "meta_prom": 400.0,
                     "qualidade": 100.0,
                     "abs_dias": 0,
                     "ho": 160.29999999999998,
                     "comissao": 0,
                     "pausas": 16.0,
-                    "banco_horas": 247
+                    "banco_horas": 52
                 },
                 {
                     "nome": "Shayonara Silva Castro",
                     "nome_norm": "SHAYONARA SILVA CASTRO",
                     "matricula": "7774",
-                    "promessas": 211.0,
+                    "promessas": 243.0,
                     "meta_prom": 400.0,
                     "qualidade": 100.0,
                     "abs_dias": 0,
                     "ho": 70.97,
                     "comissao": 0,
                     "pausas": 11.0,
-                    "banco_horas": 7959
+                    "banco_horas": 13945
                 },
                 {
                     "nome": "Victor Vasconcelos Oliveira",
                     "nome_norm": "VICTOR VASCONCELOS OLIVEIRA",
                     "matricula": "1124",
-                    "promessas": 78.0,
+                    "promessas": 93.0,
                     "meta_prom": 400.0,
                     "qualidade": 100.0,
                     "abs_dias": 1.0,
                     "ho": 0,
                     "comissao": 0,
                     "pausas": 17.0,
-                    "banco_horas": 32
+                    "banco_horas": 344
                 },
                 {
                     "nome": "Ana Leticia do Nascimento Paz",
@@ -1259,60 +1220,60 @@ var EMBEDDED_DATA = {
                     "abs_dias": 0,
                     "ho": 55.19,
                     "comissao": 0,
-                    "pausas": 18.0,
+                    "pausas": 14.000000000000002,
                     "banco_horas": 42138
                 },
                 {
                     "nome": "Maria de Fátima Andrade Fernandes",
                     "nome_norm": "MARIA DE FATIMA ANDRADE FERNANDES",
                     "matricula": "2129",
-                    "promessas": 16.0,
+                    "promessas": 22.0,
                     "meta_prom": 60.0,
                     "qualidade": null,
                     "abs_dias": 0,
                     "ho": 0,
                     "comissao": 0,
                     "pausas": 13.0,
-                    "banco_horas": 5465
+                    "banco_horas": 4978
                 },
                 {
                     "nome": "Maria Dayane Costa Barboza Nogueira",
                     "nome_norm": "MARIA DAYANE COSTA BARBOZA NOGUEIRA",
                     "matricula": "6288",
-                    "promessas": 58.0,
+                    "promessas": 69.0,
                     "meta_prom": 180.0,
                     "qualidade": 100.0,
                     "abs_dias": 0,
-                    "ho": 0,
+                    "ho": 223.0,
                     "comissao": 0,
-                    "pausas": 14.000000000000002,
-                    "banco_horas": 679
+                    "pausas": 15.0,
+                    "banco_horas": 469
                 },
                 {
                     "nome": "Mariana Maciel Lima",
                     "nome_norm": "MARIANA MACIEL LIMA",
                     "matricula": "7258",
-                    "promessas": 10.0,
+                    "promessas": 12.0,
                     "meta_prom": 180.0,
                     "qualidade": 100.0,
                     "abs_dias": 0,
                     "ho": 0,
                     "comissao": 0,
-                    "pausas": 16.0,
-                    "banco_horas": 28275
+                    "pausas": 18.0,
+                    "banco_horas": 30245
                 },
                 {
                     "nome": "Viviane Firmino Felisberto",
                     "nome_norm": "VIVIANE FIRMINO FELISBERTO",
                     "matricula": "7762",
-                    "promessas": 33.0,
+                    "promessas": 43.0,
                     "meta_prom": 180.0,
                     "qualidade": 100.0,
                     "abs_dias": 0,
-                    "ho": 0,
+                    "ho": 350.0,
                     "comissao": 0,
                     "pausas": 15.0,
-                    "banco_horas": 105
+                    "banco_horas": 235
                 }
             ],
             "du": 20
@@ -1348,12 +1309,12 @@ var EMBEDDED_DATA = {
             "nome_norm": "ANA LAYS GARCES LOPES",
             "mes": "2026-05",
             "credito_sec": 23,
-            "deficit_sec": 57,
-            "dias_trabalhados": 4,
-            "media_tempo_sec": 25911,
+            "deficit_sec": 1514,
+            "dias_trabalhados": 5,
+            "media_tempo_sec": 25621,
             "meta_diaria_sec": 25920,
-            "media_pausa_pct": 14.04,
-            "media_pausas_total_sec": 3637
+            "media_pausa_pct": 14.52,
+            "media_pausas_total_sec": 3719
         },
         {
             "nome": "Ana Leticia do Nascimento Paz",
@@ -1384,12 +1345,12 @@ var EMBEDDED_DATA = {
             "nome_norm": "ANA LETICIA DO NASCIMENTO PAZ",
             "mes": "2026-05",
             "credito_sec": 0,
-            "deficit_sec": 12023,
-            "dias_trabalhados": 5,
-            "media_tempo_sec": 20059,
-            "meta_diaria_sec": 22464,
-            "media_pausa_pct": 17.25,
-            "media_pausas_total_sec": 3459
+            "deficit_sec": 13310,
+            "dias_trabalhados": 6,
+            "media_tempo_sec": 20101,
+            "meta_diaria_sec": 22320,
+            "media_pausa_pct": 15.33,
+            "media_pausas_total_sec": 3080
         },
         {
             "nome": "Ana Lidia da Cruz Miranda",
@@ -1407,13 +1368,13 @@ var EMBEDDED_DATA = {
             "nome": "Ana Lidia da Cruz Miranda",
             "nome_norm": "ANA LIDIA DA CRUZ MIRANDA",
             "mes": "2026-05",
-            "credito_sec": 7339,
-            "deficit_sec": 2444,
-            "dias_trabalhados": 7,
-            "media_tempo_sec": 26619,
+            "credito_sec": 8756,
+            "deficit_sec": 4097,
+            "dias_trabalhados": 9,
+            "media_tempo_sec": 26437,
             "meta_diaria_sec": 25920,
-            "media_pausa_pct": 15.21,
-            "media_pausas_total_sec": 4048
+            "media_pausa_pct": 15.06,
+            "media_pausas_total_sec": 3980
         },
         {
             "nome": "Andrea de Sousa Vieira",
@@ -1444,12 +1405,12 @@ var EMBEDDED_DATA = {
             "nome_norm": "ANDREA DE SOUSA VIEIRA",
             "mes": "2026-05",
             "credito_sec": 6632,
-            "deficit_sec": 3133,
-            "dias_trabalhados": 5,
-            "media_tempo_sec": 26619,
+            "deficit_sec": 4331,
+            "dias_trabalhados": 7,
+            "media_tempo_sec": 26248,
             "meta_diaria_sec": 25920,
-            "media_pausa_pct": 12.62,
-            "media_pausas_total_sec": 3358
+            "media_pausa_pct": 12.96,
+            "media_pausas_total_sec": 3403
         },
         {
             "nome": "Antônio Yuri Andrews Nobre e Silva",
@@ -1479,13 +1440,13 @@ var EMBEDDED_DATA = {
             "nome": "Antônio Yuri Andrews Nobre e Silva",
             "nome_norm": "ANTONIO YURI ANDREWS NOBRE E SILVA",
             "mes": "2026-05",
-            "credito_sec": 2876,
-            "deficit_sec": 7952,
-            "dias_trabalhados": 7,
-            "media_tempo_sec": 25194,
+            "credito_sec": 5108,
+            "deficit_sec": 8683,
+            "dias_trabalhados": 9,
+            "media_tempo_sec": 25522,
             "meta_diaria_sec": 25920,
-            "media_pausa_pct": 14.27,
-            "media_pausas_total_sec": 3596
+            "media_pausa_pct": 14.22,
+            "media_pausas_total_sec": 3630
         },
         {
             "nome": "Elinete Ribeiro Costa",
@@ -1515,13 +1476,13 @@ var EMBEDDED_DATA = {
             "nome": "Elinete Ribeiro Costa",
             "nome_norm": "ELINETE RIBEIRO COSTA",
             "mes": "2026-05",
-            "credito_sec": 1429,
-            "deficit_sec": 3672,
-            "dias_trabalhados": 7,
-            "media_tempo_sec": 25599,
+            "credito_sec": 1968,
+            "deficit_sec": 4302,
+            "dias_trabalhados": 9,
+            "media_tempo_sec": 25660,
             "meta_diaria_sec": 25920,
-            "media_pausa_pct": 12.04,
-            "media_pausas_total_sec": 3083
+            "media_pausa_pct": 11.87,
+            "media_pausas_total_sec": 3045
         },
         {
             "nome": "Francisco Ivonildo Sousa",
@@ -1551,13 +1512,13 @@ var EMBEDDED_DATA = {
             "nome": "Francisco Ivonildo Sousa",
             "nome_norm": "FRANCISCO IVONILDO SOUSA",
             "mes": "2026-05",
-            "credito_sec": 405,
-            "deficit_sec": 0,
-            "dias_trabalhados": 6,
-            "media_tempo_sec": 25987,
+            "credito_sec": 1737,
+            "deficit_sec": 3518,
+            "dias_trabalhados": 8,
+            "media_tempo_sec": 25697,
             "meta_diaria_sec": 25920,
-            "media_pausa_pct": 12.42,
-            "media_pausas_total_sec": 3228
+            "media_pausa_pct": 12.29,
+            "media_pausas_total_sec": 3157
         },
         {
             "nome": "Izali Dutra da Cunha Magalhães",
@@ -1582,42 +1543,6 @@ var EMBEDDED_DATA = {
             "meta_diaria_sec": 25920,
             "media_pausa_pct": 27.02,
             "media_pausas_total_sec": 7065
-        },
-        {
-            "nome": "Jessica Frida Paiva Vasconcelos",
-            "nome_norm": "JESSICA FRIDA PAIVA VASCONCELOS",
-            "mes": "2026-03",
-            "credito_sec": 20408,
-            "deficit_sec": 10853,
-            "dias_trabalhados": 10,
-            "media_tempo_sec": 26875,
-            "meta_diaria_sec": 25920,
-            "media_pausa_pct": 14.96,
-            "media_pausas_total_sec": 4020
-        },
-        {
-            "nome": "Jessica Frida Paiva Vasconcelos",
-            "nome_norm": "JESSICA FRIDA PAIVA VASCONCELOS",
-            "mes": "2026-04",
-            "credito_sec": 11381,
-            "deficit_sec": 2681,
-            "dias_trabalhados": 17,
-            "media_tempo_sec": 26431,
-            "meta_diaria_sec": 25920,
-            "media_pausa_pct": 13.54,
-            "media_pausas_total_sec": 3578
-        },
-        {
-            "nome": "Jessica Frida Paiva Vasconcelos",
-            "nome_norm": "JESSICA FRIDA PAIVA VASCONCELOS",
-            "mes": "2026-05",
-            "credito_sec": 7,
-            "deficit_sec": 4792,
-            "dias_trabalhados": 7,
-            "media_tempo_sec": 25236,
-            "meta_diaria_sec": 25920,
-            "media_pausa_pct": 15.57,
-            "media_pausas_total_sec": 3929
         },
         {
             "nome": "Lorena Ribeiro dos Santos",
@@ -1647,13 +1572,13 @@ var EMBEDDED_DATA = {
             "nome": "Lorena Ribeiro dos Santos",
             "nome_norm": "LORENA RIBEIRO DOS SANTOS",
             "mes": "2026-05",
-            "credito_sec": 3377,
-            "deficit_sec": 0,
-            "dias_trabalhados": 7,
-            "media_tempo_sec": 26402,
+            "credito_sec": 4944,
+            "deficit_sec": 380,
+            "dias_trabalhados": 9,
+            "media_tempo_sec": 26427,
             "meta_diaria_sec": 25920,
-            "media_pausa_pct": 11.07,
-            "media_pausas_total_sec": 2923
+            "media_pausa_pct": 10.89,
+            "media_pausas_total_sec": 2878
         },
         {
             "nome": "Maria Dayane Costa Barboza Nogueira",
@@ -1683,13 +1608,13 @@ var EMBEDDED_DATA = {
             "nome": "Maria Dayane Costa Barboza Nogueira",
             "nome_norm": "MARIA DAYANE COSTA BARBOZA NOGUEIRA",
             "mes": "2026-05",
-            "credito_sec": 908,
+            "credito_sec": 1118,
             "deficit_sec": 718,
-            "dias_trabalhados": 7,
-            "media_tempo_sec": 25947,
+            "dias_trabalhados": 9,
+            "media_tempo_sec": 25964,
             "meta_diaria_sec": 25920,
-            "media_pausa_pct": 15.24,
-            "media_pausas_total_sec": 3953
+            "media_pausa_pct": 15.19,
+            "media_pausas_total_sec": 3943
         },
         {
             "nome": "Maria de Fátima Andrade Fernandes",
@@ -1720,12 +1645,12 @@ var EMBEDDED_DATA = {
             "nome_norm": "MARIA DE FATIMA ANDRADE FERNANDES",
             "mes": "2026-05",
             "credito_sec": 1167,
-            "deficit_sec": 1347,
-            "dias_trabalhados": 7,
-            "media_tempo_sec": 25894,
+            "deficit_sec": 1834,
+            "dias_trabalhados": 9,
+            "media_tempo_sec": 25845,
             "meta_diaria_sec": 25920,
-            "media_pausa_pct": 12.99,
-            "media_pausas_total_sec": 3363
+            "media_pausa_pct": 12.72,
+            "media_pausas_total_sec": 3288
         },
         {
             "nome": "Maria Natalia Farias",
@@ -1743,13 +1668,13 @@ var EMBEDDED_DATA = {
             "nome": "Maria Natalia Farias",
             "nome_norm": "MARIA NATALIA FARIAS",
             "mes": "2026-05",
-            "credito_sec": 449,
+            "credito_sec": 511,
             "deficit_sec": 106,
-            "dias_trabalhados": 7,
-            "media_tempo_sec": 25969,
+            "dias_trabalhados": 9,
+            "media_tempo_sec": 25965,
             "meta_diaria_sec": 25920,
-            "media_pausa_pct": 9.27,
-            "media_pausas_total_sec": 2408
+            "media_pausa_pct": 10.27,
+            "media_pausas_total_sec": 2667
         },
         {
             "nome": "Mariana Maciel Lima",
@@ -1780,12 +1705,12 @@ var EMBEDDED_DATA = {
             "nome_norm": "MARIANA MACIEL LIMA",
             "mes": "2026-05",
             "credito_sec": 0,
-            "deficit_sec": 1913,
-            "dias_trabalhados": 7,
-            "media_tempo_sec": 25646,
+            "deficit_sec": 3883,
+            "dias_trabalhados": 9,
+            "media_tempo_sec": 25488,
             "meta_diaria_sec": 25920,
-            "media_pausa_pct": 17.6,
-            "media_pausas_total_sec": 4512
+            "media_pausa_pct": 17.9,
+            "media_pausas_total_sec": 4562
         },
         {
             "nome": "Mateus Costa Franco",
@@ -1828,12 +1753,12 @@ var EMBEDDED_DATA = {
             "nome_norm": "NICOLE SOARES FREITAS",
             "mes": "2026-05",
             "credito_sec": 0,
-            "deficit_sec": 4950,
-            "dias_trabalhados": 7,
-            "media_tempo_sec": 25212,
+            "deficit_sec": 6502,
+            "dias_trabalhados": 9,
+            "media_tempo_sec": 25197,
             "meta_diaria_sec": 25920,
-            "media_pausa_pct": 18.63,
-            "media_pausas_total_sec": 4697
+            "media_pausa_pct": 17.96,
+            "media_pausas_total_sec": 4526
         },
         {
             "nome": "Rubens da Silva Bento",
@@ -1851,13 +1776,13 @@ var EMBEDDED_DATA = {
             "nome": "Rubens da Silva Bento",
             "nome_norm": "RUBENS DA SILVA BENTO",
             "mes": "2026-05",
-            "credito_sec": 867,
+            "credito_sec": 1166,
             "deficit_sec": 23,
-            "dias_trabalhados": 7,
-            "media_tempo_sec": 26040,
+            "dias_trabalhados": 9,
+            "media_tempo_sec": 26047,
             "meta_diaria_sec": 25920,
-            "media_pausa_pct": 16.43,
-            "media_pausas_total_sec": 4279
+            "media_pausa_pct": 15.74,
+            "media_pausas_total_sec": 4099
         },
         {
             "nome": "Shayonara Silva Castro",
@@ -1875,13 +1800,13 @@ var EMBEDDED_DATA = {
             "nome": "Shayonara Silva Castro",
             "nome_norm": "SHAYONARA SILVA CASTRO",
             "mes": "2026-05",
-            "credito_sec": 5488,
+            "credito_sec": 11474,
             "deficit_sec": 0,
-            "dias_trabalhados": 7,
-            "media_tempo_sec": 26704,
+            "dias_trabalhados": 9,
+            "media_tempo_sec": 27194,
             "meta_diaria_sec": 25920,
-            "media_pausa_pct": 10.44,
-            "media_pausas_total_sec": 2787
+            "media_pausa_pct": 10.14,
+            "media_pausas_total_sec": 2756
         },
         {
             "nome": "Victor Vasconcelos Oliveira",
@@ -1912,12 +1837,12 @@ var EMBEDDED_DATA = {
             "nome_norm": "VICTOR VASCONCELOS OLIVEIRA",
             "mes": "2026-05",
             "credito_sec": 10044,
-            "deficit_sec": 196,
-            "dias_trabalhados": 6,
-            "media_tempo_sec": 27561,
+            "deficit_sec": 572,
+            "dias_trabalhados": 8,
+            "media_tempo_sec": 27104,
             "meta_diaria_sec": 25920,
-            "media_pausa_pct": 16.03,
-            "media_pausas_total_sec": 4416
+            "media_pausa_pct": 16.55,
+            "media_pausas_total_sec": 4486
         },
         {
             "nome": "Viviane Firmino Felisberto",
@@ -1935,13 +1860,13 @@ var EMBEDDED_DATA = {
             "nome": "Viviane Firmino Felisberto",
             "nome_norm": "VIVIANE FIRMINO FELISBERTO",
             "mes": "2026-05",
-            "credito_sec": 259,
+            "credito_sec": 389,
             "deficit_sec": 212,
-            "dias_trabalhados": 7,
-            "media_tempo_sec": 25926,
+            "dias_trabalhados": 9,
+            "media_tempo_sec": 25939,
             "meta_diaria_sec": 25920,
-            "media_pausa_pct": 15.47,
-            "media_pausas_total_sec": 4010
+            "media_pausa_pct": 15.41,
+            "media_pausas_total_sec": 3997
         }
     ],
     "adm": [
@@ -1992,14 +1917,6 @@ var EMBEDDED_DATA = {
             "matricula": "1138",
             "operacao": "ALARES PA FIXA",
             "foto": "fotos/1138.jpg"
-        },
-        {
-            "nome": "Jessica Frida Paiva Vasconcelos",
-            "nome_norm": "JESSICA FRIDA PAIVA VASCONCELOS",
-            "admissao": "2015-09-01",
-            "matricula": "886",
-            "operacao": "ALARES PA FIXA",
-            "foto": null
         },
         {
             "nome": "Lorena Ribeiro dos Santos",
@@ -2150,86 +2067,84 @@ var EMBEDDED_DATA = {
         "PAGAMENTO DE HORAS ATE O DIA 30/04. APOS ISSO, SERA ENVIADO PARA DESCONTO.": 0
     },
     "resumo_saldo_final": {
-        "ANA LAYS GARCES LOPES": 1986,
-        "ANA LETICIA DO NASCIMENTO PAZ": -42138,
-        "ANA LIDIA DA CRUZ MIRANDA": -7942,
-        "ANDREA DE SOUSA VIEIRA": 387,
-        "ANTONIO YURI ANDREWS NOBRE E SILVA": -7804,
+        "ANA LAYS GARCES LOPES": 529,
+        "ANA LETICIA DO NASCIMENTO PAZ": -43425,
+        "ANA LIDIA DA CRUZ MIRANDA": -8178,
+        "ANDREA DE SOUSA VIEIRA": -811,
+        "ANTONIO YURI ANDREWS NOBRE E SILVA": -6303,
         "CELIANE LOURENCO DE SOUSA": -30055,
-        "ELINETE RIBEIRO COSTA": -41,
-        "FRANCISCO IVONILDO SOUSA": 652,
+        "ELINETE RIBEIRO COSTA": -132,
+        "FRANCISCO IVONILDO SOUSA": -1423,
         "IZALI DUTRA DA CUNHA MAGALHAES": -59131,
-        "JESSICA FRIDA PAIVA VASCONCELOS": -8130,
-        "LORENA RIBEIRO DOS SANTOS": -14519,
-        "MARIA DAYANE COSTA BARBOZA NOGUEIRA": -679,
-        "MARIA DE FATIMA ANDRADE FERNANDES": 5465,
+        "JESSICA FRIDA PAIVA VASCONCELOS": -8092,
+        "LORENA RIBEIRO DOS SANTOS": -13372,
+        "MARIA DAYANE COSTA BARBOZA NOGUEIRA": -469,
+        "MARIA DE FATIMA ANDRADE FERNANDES": 4978,
         "MARIA NATALIA FARIAS": 26640,
-        "MARIANA MACIEL LIMA": -28275,
+        "MARIANA MACIEL LIMA": -30245,
         "MATEUS COSTA FRANCO": -9580,
         "MILENA DOS REIS ANDRADE": -21600,
-        "NICOLE SOARES FREITAS": -15663,
-        "RUBENS DA SILVA BENTO": -247,
-        "SHAYONARA SILVA CASTRO": 7959,
-        "VICTOR VASCONCELOS OLIVEIRA": 32,
-        "VIVIANE FIRMINO FELISBERTO": 105,
+        "NICOLE SOARES FREITAS": -17215,
+        "RUBENS DA SILVA BENTO": 52,
+        "SHAYONARA SILVA CASTRO": 13945,
+        "VICTOR VASCONCELOS OLIVEIRA": -344,
+        "VIVIANE FIRMINO FELISBERTO": 235,
         "ATUALIZADO ATE 22/04/2026": 3000,
         "A COLUNA BANCO DE HORAS CONSTAM TODOS OS FERIADOS REFERNTES AOS MESES DE MARCO (25) E ABRIL ATE 01 DE MAIO": 8640,
         "PAGAMENTO DE HORAS ATE O DIA 30/04. APOS ISSO, SERA ENVIADO PARA DESCONTO.": 5640
     },
     "resumo_totals": {
-        "credito_total_sec": 401045,
-        "debito_total_sec": 573568,
+        "credito_total_sec": 382961,
+        "debito_total_sec": 548810,
         "credito_individual": {
             "ANA LAYS GARCES LOPES": 36552,
             "ANA LETICIA DO NASCIMENTO PAZ": 0,
-            "ANA LIDIA DA CRUZ MIRANDA": 7800,
+            "ANA LIDIA DA CRUZ MIRANDA": 9217,
             "ANDREA DE SOUSA VIEIRA": 23833,
-            "ANTONIO YURI ANDREWS NOBRE E SILVA": 31778,
-            "ELINETE RIBEIRO COSTA": 29343,
-            "FRANCISCO IVONILDO SOUSA": 22363,
+            "ANTONIO YURI ANDREWS NOBRE E SILVA": 34010,
+            "ELINETE RIBEIRO COSTA": 29882,
+            "FRANCISCO IVONILDO SOUSA": 23695,
             "IZALI DUTRA DA CUNHA MAGALHAES": 6439,
-            "JESSICA FRIDA PAIVA VASCONCELOS": 31796,
-            "LORENA RIBEIRO DOS SANTOS": 14120,
-            "MARIA DAYANE COSTA BARBOZA NOGUEIRA": 31608,
+            "LORENA RIBEIRO DOS SANTOS": 15687,
+            "MARIA DAYANE COSTA BARBOZA NOGUEIRA": 31818,
             "MARIA DE FATIMA ANDRADE FERNANDES": 15652,
             "MARIA NATALIA FARIAS": 39600,
             "MARIANA MACIEL LIMA": 5833,
             "MATEUS COSTA FRANCO": 21759,
             "MILENA DOS REIS ANDRADE": 0,
             "NICOLE SOARES FREITAS": 112,
-            "RUBENS DA SILVA BENTO": 9336,
-            "SHAYONARA SILVA CASTRO": 16599,
+            "RUBENS DA SILVA BENTO": 9635,
+            "SHAYONARA SILVA CASTRO": 22585,
             "VICTOR VASCONCELOS OLIVEIRA": 45790,
-            "VIVIANE FIRMINO FELISBERTO": 10732
+            "VIVIANE FIRMINO FELISBERTO": 10862
         },
         "debito_individual": {
-            "ANA LAYS GARCES LOPES": 34566,
-            "ANA LETICIA DO NASCIMENTO PAZ": 42138,
-            "ANA LIDIA DA CRUZ MIRANDA": 15742,
-            "ANDREA DE SOUSA VIEIRA": 23446,
-            "ANTONIO YURI ANDREWS NOBRE E SILVA": 39582,
-            "ELINETE RIBEIRO COSTA": 29384,
-            "FRANCISCO IVONILDO SOUSA": 21711,
+            "ANA LAYS GARCES LOPES": 36023,
+            "ANA LETICIA DO NASCIMENTO PAZ": 43425,
+            "ANA LIDIA DA CRUZ MIRANDA": 17395,
+            "ANDREA DE SOUSA VIEIRA": 24644,
+            "ANTONIO YURI ANDREWS NOBRE E SILVA": 40313,
+            "ELINETE RIBEIRO COSTA": 30014,
+            "FRANCISCO IVONILDO SOUSA": 25118,
             "IZALI DUTRA DA CUNHA MAGALHAES": 65570,
-            "JESSICA FRIDA PAIVA VASCONCELOS": 39926,
-            "LORENA RIBEIRO DOS SANTOS": 28639,
+            "LORENA RIBEIRO DOS SANTOS": 29059,
             "MARIA DAYANE COSTA BARBOZA NOGUEIRA": 32287,
-            "MARIA DE FATIMA ANDRADE FERNANDES": 10187,
+            "MARIA DE FATIMA ANDRADE FERNANDES": 10674,
             "MARIA NATALIA FARIAS": 12960,
-            "MARIANA MACIEL LIMA": 34108,
+            "MARIANA MACIEL LIMA": 36078,
             "MATEUS COSTA FRANCO": 31339,
             "MILENA DOS REIS ANDRADE": 21600,
-            "NICOLE SOARES FREITAS": 15775,
+            "NICOLE SOARES FREITAS": 17327,
             "RUBENS DA SILVA BENTO": 9583,
             "SHAYONARA SILVA CASTRO": 8640,
-            "VICTOR VASCONCELOS OLIVEIRA": 45758,
+            "VICTOR VASCONCELOS OLIVEIRA": 46134,
             "VIVIANE FIRMINO FELISBERTO": 10627
         }
     },
     "tempo_logado_media_mensal": {
-        "2026-03": 26066,
-        "2026-04": 25942,
-        "2026-05": 25719
+        "2026-03": 25999,
+        "2026-04": 25917,
+        "2026-05": 25700
     },
     "abs_data": {
         "geral_por_mes": {
@@ -2237,7 +2152,7 @@ var EMBEDDED_DATA = {
             "2026-02": 1.28,
             "2026-03": 3.92,
             "2026-04": 4.17,
-            "2026-05": 0.91
+            "2026-05": 2.36
         },
         "por_operacao_mes": {
             "2026-01": [
@@ -2319,7 +2234,7 @@ var EMBEDDED_DATA = {
                 },
                 {
                     "operacao": "002.03 - OPERAÇÃO/ALARES",
-                    "abs_pct": 1.16
+                    "abs_pct": 3.01
                 },
                 {
                     "operacao": "002.26 - OPERAÇÃO/EDUCACIONAL",
@@ -2734,7 +2649,7 @@ var EMBEDDED_DATA = {
                 {
                     "nome": "Ana Lays Garces Lopes",
                     "nome_norm": "ANA LAYS GARCES LOPES",
-                    "total_dias": 3,
+                    "total_dias": 7,
                     "operacao": "002.03 - OPERAÇÃO/ALARES"
                 },
                 {
@@ -2770,7 +2685,7 @@ var EMBEDDED_DATA = {
                 {
                     "nome": "Izali Dutra da Cunha Magalhães",
                     "nome_norm": "IZALI DUTRA DA CUNHA MAGALHAES",
-                    "total_dias": 2,
+                    "total_dias": 5,
                     "operacao": "002.03 - OPERAÇÃO/ALARES"
                 },
                 {
@@ -2806,7 +2721,7 @@ var EMBEDDED_DATA = {
                 {
                     "nome": "Victor Vasconcelos Oliveira",
                     "nome_norm": "VICTOR VASCONCELOS OLIVEIRA",
-                    "total_dias": 0,
+                    "total_dias": 1,
                     "operacao": "002.03 - OPERAÇÃO/ALARES"
                 },
                 {
@@ -2865,7 +2780,7 @@ var EMBEDDED_DATA = {
                 }
             ]
         },
-        "geral_ultimos_3": 3.0
+        "geral_ultimos_3": 3.48
     },
     "operacoes": [
         "AGORACRED",
@@ -2875,5 +2790,5 @@ var EMBEDDED_DATA = {
         "ALARES/AGORACRED",
         "M.DIAS"
     ],
-    "updated_at": "2026-05-13T15:13:33.381261"
+    "updated_at": "2026-05-15T11:46:24.679352"
 };
