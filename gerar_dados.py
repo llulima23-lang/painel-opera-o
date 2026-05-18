@@ -576,9 +576,13 @@ def process_excel():
 
             # Busca dinâmica de colunas para H.O e Comissão (robusto contra espaços/acentos)
             col_ho_name = next((c for c in df.columns if normalize(c) == 'HO'), 'H.O')
+            col_meta_ho_name = next((c for c in df.columns if normalize(c) in ('META H.O', 'META HO')), 'META H.O')
             col_com_name = next((c for c in df.columns if normalize(c) == 'COMISSAO'), 'COMISSÃO')
             
             val_ho   = float(row.get(col_ho_name, 0)) if not pd.isna(row.get(col_ho_name)) else 0
+            meta_ho_val = row.get(col_meta_ho_name, None)
+            val_meta_ho = float(meta_ho_val) if meta_ho_val is not None and not (isinstance(meta_ho_val, float) and pd.isna(meta_ho_val)) else 0
+
             val_com  = float(row.get(col_com_name, 0)) if not pd.isna(row.get(col_com_name)) else 0
 
             # Pausas (percentual) e Banco de Horas (tempo)
@@ -594,7 +598,8 @@ def process_excel():
                 'meta_prom': float(meta_prom)  if meta_prom  is not None and not (isinstance(meta_prom, float) and pd.isna(meta_prom))  else 0,
                 'qualidade': qualidade,
                 'abs_dias':  abs_dias,
-                'ho': val_ho, 
+                'ho': val_ho,
+                'meta_ho': val_meta_ho,
                 'comissao': val_com,
                 'pausas': pausas_pct,
                 'banco_horas': val_to_sec(row.get('Banco de horas', 0))

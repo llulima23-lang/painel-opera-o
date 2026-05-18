@@ -566,6 +566,7 @@ function renderOperadores() {
         const qualidade = metaRow ? metaRow.qualidade : null;
         const absDias   = metaRow ? (metaRow.abs_dias || 0) : 0;
         const ho        = metaRow ? (metaRow.ho || 0) : 0;
+        const metaHo    = metaRow ? (metaRow.meta_ho || 0) : 0;
         const comissao  = metaRow ? (metaRow.comissao || 0) : 0;
         const metaPausas= metaRow ? (metaRow.pausas || 0) : 0;
         const metaBh    = metaRow ? (metaRow.banco_horas || 0) : 0;
@@ -628,6 +629,7 @@ function renderOperadores() {
                     <div class="metric-item">
                         <div class="metric-label">H.O</div>
                         <div class="metric-val">R$ ${(ho || 0).toLocaleString('pt-BR', {minimumFractionDigits: 2})}</div>
+                        ${metaHo > 0 ? `<div style="font-size: 13.5px; font-weight: 600; color: #334155; margin-top: 4px;">Meta: R$ ${(metaHo).toLocaleString('pt-BR', {minimumFractionDigits: 2})}</div><div class="metric-sub" style="color:${cor(ho, metaHo)}; font-size: 12px; font-weight: 500;">${ho >= metaHo ? '\u2705 Atingida' : `Falta: R$ ${(metaHo - ho).toLocaleString('pt-BR', {minimumFractionDigits: 2})}`}</div>` : ''}
                     </div>
                     <div class="metric-item">
                         <div class="metric-label">Comiss\u00e3o</div>

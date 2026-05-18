@@ -11,6 +11,7 @@ var EMBEDDED_DATA = {
                     "qualidade": 100.0,
                     "abs_dias": 2.0,
                     "ho": 0,
+                    "meta_ho": 0,
                     "comissao": 180.0,
                     "pausas": 0,
                     "banco_horas": 0
@@ -24,6 +25,7 @@ var EMBEDDED_DATA = {
                     "qualidade": 100.0,
                     "abs_dias": 0,
                     "ho": 2717.669999999999,
+                    "meta_ho": 1800.0,
                     "comissao": 512.9,
                     "pausas": 0,
                     "banco_horas": 0
@@ -37,6 +39,7 @@ var EMBEDDED_DATA = {
                     "qualidade": 98.75,
                     "abs_dias": 0,
                     "ho": 1922.44,
+                    "meta_ho": 1800.0,
                     "comissao": 341.93,
                     "pausas": 0,
                     "banco_horas": 0
@@ -50,6 +53,7 @@ var EMBEDDED_DATA = {
                     "qualidade": 97.5,
                     "abs_dias": 1.0,
                     "ho": 2124.570000000001,
+                    "meta_ho": 1800.0,
                     "comissao": 328.25,
                     "pausas": 0,
                     "banco_horas": 0
@@ -63,6 +67,7 @@ var EMBEDDED_DATA = {
                     "qualidade": 100.0,
                     "abs_dias": 0,
                     "ho": 2373.4100000000003,
+                    "meta_ho": 1800.0,
                     "comissao": 355.61,
                     "pausas": 0,
                     "banco_horas": 0
@@ -76,6 +81,7 @@ var EMBEDDED_DATA = {
                     "qualidade": 93.5,
                     "abs_dias": 1.0,
                     "ho": 900.4530000000002,
+                    "meta_ho": 7700.0,
                     "comissao": 25.21,
                     "pausas": 0,
                     "banco_horas": 0
@@ -89,6 +95,7 @@ var EMBEDDED_DATA = {
                     "qualidade": 99.0,
                     "abs_dias": 0,
                     "ho": 9871.3884,
+                    "meta_ho": 7700.0,
                     "comissao": 345.498594,
                     "pausas": 0,
                     "banco_horas": 0
@@ -102,6 +109,7 @@ var EMBEDDED_DATA = {
                     "qualidade": 100.0,
                     "abs_dias": 0,
                     "ho": 8235.935800000001,
+                    "meta_ho": 7700.0,
                     "comissao": 288.2577530000001,
                     "pausas": 0,
                     "banco_horas": 0
@@ -115,6 +123,7 @@ var EMBEDDED_DATA = {
                     "qualidade": 100.0,
                     "abs_dias": 0,
                     "ho": 99059.96000000004,
+                    "meta_ho": 45000.0,
                     "comissao": 3467.0986000000016,
                     "pausas": 0,
                     "banco_horas": 0
@@ -128,6 +137,7 @@ var EMBEDDED_DATA = {
                     "qualidade": 100.0,
                     "abs_dias": 0,
                     "ho": 75497.78999999998,
+                    "meta_ho": 45000.0,
                     "comissao": 2642.4226499999995,
                     "pausas": 0,
                     "banco_horas": 0
@@ -141,6 +151,7 @@ var EMBEDDED_DATA = {
                     "qualidade": 100.0,
                     "abs_dias": 0,
                     "ho": 104363.71999999999,
+                    "meta_ho": 45000.0,
                     "comissao": 3652.7302,
                     "pausas": 0,
                     "banco_horas": 0
@@ -154,6 +165,7 @@ var EMBEDDED_DATA = {
                     "qualidade": 100.0,
                     "abs_dias": 0,
                     "ho": 13329.219999999998,
+                    "meta_ho": 15000.0,
                     "comissao": 466.5227,
                     "pausas": 0,
                     "banco_horas": 0
@@ -167,6 +179,7 @@ var EMBEDDED_DATA = {
                     "qualidade": 90.0,
                     "abs_dias": 0,
                     "ho": 2059.670000000001,
+                    "meta_ho": 1800.0,
                     "comissao": 185.87704499999998,
                     "pausas": 0,
                     "banco_horas": 0
@@ -180,6 +193,7 @@ var EMBEDDED_DATA = {
                     "qualidade": 92.5,
                     "abs_dias": 0,
                     "ho": 1807.8799999999997,
+                    "meta_ho": 1800.0,
                     "comissao": 123.91803,
                     "pausas": 0,
                     "banco_horas": 0
@@ -198,6 +212,7 @@ var EMBEDDED_DATA = {
                     "qualidade": null,
                     "abs_dias": 0,
                     "ho": 0,
+                    "meta_ho": 1800.0,
                     "comissao": 0,
                     "pausas": 0,
                     "banco_horas": 0
@@ -211,6 +226,7 @@ var EMBEDDED_DATA = {
                     "qualidade": 94.0,
                     "abs_dias": 1.0,
                     "ho": 2994.089999999998,
+                    "meta_ho": 1800.0,
                     "comissao": 0,
                     "pausas": 18.0,
                     "banco_horas": 0
@@ -224,6 +240,7 @@ var EMBEDDED_DATA = {
                     "qualidade": 100.0,
                     "abs_dias": 0,
                     "ho": 3669.0500000000006,
+                    "meta_ho": 1800.0,
                     "comissao": 0,
                     "pausas": 13.0,
                     "banco_horas": 0
@@ -237,6 +254,7 @@ var EMBEDDED_DATA = {
                     "qualidade": 100.0,
                     "abs_dias": 0,
                     "ho": 0,
+                    "meta_ho": 0,
                     "comissao": 0,
                     "pausas": 12.0,
                     "banco_horas": 0
@@ -250,6 +268,7 @@ var EMBEDDED_DATA = {
                     "qualidade": 100.0,
                     "abs_dias": 0,
                     "ho": 533.07,
+                    "meta_ho": 1800.0,
                     "comissao": 0,
                     "pausas": 15.0,
                     "banco_horas": 0
@@ -263,6 +282,7 @@ var EMBEDDED_DATA = {
                     "qualidade": 100.0,
                     "abs_dias": 1.0,
                     "ho": 1549.5899999999992,
+                    "meta_ho": 1800.0,
                     "comissao": 0,
                     "pausas": 15.0,
                     "banco_horas": 0
@@ -276,6 +296,7 @@ var EMBEDDED_DATA = {
                     "qualidade": 98.0,
                     "abs_dias": 5.0,
                     "ho": 797.76,
+                    "meta_ho": 1800.0,
                     "comissao": 0,
                     "pausas": 16.0,
                     "banco_horas": 0
@@ -289,6 +310,7 @@ var EMBEDDED_DATA = {
                     "qualidade": 100.0,
                     "abs_dias": 0,
                     "ho": 0,
+                    "meta_ho": 20000.0,
                     "comissao": 0,
                     "pausas": 12.0,
                     "banco_horas": 0
@@ -302,6 +324,7 @@ var EMBEDDED_DATA = {
                     "qualidade": 100.0,
                     "abs_dias": 0,
                     "ho": 0,
+                    "meta_ho": 20000.0,
                     "comissao": 0,
                     "pausas": 12.0,
                     "banco_horas": 0
@@ -315,6 +338,7 @@ var EMBEDDED_DATA = {
                     "qualidade": 99.2,
                     "abs_dias": 0,
                     "ho": 0,
+                    "meta_ho": 20000.0,
                     "comissao": 0,
                     "pausas": 12.0,
                     "banco_horas": 0
@@ -328,6 +352,7 @@ var EMBEDDED_DATA = {
                     "qualidade": 100.0,
                     "abs_dias": 0,
                     "ho": 18415.499999999993,
+                    "meta_ho": 14500.0,
                     "comissao": 0,
                     "pausas": 14.000000000000002,
                     "banco_horas": 0
@@ -341,6 +366,7 @@ var EMBEDDED_DATA = {
                     "qualidade": null,
                     "abs_dias": 1.0,
                     "ho": 317.61,
+                    "meta_ho": 1900.0,
                     "comissao": 0,
                     "pausas": 14.000000000000002,
                     "banco_horas": 0
@@ -354,6 +380,7 @@ var EMBEDDED_DATA = {
                     "qualidade": null,
                     "abs_dias": 0,
                     "ho": 72.80000000000001,
+                    "meta_ho": 1900.0,
                     "comissao": 0,
                     "pausas": 0,
                     "banco_horas": 0
@@ -367,6 +394,7 @@ var EMBEDDED_DATA = {
                     "qualidade": 98.2,
                     "abs_dias": 2.0,
                     "ho": 2261.51,
+                    "meta_ho": 1900.0,
                     "comissao": 0,
                     "pausas": 16.0,
                     "banco_horas": 0
@@ -385,6 +413,7 @@ var EMBEDDED_DATA = {
                     "qualidade": 100.0,
                     "abs_dias": 0,
                     "ho": 3828.4500000000016,
+                    "meta_ho": 2000.0,
                     "comissao": 391.01250000000005,
                     "pausas": 13.0,
                     "banco_horas": 0
@@ -398,6 +427,7 @@ var EMBEDDED_DATA = {
                     "qualidade": 95.0,
                     "abs_dias": 1.0,
                     "ho": 1430.6299999999994,
+                    "meta_ho": 2000.0,
                     "comissao": 192.0,
                     "pausas": 16.0,
                     "banco_horas": 0
@@ -411,6 +441,7 @@ var EMBEDDED_DATA = {
                     "qualidade": 96.67,
                     "abs_dias": 0,
                     "ho": 1460.5299999999997,
+                    "meta_ho": 2000.0,
                     "comissao": 355.74,
                     "pausas": 12.0,
                     "banco_horas": 0
@@ -424,6 +455,7 @@ var EMBEDDED_DATA = {
                     "qualidade": 96.67,
                     "abs_dias": 2.0,
                     "ho": 1029.28,
+                    "meta_ho": 2000.0,
                     "comissao": 0,
                     "pausas": 16.0,
                     "banco_horas": 0
@@ -437,6 +469,7 @@ var EMBEDDED_DATA = {
                     "qualidade": 100.0,
                     "abs_dias": 1.0,
                     "ho": 261.38999999999993,
+                    "meta_ho": 2000.0,
                     "comissao": 0,
                     "pausas": 18.0,
                     "banco_horas": 0
@@ -450,6 +483,7 @@ var EMBEDDED_DATA = {
                     "qualidade": null,
                     "abs_dias": 0,
                     "ho": 217.9,
+                    "meta_ho": 2000.0,
                     "comissao": 0,
                     "pausas": 0,
                     "banco_horas": 0
@@ -463,6 +497,7 @@ var EMBEDDED_DATA = {
                     "qualidade": null,
                     "abs_dias": 1.0,
                     "ho": 0,
+                    "meta_ho": 0,
                     "comissao": 200.0,
                     "pausas": 15.0,
                     "banco_horas": 0
@@ -476,6 +511,7 @@ var EMBEDDED_DATA = {
                     "qualidade": 100.0,
                     "abs_dias": 0,
                     "ho": 8924.479999999998,
+                    "meta_ho": 20000.0,
                     "comissao": 316.72795,
                     "pausas": 11.0,
                     "banco_horas": 0
@@ -489,6 +525,7 @@ var EMBEDDED_DATA = {
                     "qualidade": 99.0,
                     "abs_dias": 0,
                     "ho": 13300.96,
+                    "meta_ho": 20000.0,
                     "comissao": 465.53360000000004,
                     "pausas": 11.0,
                     "banco_horas": 0
@@ -502,6 +539,7 @@ var EMBEDDED_DATA = {
                     "qualidade": 98.0,
                     "abs_dias": 0,
                     "ho": 10658.610000000004,
+                    "meta_ho": 20000.0,
                     "comissao": 312.35679999999996,
                     "pausas": 11.0,
                     "banco_horas": 0
@@ -515,6 +553,7 @@ var EMBEDDED_DATA = {
                     "qualidade": 99.17,
                     "abs_dias": 0,
                     "ho": 11198.119999999999,
+                    "meta_ho": 16000.0,
                     "comissao": 391.9342,
                     "pausas": 13.0,
                     "banco_horas": 0
@@ -528,6 +567,7 @@ var EMBEDDED_DATA = {
                     "qualidade": 98.67,
                     "abs_dias": 0,
                     "ho": 711.6999999999999,
+                    "meta_ho": 2000.0,
                     "comissao": 255.22,
                     "pausas": 13.0,
                     "banco_horas": 0
@@ -541,6 +581,7 @@ var EMBEDDED_DATA = {
                     "qualidade": 88.0,
                     "abs_dias": 0,
                     "ho": 259.59000000000003,
+                    "meta_ho": 2000.0,
                     "comissao": 0,
                     "pausas": 18.0,
                     "banco_horas": 0
@@ -554,6 +595,7 @@ var EMBEDDED_DATA = {
                     "qualidade": null,
                     "abs_dias": 0,
                     "ho": 47.54,
+                    "meta_ho": 2000.0,
                     "comissao": 0,
                     "pausas": 0,
                     "banco_horas": 0
@@ -572,6 +614,7 @@ var EMBEDDED_DATA = {
                     "qualidade": 100.0,
                     "abs_dias": 0,
                     "ho": 0,
+                    "meta_ho": 2500.0,
                     "comissao": 200.0,
                     "pausas": 0,
                     "banco_horas": 0
@@ -585,6 +628,7 @@ var EMBEDDED_DATA = {
                     "qualidade": 100.0,
                     "abs_dias": 0,
                     "ho": 691.0199999999999,
+                    "meta_ho": 650.0,
                     "comissao": 360.74,
                     "pausas": 0,
                     "banco_horas": 0
@@ -598,6 +642,7 @@ var EMBEDDED_DATA = {
                     "qualidade": 99.0,
                     "abs_dias": 0,
                     "ho": 646.2600000000001,
+                    "meta_ho": 650.0,
                     "comissao": 396.54,
                     "pausas": 0,
                     "banco_horas": 0
@@ -611,6 +656,7 @@ var EMBEDDED_DATA = {
                     "qualidade": null,
                     "abs_dias": 0,
                     "ho": 0,
+                    "meta_ho": 2100.0,
                     "comissao": 0,
                     "pausas": 0,
                     "banco_horas": 0
@@ -624,6 +670,7 @@ var EMBEDDED_DATA = {
                     "qualidade": 100.0,
                     "abs_dias": 2.0,
                     "ho": 644.9200000000001,
+                    "meta_ho": 650.0,
                     "comissao": 229.53,
                     "pausas": 0,
                     "banco_horas": 0
@@ -637,6 +684,7 @@ var EMBEDDED_DATA = {
                     "qualidade": 95.0,
                     "abs_dias": 0,
                     "ho": 603.67,
+                    "meta_ho": 650.0,
                     "comissao": 250.0,
                     "pausas": 0,
                     "banco_horas": 0
@@ -650,6 +698,7 @@ var EMBEDDED_DATA = {
                     "qualidade": 96.3,
                     "abs_dias": 0,
                     "ho": 984.4499999999999,
+                    "meta_ho": 2100.0,
                     "comissao": 0.0,
                     "pausas": 0,
                     "banco_horas": 0
@@ -663,6 +712,7 @@ var EMBEDDED_DATA = {
                     "qualidade": 97.0,
                     "abs_dias": 5.0,
                     "ho": 497.5500000000001,
+                    "meta_ho": 650.0,
                     "comissao": 0.0,
                     "pausas": 0,
                     "banco_horas": 0
@@ -676,6 +726,7 @@ var EMBEDDED_DATA = {
                     "qualidade": null,
                     "abs_dias": 0,
                     "ho": 176.12,
+                    "meta_ho": 650.0,
                     "comissao": 0.0,
                     "pausas": 0,
                     "banco_horas": 0
@@ -689,6 +740,7 @@ var EMBEDDED_DATA = {
                     "qualidade": 97.0,
                     "abs_dias": 2.0,
                     "ho": 145.37000000000003,
+                    "meta_ho": 650.0,
                     "comissao": 0.0,
                     "pausas": 0,
                     "banco_horas": 0
@@ -702,6 +754,7 @@ var EMBEDDED_DATA = {
                     "qualidade": 98.33,
                     "abs_dias": 5.0,
                     "ho": 498.2699999999999,
+                    "meta_ho": 2100.0,
                     "comissao": 0.0,
                     "pausas": 0,
                     "banco_horas": 0
@@ -715,6 +768,7 @@ var EMBEDDED_DATA = {
                     "qualidade": 100.0,
                     "abs_dias": 0,
                     "ho": 13760.553,
+                    "meta_ho": 16500.0,
                     "comissao": 481.61935500000004,
                     "pausas": 0,
                     "banco_horas": 0
@@ -728,6 +782,7 @@ var EMBEDDED_DATA = {
                     "qualidade": 98.8,
                     "abs_dias": 0,
                     "ho": 1493.6,
+                    "meta_ho": 2500.0,
                     "comissao": 0,
                     "pausas": 0,
                     "banco_horas": 0
@@ -741,6 +796,7 @@ var EMBEDDED_DATA = {
                     "qualidade": 98.5,
                     "abs_dias": 1.0,
                     "ho": 2257.8399999999997,
+                    "meta_ho": 2500.0,
                     "comissao": 218.45,
                     "pausas": 0,
                     "banco_horas": 0
@@ -759,6 +815,7 @@ var EMBEDDED_DATA = {
                     "qualidade": 100.0,
                     "abs_dias": 0,
                     "ho": 0,
+                    "meta_ho": 0,
                     "comissao": 200.0,
                     "pausas": 14.012992602242589,
                     "banco_horas": 0
@@ -772,6 +829,7 @@ var EMBEDDED_DATA = {
                     "qualidade": null,
                     "abs_dias": 0,
                     "ho": 143.14000000000001,
+                    "meta_ho": 700.0,
                     "comissao": 0,
                     "pausas": 10.822297780959197,
                     "banco_horas": 0
@@ -785,6 +843,7 @@ var EMBEDDED_DATA = {
                     "qualidade": null,
                     "abs_dias": 0,
                     "ho": 161.78999999999996,
+                    "meta_ho": 700.0,
                     "comissao": 0,
                     "pausas": 15.311723580054318,
                     "banco_horas": 0
@@ -798,6 +857,7 @@ var EMBEDDED_DATA = {
                     "qualidade": 85.0,
                     "abs_dias": 0,
                     "ho": 274.07000000000005,
+                    "meta_ho": 700.0,
                     "comissao": 225.0,
                     "pausas": 15.679792540329645,
                     "banco_horas": 0
@@ -811,6 +871,7 @@ var EMBEDDED_DATA = {
                     "qualidade": 100.0,
                     "abs_dias": 0,
                     "ho": 930.63,
+                    "meta_ho": 1000.0,
                     "comissao": 225.57,
                     "pausas": 11.934634180154582,
                     "banco_horas": 0
@@ -824,6 +885,7 @@ var EMBEDDED_DATA = {
                     "qualidade": 100.0,
                     "abs_dias": 0,
                     "ho": 583.1699999999998,
+                    "meta_ho": 700.0,
                     "comissao": 502.865,
                     "pausas": 12.06695837180362,
                     "banco_horas": 0
@@ -837,6 +899,7 @@ var EMBEDDED_DATA = {
                     "qualidade": 100.0,
                     "abs_dias": 4.0,
                     "ho": 1210.9900000000002,
+                    "meta_ho": 1000.0,
                     "comissao": 297.7,
                     "pausas": 16.04373339689689,
                     "banco_horas": 0
@@ -850,6 +913,7 @@ var EMBEDDED_DATA = {
                     "qualidade": 100.0,
                     "abs_dias": 0,
                     "ho": 564.9000000000001,
+                    "meta_ho": 700.0,
                     "comissao": 418.5766666666667,
                     "pausas": 10.924124455670265,
                     "banco_horas": 0
@@ -863,6 +927,7 @@ var EMBEDDED_DATA = {
                     "qualidade": 100.0,
                     "abs_dias": 0,
                     "ho": 126.60000000000002,
+                    "meta_ho": 2300.0,
                     "comissao": 334.28833333333336,
                     "pausas": 11.209398660302991,
                     "banco_horas": 0
@@ -876,6 +941,7 @@ var EMBEDDED_DATA = {
                     "qualidade": 100.0,
                     "abs_dias": 0,
                     "ho": 189.29,
+                    "meta_ho": 700.0,
                     "comissao": 0,
                     "pausas": 15.45900264313117,
                     "banco_horas": 0
@@ -889,6 +955,7 @@ var EMBEDDED_DATA = {
                     "qualidade": null,
                     "abs_dias": 0,
                     "ho": 0,
+                    "meta_ho": 0,
                     "comissao": 0,
                     "pausas": 0,
                     "banco_horas": 0
@@ -902,6 +969,7 @@ var EMBEDDED_DATA = {
                     "qualidade": null,
                     "abs_dias": 0,
                     "ho": 0,
+                    "meta_ho": 700.0,
                     "comissao": 0,
                     "pausas": 18.905215717571945,
                     "banco_horas": 0
@@ -915,6 +983,7 @@ var EMBEDDED_DATA = {
                     "qualidade": null,
                     "abs_dias": 0,
                     "ho": 568.2800000000001,
+                    "meta_ho": 700.0,
                     "comissao": 0,
                     "pausas": 13.815941174963491,
                     "banco_horas": 0
@@ -928,6 +997,7 @@ var EMBEDDED_DATA = {
                     "qualidade": null,
                     "abs_dias": 0,
                     "ho": 101.44,
+                    "meta_ho": 700.0,
                     "comissao": 0,
                     "pausas": 11.839426339714448,
                     "banco_horas": 0
@@ -941,6 +1011,7 @@ var EMBEDDED_DATA = {
                     "qualidade": 95.0,
                     "abs_dias": 0,
                     "ho": 189.04000000000002,
+                    "meta_ho": 700.0,
                     "comissao": 135.0,
                     "pausas": 17.422497872941516,
                     "banco_horas": 0
@@ -954,6 +1025,7 @@ var EMBEDDED_DATA = {
                     "qualidade": 88.3,
                     "abs_dias": 0,
                     "ho": 839.3799999999999,
+                    "meta_ho": 1500.0,
                     "comissao": 0,
                     "pausas": 20.140677293096594,
                     "banco_horas": 0
@@ -967,6 +1039,7 @@ var EMBEDDED_DATA = {
                     "qualidade": 100.0,
                     "abs_dias": 15.0,
                     "ho": 10530.650000000001,
+                    "meta_ho": 14000.0,
                     "comissao": 294.85820000000007,
                     "pausas": 14.041985625517553,
                     "banco_horas": 0
@@ -980,6 +1053,7 @@ var EMBEDDED_DATA = {
                     "qualidade": 97.0,
                     "abs_dias": 0,
                     "ho": 1801.98,
+                    "meta_ho": 1500.0,
                     "comissao": 173.3193,
                     "pausas": 16.84528508956118,
                     "banco_horas": 0
@@ -993,6 +1067,7 @@ var EMBEDDED_DATA = {
                     "qualidade": 100.0,
                     "abs_dias": 0,
                     "ho": 1285.5199999999995,
+                    "meta_ho": 1500.0,
                     "comissao": 90.0,
                     "pausas": 16.074467259363637,
                     "banco_horas": 0
@@ -1006,6 +1081,7 @@ var EMBEDDED_DATA = {
                     "qualidade": null,
                     "abs_dias": 0,
                     "ho": 84.75999999999999,
+                    "meta_ho": 800.0,
                     "comissao": 0,
                     "pausas": 13.761911852293032,
                     "banco_horas": 0
@@ -1024,6 +1100,7 @@ var EMBEDDED_DATA = {
                     "qualidade": 100.0,
                     "abs_dias": 7.0,
                     "ho": 0,
+                    "meta_ho": 0,
                     "comissao": 0,
                     "pausas": 14.000000000000002,
                     "banco_horas": 529
@@ -1037,6 +1114,7 @@ var EMBEDDED_DATA = {
                     "qualidade": null,
                     "abs_dias": 0,
                     "ho": 0,
+                    "meta_ho": 1000.0,
                     "comissao": 0,
                     "pausas": 15.0,
                     "banco_horas": 8344
@@ -1050,6 +1128,7 @@ var EMBEDDED_DATA = {
                     "qualidade": 100.0,
                     "abs_dias": 0,
                     "ho": 0,
+                    "meta_ho": 1000.0,
                     "comissao": 0,
                     "pausas": 14.000000000000002,
                     "banco_horas": 2438
@@ -1063,6 +1142,7 @@ var EMBEDDED_DATA = {
                     "qualidade": 95.0,
                     "abs_dias": 0,
                     "ho": 126.66999999999999,
+                    "meta_ho": 1000.0,
                     "comissao": 0,
                     "pausas": 14.000000000000002,
                     "banco_horas": 6182
@@ -1076,6 +1156,7 @@ var EMBEDDED_DATA = {
                     "qualidade": 100.0,
                     "abs_dias": 0,
                     "ho": 286.7700000000001,
+                    "meta_ho": 1000.0,
                     "comissao": 0,
                     "pausas": 12.0,
                     "banco_horas": 738
@@ -1089,6 +1170,7 @@ var EMBEDDED_DATA = {
                     "qualidade": 100.0,
                     "abs_dias": 0,
                     "ho": 0,
+                    "meta_ho": 1000.0,
                     "comissao": 0,
                     "pausas": 12.0,
                     "banco_horas": 1392
@@ -1102,6 +1184,7 @@ var EMBEDDED_DATA = {
                     "qualidade": 100.0,
                     "abs_dias": 4.0,
                     "ho": 175.92999999999998,
+                    "meta_ho": 1000.0,
                     "comissao": 0,
                     "pausas": 27.0,
                     "banco_horas": 59131
@@ -1115,6 +1198,7 @@ var EMBEDDED_DATA = {
                     "qualidade": 100.0,
                     "abs_dias": 0,
                     "ho": 128.21,
+                    "meta_ho": 1000.0,
                     "comissao": 0,
                     "pausas": 12.0,
                     "banco_horas": 14032
@@ -1128,6 +1212,7 @@ var EMBEDDED_DATA = {
                     "qualidade": 100.0,
                     "abs_dias": 0,
                     "ho": 7.1,
+                    "meta_ho": 1000.0,
                     "comissao": 0,
                     "pausas": 12.0,
                     "banco_horas": 26640
@@ -1141,6 +1226,7 @@ var EMBEDDED_DATA = {
                     "qualidade": null,
                     "abs_dias": 0,
                     "ho": 0,
+                    "meta_ho": 1000.0,
                     "comissao": 0,
                     "pausas": 0,
                     "banco_horas": 9580
@@ -1154,6 +1240,7 @@ var EMBEDDED_DATA = {
                     "qualidade": null,
                     "abs_dias": 0,
                     "ho": 0,
+                    "meta_ho": 1000.0,
                     "comissao": 0,
                     "pausas": 0,
                     "banco_horas": 21600
@@ -1167,6 +1254,7 @@ var EMBEDDED_DATA = {
                     "qualidade": 100.0,
                     "abs_dias": 0,
                     "ho": 92.2,
+                    "meta_ho": 1000.0,
                     "comissao": 0,
                     "pausas": 18.0,
                     "banco_horas": 8390
@@ -1180,6 +1268,7 @@ var EMBEDDED_DATA = {
                     "qualidade": 100.0,
                     "abs_dias": 0,
                     "ho": 160.29999999999998,
+                    "meta_ho": 1000.0,
                     "comissao": 0,
                     "pausas": 16.0,
                     "banco_horas": 207
@@ -1193,6 +1282,7 @@ var EMBEDDED_DATA = {
                     "qualidade": 100.0,
                     "abs_dias": 0,
                     "ho": 70.97,
+                    "meta_ho": 1000.0,
                     "comissao": 0,
                     "pausas": 11.0,
                     "banco_horas": 15131
@@ -1206,6 +1296,7 @@ var EMBEDDED_DATA = {
                     "qualidade": 100.0,
                     "abs_dias": 1.0,
                     "ho": 0,
+                    "meta_ho": 1000.0,
                     "comissao": 0,
                     "pausas": 17.0,
                     "banco_horas": 267
@@ -1219,6 +1310,7 @@ var EMBEDDED_DATA = {
                     "qualidade": null,
                     "abs_dias": 0,
                     "ho": 55.19,
+                    "meta_ho": 1000.0,
                     "comissao": 0,
                     "pausas": 14.000000000000002,
                     "banco_horas": 43425
@@ -1232,6 +1324,7 @@ var EMBEDDED_DATA = {
                     "qualidade": null,
                     "abs_dias": 0,
                     "ho": 0,
+                    "meta_ho": 14000.0,
                     "comissao": 0,
                     "pausas": 13.0,
                     "banco_horas": 5072
@@ -1245,6 +1338,7 @@ var EMBEDDED_DATA = {
                     "qualidade": 100.0,
                     "abs_dias": 0,
                     "ho": 223.0,
+                    "meta_ho": 1500.0,
                     "comissao": 0,
                     "pausas": 16.0,
                     "banco_horas": 410
@@ -1258,6 +1352,7 @@ var EMBEDDED_DATA = {
                     "qualidade": 100.0,
                     "abs_dias": 0,
                     "ho": 0,
+                    "meta_ho": 1500.0,
                     "comissao": 0,
                     "pausas": 18.0,
                     "banco_horas": 30763
@@ -1271,6 +1366,7 @@ var EMBEDDED_DATA = {
                     "qualidade": 100.0,
                     "abs_dias": 0,
                     "ho": 350.0,
+                    "meta_ho": 1500.0,
                     "comissao": 0,
                     "pausas": 16.0,
                     "banco_horas": 230
@@ -1900,7 +1996,7 @@ var EMBEDDED_DATA = {
             "admissao": "2024-08-05",
             "matricula": "6292",
             "operacao": "ALARES PA FIXA",
-            "foto": null
+            "foto": "fotos/6292.jpg"
         },
         {
             "nome": "Francisco Ivonildo Sousa",
@@ -1964,7 +2060,7 @@ var EMBEDDED_DATA = {
             "admissao": "2026-04-14",
             "matricula": "7764",
             "operacao": "ALARES PA FIXA",
-            "foto": null
+            "foto": "fotos/7764.jpg"
         },
         {
             "nome": "Ana Lidia da Cruz Miranda",
@@ -1980,7 +2076,7 @@ var EMBEDDED_DATA = {
             "admissao": "2026-04-14",
             "matricula": "7774",
             "operacao": "ALARES PA FIXA",
-            "foto": null
+            "foto": "fotos/7774.jpg"
         },
         {
             "nome": "Nicole Soares Freitas",
@@ -2790,5 +2886,5 @@ var EMBEDDED_DATA = {
         "ALARES/AGORACRED",
         "M.DIAS"
     ],
-    "updated_at": "2026-05-18T09:26:24.007383"
+    "updated_at": "2026-05-18T11:10:50.279664"
 };
