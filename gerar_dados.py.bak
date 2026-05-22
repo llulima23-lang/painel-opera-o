@@ -13,25 +13,13 @@ try:
 except:
     pass
 
-def get_path(path_key, default_path):
-    if os.path.exists(default_path):
-        return default_path
-    base_name = os.path.basename(default_path)
-    local_candidate = os.path.join(os.path.dirname(os.path.abspath(__file__)), base_name)
-    if os.path.exists(local_candidate):
-        return local_candidate
-    local_candidate_sibling = os.path.join(os.getcwd(), base_name)
-    if os.path.exists(local_candidate_sibling):
-        return local_candidate_sibling
-    return default_path
-
 FILES = {
-    'META': get_path('META', r'C:\Users\sup.luciana\Meu Drive\MF\MF\Indicadores de Cobrança\META GERAL 2026.xlsx'),
-    'TEMPOS': get_path('TEMPOS', r'C:\Users\sup.luciana\Meu Drive\MF\MF\Indicadores de Cobrança\TEMPOS 2026.xlsx'),
-    'ADM': get_path('ADM', r'C:\Users\sup.luciana\Meu Drive\MF\MF\Indicadores de Cobrança\ADM EQUIPES.xlsx'),
-    'ABS': get_path('ABS', r'C:\Users\sup.luciana\Meu Drive\MF\MF\ABS\TRATADO - ABS.xlsx')
+    'META': r'C:\Users\sup.luciana\Meu Drive\MF\MF\Indicadores de Cobrança\META GERAL 2026.xlsx',
+    'TEMPOS': r'C:\Users\sup.luciana\Meu Drive\MF\MF\Indicadores de Cobrança\TEMPOS 2026.xlsx',
+    'ADM': r'C:\Users\sup.luciana\Meu Drive\MF\MF\Indicadores de Cobrança\ADM EQUIPES.xlsx',
+    'ABS': r'C:\Users\sup.luciana\Meu Drive\MF\MF\ABS\TRATADO - ABS.xlsx'
 }
-JS_OUTPUT = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data_embedded.js')
+JS_OUTPUT = r'C:\Users\sup.luciana\Desktop\AntiGravity\PAINEL OPERAÇÃO\data_embedded.js'
 
 CORTE_BH = datetime.date(2026, 3, 16)
 META_PADRAO_SEC = 7 * 3600 + 12 * 60  # 07:12:00
@@ -187,24 +175,16 @@ def process_excel():
 
     # ── 1.5 MAPEAMENTO DE FOTOS ──────────────────────────────────────
     import shutil, glob
-    image_extensions = ('.jpg', '.jpeg', '.png')
+    fotos_dir_src = r'C:\Users\sup.luciana\Meu Drive\FOTOS EQUIPES'
     fotos_dir_dst = os.path.join(os.path.dirname(__file__), 'fotos')
     os.makedirs(fotos_dir_dst, exist_ok=True)
 
-    fotos_dir_src_default = r'C:\Users\sup.luciana\Meu Drive\FOTOS EQUIPES'
-    if os.path.exists(fotos_dir_src_default):
-        fotos_dir_src = fotos_dir_src_default
-    else:
-        fotos_dir_src = os.path.join(os.path.dirname(__file__), 'fotos_src')
-        if not os.path.exists(fotos_dir_src):
-            fotos_dir_src = fotos_dir_dst
-            
+    image_extensions = ('.jpg', '.jpeg', '.png')
     src_images = []
-    if os.path.exists(fotos_dir_src):
-        for root, dirs, files in os.walk(fotos_dir_src):
-            for file in files:
-                if file.lower().endswith(image_extensions):
-                    src_images.append(os.path.join(root, file))
+    for root, dirs, files in os.walk(fotos_dir_src):
+        for file in files:
+            if file.lower().endswith(image_extensions):
+                src_images.append(os.path.join(root, file))
 
     fotos_found = 0
     for op in adm_list:
@@ -234,8 +214,7 @@ def process_excel():
             safe = op['matricula'] if op['matricula'] else n_norm.replace(' ', '_')
             dst = os.path.join(fotos_dir_dst, f"{safe}{ext}")
             try:
-                if os.path.abspath(best) != os.path.abspath(dst):
-                    shutil.copy2(best, dst)
+                shutil.copy2(best, dst)
                 op['foto'] = f"fotos/{safe}{ext}"
                 fotos_found += 1
             except Exception as e:
@@ -611,16 +590,6 @@ def process_excel():
             pausas_val = row.get(col_pausa_name, 0)
             pausas_pct = float(pausas_val) * 100 if not pd.isna(pausas_val) else 0
 
-            # Quartil e Dispersão (se existirem)
-            col_quartil_name = next((c for c in df.columns if normalize(c) == 'QUARTIL'), None)
-            col_dispersao_name = next((c for c in df.columns if normalize(c) in ('DISPERSAO', 'DISPERSÃO')), None)
-
-            quartil_val = row.get(col_quartil_name) if col_quartil_name else None
-            dispersao_val = row.get(col_dispersao_name) if col_dispersao_name else None
-
-            quartil_str = str(quartil_val).strip() if pd.notna(quartil_val) and quartil_val is not None else None
-            dispersao_num = safe_pct(dispersao_val) if pd.notna(dispersao_val) and dispersao_val is not None else None
-
             rows.append({
                 'nome':      nome_str,
                 'nome_norm': nome_norm,
@@ -633,9 +602,7 @@ def process_excel():
                 'meta_ho': val_meta_ho,
                 'comissao': val_com,
                 'pausas': pausas_pct,
-                'banco_horas': val_to_sec(row.get('Banco de horas', 0)),
-                'quartil': quartil_str,
-                'dispersao': dispersao_num
+                'banco_horas': val_to_sec(row.get('Banco de horas', 0))
             })
         meta_data[sh] = {'rows': rows, 'du': du_val}
         print(f"  META {sh}: {len(rows)} ativos, D.U={du_val}")
