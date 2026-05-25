@@ -1273,7 +1273,7 @@ var EMBEDDED_DATA = {
                     "pausas": 15.0,
                     "banco_horas": 10666,
                     "quartil": "3º",
-                    "dispersao": 56.9
+                    "dispersao": 61.1
                 },
                 {
                     "nome": "Andrea de Sousa Vieira",
@@ -1304,8 +1304,8 @@ var EMBEDDED_DATA = {
                     "comissao": 0,
                     "pausas": 14.000000000000002,
                     "banco_horas": 3399,
-                    "quartil": "2º",
-                    "dispersao": 61.5
+                    "quartil": "3º",
+                    "dispersao": 59.6
                 },
                 {
                     "nome": "Elinete Ribeiro Costa",
@@ -1320,8 +1320,8 @@ var EMBEDDED_DATA = {
                     "comissao": 0,
                     "pausas": 12.0,
                     "banco_horas": 2103,
-                    "quartil": "1º",
-                    "dispersao": 83.6
+                    "quartil": "2º",
+                    "dispersao": 77.9
                 },
                 {
                     "nome": "Francisco Ivonildo Sousa",
@@ -1336,8 +1336,8 @@ var EMBEDDED_DATA = {
                     "comissao": 0,
                     "pausas": 12.0,
                     "banco_horas": 2817,
-                    "quartil": "3º",
-                    "dispersao": 49.3
+                    "quartil": "1º",
+                    "dispersao": 90.5
                 },
                 {
                     "nome": "Izali Dutra da Cunha Magalhães",
@@ -1353,7 +1353,7 @@ var EMBEDDED_DATA = {
                     "pausas": 26.0,
                     "banco_horas": 63530,
                     "quartil": "4º",
-                    "dispersao": 22.9
+                    "dispersao": 22.3
                 },
                 {
                     "nome": "Lorena Ribeiro dos Santos",
@@ -1369,7 +1369,7 @@ var EMBEDDED_DATA = {
                     "pausas": 12.0,
                     "banco_horas": 17933,
                     "quartil": "1º",
-                    "dispersao": 90.9
+                    "dispersao": 94.5
                 },
                 {
                     "nome": "Maria Natalia Farias",
@@ -1384,8 +1384,8 @@ var EMBEDDED_DATA = {
                     "comissao": 0,
                     "pausas": 12.0,
                     "banco_horas": 27679,
-                    "quartil": "4º",
-                    "dispersao": 8.6
+                    "quartil": "2º",
+                    "dispersao": 69.2
                 },
                 {
                     "nome": "Mateus Costa Franco",
@@ -1433,7 +1433,7 @@ var EMBEDDED_DATA = {
                     "pausas": 18.0,
                     "banco_horas": 14329,
                     "quartil": "3º",
-                    "dispersao": 25.9
+                    "dispersao": 41.5
                 },
                 {
                     "nome": "Rubens da Silva Bento",
@@ -1449,7 +1449,7 @@ var EMBEDDED_DATA = {
                     "pausas": 15.0,
                     "banco_horas": 1230,
                     "quartil": "1º",
-                    "dispersao": 81.0
+                    "dispersao": 88.9
                 },
                 {
                     "nome": "Shayonara Silva Castro",
@@ -1465,7 +1465,7 @@ var EMBEDDED_DATA = {
                     "pausas": 11.0,
                     "banco_horas": 3119,
                     "quartil": "2º",
-                    "dispersao": 67.7
+                    "dispersao": 69.4
                 },
                 {
                     "nome": "Victor Vasconcelos Oliveira",
@@ -1481,7 +1481,7 @@ var EMBEDDED_DATA = {
                     "pausas": 17.0,
                     "banco_horas": 5736,
                     "quartil": "4º",
-                    "dispersao": 12.6
+                    "dispersao": 13.3
                 },
                 {
                     "nome": "Ana Leticia do Nascimento Paz",
@@ -1496,8 +1496,8 @@ var EMBEDDED_DATA = {
                     "comissao": 0,
                     "pausas": 12.0,
                     "banco_horas": 45303,
-                    "quartil": "3º",
-                    "dispersao": 41.5
+                    "quartil": "4º",
+                    "dispersao": 22.7
                 },
                 {
                     "nome": "Maria de Fátima Andrade Fernandes",
@@ -3093,5 +3093,5 @@ var EMBEDDED_DATA = {
         "ALARES/AGORACRED",
         "M.DIAS"
     ],
-    "updated_at": "2026-05-25T12:01:28.249593"
+    "updated_at": "2026-05-25T12:13:42.572827"
 };
