@@ -418,6 +418,8 @@ function calcDebitosExtras(op) {
 function renderTudo() {
     rebuildTempoMes();
     if (G.isAdmin) renderDashboard();
+    if (typeof window.initQuartil === 'function' && !window.quartilInitialized) { window.initQuartil(); window.quartilInitialized = true; }
+    if (window.loadDataQuartil) window.loadDataQuartil();
     renderOperadores();
 }
 
@@ -838,3 +840,15 @@ function renderMotivational(status, details) {
     `;
     pnl.style.display = 'flex';
 }
+
+
+// Sidebar Collapsible Logic
+document.addEventListener('DOMContentLoaded', () => {
+    const logoSidebar = document.querySelector('.logo-sidebar');
+    const sidebar = document.querySelector('.sidebar');
+    if (logoSidebar && sidebar) {
+        logoSidebar.addEventListener('click', () => {
+            sidebar.classList.toggle('collapsed');
+        });
+    }
+});

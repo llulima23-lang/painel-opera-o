@@ -53,6 +53,14 @@
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
                     <span>Operadores</span>
                 </li>
+                <li class="admin-only" data-view="quartil">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                    <span>Dashboard Quartil</span>
+                </li>
+                <li class="admin-only" data-view="q4alerts">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                    <span>Foco 4º Quartil</span>
+                </li>
             </ul>
             <div class="sidebar-footer">
                 <div id="user-info" style="font-size:12px; color:#94a3b8; margin-bottom:10px;"></div>
@@ -203,11 +211,250 @@
                     <div class="cards-grid" id="operadores-grid"></div>
                 </div>
 
+                <!-- VIEW: Quartil -->
+<div id="view-quartil" class="view-section" style="display:none;">
+      <div class="section-header">
+        <div class="icon-box">🏆</div>
+        <div>
+          <h2>Monitoramento de Performance</h2>
+          <p>Análise de Quartil e Dispersão por H.O e Promessas por Operação</p>
+        </div>
+      </div>
+
+      <!-- KPI cards -->
+      <div class="grid-4" style="margin-bottom: 24px;" id="kpiGrid">
+        <div class="kpi-card">
+          <div class="kpi-label">Agentes Ativos</div>
+          <div class="kpi-value" id="kpiTotalAgentes">—</div>
+          <div class="kpi-sub">Total monitorado</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Média Geral H.O</div>
+          <div class="kpi-value" id="kpiMediaHO">—</div>
+          <div class="kpi-sub">Honorários</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Média Geral Promessas</div>
+          <div class="kpi-value" id="kpiMediaPromessas">—</div>
+          <div class="kpi-sub">Quantidade média</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Operações</div>
+          <div class="kpi-value" id="kpiTotalOperacoes">—</div>
+          <div class="kpi-sub">Segmentações ativas</div>
+        </div>
+      </div>
+
+      <!-- CARTEIRAS SUMMARY -->
+      <div class="carteiras-section" style="margin-bottom: 24px;">
+        <h3 style="font-size: 1.1rem; color: var(--navy); margin-bottom: 16px; font-weight: 700; display: flex; align-items: center; gap: 8px;">
+          <span>💼</span> Desempenho por Carteira (Médias de Produção &amp; Dispersão)
+        </h3>
+        <div class="grid-2" id="carteirasGrid">
+          <!-- Dynamically populated portfolio summary cards -->
+        </div>
+      </div>
+
+      <!-- FILTERS -->
+      <div class="filters-bar">
+        <div class="filter-group">
+          <label for="filterOp">Operação</label>
+          <select id="filterOp">
+            <option value="all">Todas as Operações</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label for="filterQuartilHO">Quartil H.O</label>
+          <select id="filterQuartilHO">
+            <option value="all">Todos os Quartis</option>
+            <option value="1º Quartil">1º Quartil</option>
+            <option value="2º Quartil">2º Quartil</option>
+            <option value="3º Quartil">3º Quartil</option>
+            <option value="4º Quartil">4º Quartil</option>
+            <option value="—">Sem Lançamento (—)</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label for="filterQuartilPromessa">Quartil Promessas</label>
+          <select id="filterQuartilPromessa">
+            <option value="all">Todos os Quartis</option>
+            <option value="1º Quartil">1º Quartil</option>
+            <option value="2º Quartil">2º Quartil</option>
+            <option value="3º Quartil">3º Quartil</option>
+            <option value="4º Quartil">4º Quartil</option>
+            <option value="—">Sem Lançamento (—)</option>
+          </select>
+        </div>
+        <div class="filter-group" style="min-width: 250px;">
+          <label for="searchAgent">Buscar Agente</label>
+          <input type="text" id="searchAgent" placeholder="Digite o nome do agente...">
+        </div>
+      </div>
+
+      <!-- LOADING STATE -->
+      <div id="loading" class="loading-state">
+        <div class="spinner"></div>
+        <p>Carregando dados da planilha...</p>
+      </div>
+
+      <!-- ERROR STATE -->
+      <div id="error" class="error-state hidden"></div>
+
+      <!-- DASHBOARD CARDS GRID -->
+      <div id="dashboardData" class="hidden">
+        <div class="card" style="margin-bottom: 24px;">
+          <h3>Distribuição de Quartis (Registros Filtrados)</h3>
+          <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-top: 12px; text-align: center;">
+            <div style="background: rgba(95, 173, 65, 0.08); border: 1px solid rgba(95, 173, 65, 0.2); border-radius: 8px; padding: 12px;">
+              <div style="font-weight: 800; font-size: 1.5rem; color: #2E7D4F;" id="q1Count">0</div>
+              <div style="font-size: 0.72rem; font-weight: 700; color: #2E7D4F; text-transform: uppercase; margin-top: 4px;">1º Quartil</div>
+            </div>
+            <div style="background: rgba(79, 129, 189, 0.08); border: 1px solid rgba(79, 129, 189, 0.2); border-radius: 8px; padding: 12px;">
+              <div style="font-weight: 800; font-size: 1.5rem; color: #2E5C9A;" id="q2Count">0</div>
+              <div style="font-size: 0.72rem; font-weight: 700; color: #2E5C9A; text-transform: uppercase; margin-top: 4px;">2º Quartil</div>
+            </div>
+            <div style="background: rgba(247, 150, 70, 0.08); border: 1px solid rgba(247, 150, 70, 0.2); border-radius: 8px; padding: 12px;">
+              <div style="font-weight: 800; font-size: 1.5rem; color: #c46418;" id="q3Count">0</div>
+              <div style="font-size: 0.72rem; font-weight: 700; color: #c46418; text-transform: uppercase; margin-top: 4px;">3º Quartil</div>
+            </div>
+            <div style="background: rgba(192, 80, 77, 0.08); border: 1px solid rgba(192, 80, 77, 0.2); border-radius: 8px; padding: 12px;">
+              <div style="font-weight: 800; font-size: 1.5rem; color: #a03030;" id="q4Count">0</div>
+              <div style="font-size: 0.72rem; font-weight: 700; color: #a03030; text-transform: uppercase; margin-top: 4px;">4º Quartil</div>
+            </div>
+          </div>
+        </div>
+
+        <h3 style="font-size: 1.1rem; color: var(--navy); margin-bottom: 16px; font-weight: 700;">Cards dos Operadores</h3>
+        <div class="agents-grid" id="agentsGrid"></div>
+      </div>
+      
+    </div>
+    
+    
+                <!-- VIEW: Q4 Alerts -->
+<div id="view-q4alerts" class="view-section" style="display:none;">
+      <div class="section-header">
+        <div class="icon-box" style="background: linear-gradient(135deg, var(--q4), #df7c79);">⚠️</div>
+        <div>
+          <h2>Foco Crítico: 4º Quartil (Honorários)</h2>
+          <p>Análise de dispersão e plano de ação de 5 dias para reversão de baixo desempenho</p>
+        </div>
+      </div>
+
+      <!-- KPI cards for Q4 -->
+      <div class="grid-4" style="margin-bottom: 24px;">
+        <div class="kpi-card" style="border-left: 4px solid var(--q4);">
+          <div class="kpi-label">Operadores no 4º Q</div>
+          <div class="kpi-value text-danger" id="q4TotalOperadores">—</div>
+          <div class="kpi-sub">Alvo de intervenção</div>
+        </div>
+        <div class="kpi-card" style="border-left: 4px solid var(--q4);">
+          <div class="kpi-label">Média de Dispersão do 4º Q</div>
+          <div class="kpi-value" id="q4MediaDispersao">—</div>
+          <div class="kpi-sub">Meta: ≥ 50%</div>
+        </div>
+        <div class="kpi-card" style="border-left: 4px solid var(--q4);">
+          <div class="kpi-label">Status da Meta</div>
+          <div class="kpi-value" id="q4StatusMeta">—</div>
+          <div class="kpi-sub" id="q4StatusMetaSub">Análise do indicador</div>
+        </div>
+        <div class="kpi-card" style="border-left: 4px solid var(--q4);">
+          <div class="kpi-label">Impacto Recuperável</div>
+          <div class="kpi-value" id="q4ImpactoEstimado">—</div>
+          <div class="kpi-sub">Potencial se atingir meta</div>
+        </div>
+      </div>
+
+      <!-- Content Layout: List of Q4 Operators left, Insights & Action Plan right -->
+      <div class="grid-2-resp" style="margin-bottom: 30px;">
+        
+        <!-- Left: Q4 Operators Table -->
+        <div class="card" style="display: flex; flex-direction: column;">
+          <h3 style="margin-bottom: 16px; display: flex; align-items: center; gap: 8px; font-size: 1.05rem; color: var(--navy); font-weight: 700;">
+            <span>📋</span> Operadores Impactados
+          </h3>
+          <div style="overflow-x: auto; flex-grow: 1;">
+            <table class="q4-table">
+              <thead>
+                <tr style="border-bottom: 2.5px solid #eef7f2; padding-bottom: 10px; text-align: left;">
+                  <th style="padding: 10px 8px; font-size: 0.72rem; font-weight: 700; color: var(--muted); text-transform: uppercase;">Operador</th>
+                  <th style="padding: 10px 8px; font-size: 0.72rem; font-weight: 700; color: var(--muted); text-transform: uppercase;">Operação</th>
+                  <th style="padding: 10px 8px; font-size: 0.72rem; font-weight: 700; color: var(--muted); text-transform: uppercase; text-align: right;">Dispersão H.O</th>
+                </tr>
+              </thead>
+              <tbody id="q4OperatorsTableBody">
+                <!-- Dynamically populated rows -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Right: Action Plan & Insights -->
+        <div class="card">
+          <h3 style="margin-bottom: 18px; display: flex; align-items: center; gap: 8px; font-size: 1.05rem; color: var(--navy); font-weight: 700;">
+            <span>⚡</span> Plano de Ação de 5 Dias (Foco em Dispersão)
+          </h3>
+          
+          <div class="action-timeline">
+            <!-- Days 1-5 -->
+            <div class="timeline-step">
+              <div class="step-num">D1</div>
+              <div class="step-content">
+                <h4>Diagnóstico Individual & Calibragem</h4>
+                <p>Identificar se a dispersão abaixo de 50% é causada por devedores inativos ou problemas no discador. Auditoria imediata de 3 ligações gravadas de cada operador.</p>
+              </div>
+            </div>
+            <div class="timeline-step">
+              <div class="step-num">D2</div>
+              <div class="step-content">
+                <h4>Treinamento em Contorno de Objeções</h4>
+                <p>Reciclagem de negociação com foco em contorno de objeções de taxas e descontos nos honorários. Roleplay de 30 minutos antes de iniciar o turno.</p>
+              </div>
+            </div>
+            <div class="timeline-step">
+              <div class="step-num">D3</div>
+              <div class="step-content">
+                <h4>Discagem Manual Focada (Hot Leads)</h4>
+                <p>Priorizar carteiras com maior propensão de pagamento e honorários de ticket médio elevado. Executar contatos manuais monitorados em telefones quentes.</p>
+              </div>
+            </div>
+            <div class="timeline-step">
+              <div class="step-num">D4</div>
+              <div class="step-content">
+                <h4>Negociação em Linha com Supervisão</h4>
+                <p>Supervisor assume as ligações de acordos mais complexos ou com valores mais elevados junto ao operador para auxiliar na conversão imediata.</p>
+              </div>
+            </div>
+            <div class="timeline-step">
+              <div class="step-num">D5</div>
+              <div class="step-content">
+                <h4>Validação de Boletos & Cobrança de Vencimento</h4>
+                <p>Acompanhamento intensivo do pagamento dos boletos emitidos. Disparar lembretes via WhatsApp/SMS no início do dia para garantir a liquidação.</p>
+              </div>
+            </div>
+          </div>
+
+          <div style="margin-top: 24px; padding: 16px; background: rgba(141, 198, 66, 0.08); border: 1.5px solid rgba(141, 198, 66, 0.2); border-radius: 10px;">
+            <h4 style="color: var(--navy); font-weight: 700; margin-bottom: 6px; display: flex; align-items: center; gap: 6px; font-size: 0.88rem;">
+              <span>💡</span> Insights Estratégicos para Acelerar Metas
+            </h4>
+            <ul style="padding-left: 18px; margin: 0; font-size: 0.82rem; color: var(--text); line-height: 1.5;">
+              <li><strong>Distribuição Corretiva:</strong> Operadores com dispersão de H.O &lt; 50% devem temporariamente focar em leads com menor tempo de atraso para recompor a média.</li>
+              <li><strong>Sincronia Operacional:</strong> A meta coletiva da operação exige que o grupo do 4º Quartil mantenha média de dispersão <strong>≥ 50%</strong> para evitar dispersão prejudicial.</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  
+
             </main>
         </div>
     </div>
 
     <script src="data_embedded.js?v=2"></script>
+    <script src="app_quartil.js?v=1"></script>
     <script src="app.js?v=2"></script>
 </body>
 </html>
