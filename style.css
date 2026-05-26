@@ -912,7 +912,7 @@ select:focus, input[type="text"]:focus {
 #login-error { color: var(--q4); }
 
 /* ── LAYOUT ── */
-#app-wrapper { display:flex; height:100vh; overflow:hidden; }
+#app-wrapper { display:flex; height:100vh; overflow:hidden; width: 100%; }
 .content-area { flex:1; display:flex; flex-direction:column; overflow:hidden; background: var(--bg); }
 .main-content { flex:1; overflow-y:auto; padding-bottom: 40px; }
 
@@ -1066,12 +1066,12 @@ select:focus, input[type="text"]:focus {
 .abs-operacao-container { display:grid; grid-template-columns:repeat(auto-fill, minmax(200px, 1fr)); gap:12px; margin-bottom:24px; }
 .abs-op-item {
     background:var(--card); border:1px solid var(--border); border-radius:10px;
-    padding:16px; display:flex; justify-content:space-between; align-items:center;
+    padding:16px; display:flex; justify-content:space-between; align-items:center; gap:10px;
     box-shadow:0 2px 8px rgba(0,0,0,.02); transition: transform 0.2s;
 }
 .abs-op-item:hover { transform: translateY(-2px); border-color: var(--navy-mid); }
-.abs-op-name { font-size:13px; color:var(--muted); font-weight:700; }
-.abs-op-val { font-size:18px; font-weight:800; color: var(--navy); }
+.abs-op-name { font-size:12px; color:var(--muted); font-weight:700; flex: 1; min-width: 0; word-break: break-word; overflow-wrap: break-word; line-height: 1.3; }
+.abs-op-val { font-size:18px; font-weight:800; color: var(--navy); white-space: nowrap; flex-shrink: 0; }
 
 /* ── OPERATOR CARDS (Replacing glassmorphism with Quartil flat style) ── */
 .cards-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); gap:20px; }
