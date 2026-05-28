@@ -88,10 +88,10 @@ window.initQuartil = function() {
         });
 
         // Set up change event listeners
-        filterOp.addEventListener('change', window.renderQuartilDashboard);
-        filterQuartilHO.addEventListener('change', window.renderQuartilDashboard);
-        filterQuartilPromessa.addEventListener('change', window.renderQuartilDashboard);
-        searchAgent.addEventListener('input', window.renderQuartilDashboard);
+        filterOp.addEventListener('change', () => window.renderQuartilDashboard());
+        filterQuartilHO.addEventListener('change', () => window.renderQuartilDashboard());
+        filterQuartilPromessa.addEventListener('change', () => window.renderQuartilDashboard());
+        searchAgent.addEventListener('input', () => window.renderQuartilDashboard());
     }
 
     function getQuartileClass(quartil) {
