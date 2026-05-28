@@ -384,7 +384,7 @@ function operadoresFiltrados() {
         if (G.filtroOperacao && op.operacao !== G.filtroOperacao) return false;
         if (fNorm) {
             const nomeOk = op.nomeNorm.includes(fNorm);
-            const matOk  = op.matricula && op.matricula.includes(G.filtroNome.trim());
+            const matOk  = op.matricula && String(op.matricula).includes(G.filtroNome.trim());
             if (!nomeOk && !matOk) return false;
         }
         return true;

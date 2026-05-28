@@ -114,8 +114,8 @@ window.initQuartil = function() {
             const matchOp = opVal === 'all' || item.Operacao === opVal;
             const matchQHO = qHOVal === 'all' || item.Quartil_HO === qHOVal;
             const matchQProm = qPromVal === 'all' || item.Quartil_Promessas === qPromVal;
-            const matchSearch = item.Agente.toLowerCase().includes(searchVal) || 
-                                item.Matricula.toLowerCase().includes(searchVal);
+            const matchSearch = String(item.Agente || '').toLowerCase().includes(searchVal) || 
+                                String(item.Matricula || '').toLowerCase().includes(searchVal);
             return matchOp && matchQHO && matchQProm && matchSearch;
         });
 
@@ -145,7 +145,7 @@ window.initQuartil = function() {
         // === Q4 PAGE UPDATES ===
         const q4Agents = allAgents.filter(item => {
             const matchOp = opVal === 'all' || item.Operacao === opVal;
-            const isQ4 = item.Quartil_HO === '4º Quartil';
+            const isQ4 = (item.Quartil_HO || "").includes('4º');
             return matchOp && isQ4;
         });
 
@@ -420,15 +420,18 @@ window.initQuartil = function() {
         };
 
         filtered.forEach(item => {
-            if (item.Quartil_HO.includes("1º")) counts.q1.ho++;
-            if (item.Quartil_HO.includes("2º")) counts.q2.ho++;
-            if (item.Quartil_HO.includes("3º")) counts.q3.ho++;
-            if (item.Quartil_HO.includes("4º")) counts.q4.ho++;
+            const qho = item.Quartil_HO || "";
+            const qprom = item.Quartil_Promessas || "";
+            
+            if (qho.includes("1º")) counts.q1.ho++;
+            if (qho.includes("2º")) counts.q2.ho++;
+            if (qho.includes("3º")) counts.q3.ho++;
+            if (qho.includes("4º")) counts.q4.ho++;
 
-            if (item.Quartil_Promessas.includes("1º")) counts.q1.prom++;
-            if (item.Quartil_Promessas.includes("2º")) counts.q2.prom++;
-            if (item.Quartil_Promessas.includes("3º")) counts.q3.prom++;
-            if (item.Quartil_Promessas.includes("4º")) counts.q4.prom++;
+            if (qprom.includes("1º")) counts.q1.prom++;
+            if (qprom.includes("2º")) counts.q2.prom++;
+            if (qprom.includes("3º")) counts.q3.prom++;
+            if (qprom.includes("4º")) counts.q4.prom++;
         });
 
         q1Count.innerHTML = `<span style="font-size: 1.3rem;">${counts.q1.ho}</span><span style="font-size:0.75rem; font-weight:500; color:var(--muted)"> HO</span> &nbsp;|&nbsp; <span style="font-size: 1.3rem;">${counts.q1.prom}</span><span style="font-size:0.75rem; font-weight:500; color:var(--muted)"> PROM</span>`;
@@ -461,7 +464,7 @@ window.initQuartil = function() {
             const promFillWidth = item.Dispersao_Promessas !== null ? item.Dispersao_Promessas : 0;
             const promFillClass = item.Quartil_Promessas !== "—" ? promClass : "q-empty";
 
-            const isQ4 = item.Quartil_HO.includes("4º") || item.Quartil_Promessas.includes("4º");
+            const isQ4 = (item.Quartil_HO || "").includes("4º") || (item.Quartil_Promessas || "").includes("4º");
             const nameClass = isQ4 ? "agent-card-name q4-highlighted-name" : "agent-card-name";
             const nameBadge = isQ4 ? ` <span class="q4-alert-badge" title="Operador no 4º Quartil em pelo menos um indicador">⚠️ 4º Q</span>` : "";
 
