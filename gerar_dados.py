@@ -790,6 +790,7 @@ def process_excel():
         
         for mes_key, mes_info in meta_data.items():
             rows = mes_info.get('rows', [])
+            du_mes = mes_info.get('du', 22)
             
             # Separar por operação
             ops = {}
@@ -808,17 +809,17 @@ def process_excel():
             all_valid_prom = []
             
             for op_name, op_rows in ops.items():
-                # Validos = ho > 0
-                validos = [r for r in op_rows if r.get('ho', 0) > 0]
+                # Validos HO
+                validos_ho = [r for r in op_rows]
+                for r in validos_ho:
+                    capacidade = max(1, du_mes - r.get('abs_dias', 0))
+                    r['_ho_diario'] = r.get('ho', 0) / capacidade
                 
-                ho_n = len(validos)
-                if ho_n == 0: continue
+                validos_ho.sort(key=lambda x: x.get('_ho_diario', 0), reverse=True)
+                ho_max_diario = max([x.get('_ho_diario', 0) for x in validos_ho], default=0)
+                ho_n = len(validos_ho)
                 
-                # ho dispersão/quartil
-                validos.sort(key=lambda x: x.get('ho', 0), reverse=True)
-                ho_max = max(x.get('ho', 0) for x in validos)
-                
-                for rank, r in enumerate(validos):
+                for rank, r in enumerate(validos_ho):
                     pct = rank / max(1, ho_n - 1)
                     if ho_n <= 1: q = 1
                     elif pct <= 0.25: q = 1
@@ -826,15 +827,19 @@ def process_excel():
                     elif pct <= 0.75: q = 3
                     else: q = 4
                     
-                    r['_q_ho'] = f"{q}º Quartil"
-                    r['_disp_ho'] = round((r.get('ho', 0) / ho_max * 100), 1) if ho_max > 0 else 0
+                    r['_q_ho'] = f"{q}\u00ba Quartil"
+                    r['_disp_ho'] = round((r.get('_ho_diario', 0) / ho_max_diario * 100), 1) if ho_max_diario > 0 else 0
                     all_valid_ho.append(r.get('ho', 0))
                     
-                # promessas dispersão/quartil
-                validos_prom = [r for r in validos if r.get('promessas') is not None]
+                # Validos Promessas
+                validos_prom = [r for r in op_rows]
+                for r in validos_prom:
+                    capacidade = max(1, du_mes - r.get('abs_dias', 0))
+                    r['_prom_diaria'] = r.get('promessas', 0) / capacidade
+                
+                validos_prom.sort(key=lambda x: x.get('_prom_diaria', 0), reverse=True)
+                prom_max_diaria = max((x.get('_prom_diaria', 0) for x in validos_prom), default=0)
                 prom_n = len(validos_prom)
-                validos_prom.sort(key=lambda x: x.get('promessas', 0), reverse=True)
-                prom_max = max((x.get('promessas', 0) for x in validos_prom), default=0)
                 
                 for rank, r in enumerate(validos_prom):
                     pct = rank / max(1, prom_n - 1)
@@ -844,9 +849,13 @@ def process_excel():
                     elif pct <= 0.75: q = 3
                     else: q = 4
                     
-                    r['_q_prom'] = f"{q}º Quartil"
-                    r['_disp_prom'] = round((r.get('promessas', 0) / prom_max * 100), 1) if prom_max > 0 else 0
+                    r['_q_prom'] = f"{q}\u00ba Quartil"
+                    r['_disp_prom'] = round((r.get('_prom_diaria', 0) / prom_max_diaria * 100), 1) if prom_max_diaria > 0 else 0
                     all_valid_prom.append(r.get('promessas', 0))
+                
+                # Resumo da carteira (Operação) - Need to use the correctly populated validos_ho/prom lists!
+                # Wait, the lines below (get_vals) rely on `validos` which doesn't exist anymore! Let's define it.
+                validos = op_rows # Use op_rows for the aggregations so it covers all
                 
                 # Resumo da carteira (Operação)
                 def media(lst): return round(float(np.mean(lst)), 2) if lst else 0.0

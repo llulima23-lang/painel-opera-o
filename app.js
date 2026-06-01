@@ -1,18 +1,18 @@
-// ═══════════════════════════════════════════════════════════
+// âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
 //  CONSTANTES
-// ═══════════════════════════════════════════════════════════
+// âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
 const ADMIN_SENHA       = '1926';
 const DATA_CORTE        = new Date(2026, 2, 16);
 
-// Mapeamento dinâmico será construído na inicialização
+// Mapeamento dinÃ¢mico serÃ¡ construÃ­do na inicializaÃ§Ã£o
 let MES_MAP = {};
 
 let lastUpdatedAt = null;
 let pollInterval  = null;
 
-// ═══════════════════════════════════════════════════════════
+// âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
 //  ESTADO GLOBAL
-// ═══════════════════════════════════════════════════════════
+// âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
 let G = {
     isAdmin:         false,
     currentMatricula: null,   // null = admin, string = operador
@@ -23,9 +23,9 @@ let G = {
     operadores:      [],
 };
 
-// ═══════════════════════════════════════════════════════════
-//  UTILITÁRIOS
-// ═══════════════════════════════════════════════════════════
+// âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+//  UTILITÃRIOS
+// âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
 const secToStr = sec => {
     const neg = sec < 0;
     sec = Math.abs(Math.round(sec));
@@ -45,31 +45,31 @@ const setKpi = (id, txt, clr) => {
     if (el) { el.textContent = txt; if (clr) el.style.color = clr; }
 };
 
-// ═══════════════════════════════════════════════════════════
-//  INICIALIZAÇÃO
-// ═══════════════════════════════════════════════════════════
+// âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+//  INICIALIZAÃÃO
+// âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
 document.addEventListener('DOMContentLoaded', () => {
     if (typeof EMBEDDED_DATA === 'undefined') {
         document.getElementById('login-screen').style.display = 'none';
         document.getElementById('loading-screen').style.display = 'flex';
         document.getElementById('loading-text').textContent =
-            'Erro: data_embedded.js não encontrado. Execute o gerar_dados.py.';
+            'Erro: data_embedded.js nÃ£o encontrado. Execute o gerar_dados.py.';
         document.getElementById('loading-text').style.color = '#ef4444';
         return;
     }
 
-    // ── Login ───────────────────────────────────────────────
+    // ââ Login âââââââââââââââââââââââââââââââââââââââââââââââ
     const loginInput = document.getElementById('login-input');
     loginInput.addEventListener('keydown', e => { if (e.key === 'Enter') tentarLogin(); });
     document.getElementById('btn-login').addEventListener('click', tentarLogin);
 
-    // ── Logout ──────────────────────────────────────────────
+    // ââ Logout ââââââââââââââââââââââââââââââââââââââââââââââ
     document.getElementById('btn-logout').addEventListener('click', () => {
         sessionStorage.removeItem('po_sessao');
         location.reload();
     });
 
-    // ── Restaura sessão ─────────────────────────────────────
+    // ââ Restaura sessÃ£o âââââââââââââââââââââââââââââââââââââ
     const sessao = sessionStorage.getItem('po_sessao');
     if (sessao) {
         const s = JSON.parse(sessao);
@@ -77,9 +77,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-// ─────────────────────────────────────────────────────────
+// âââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
 //  LOGIN
-// ─────────────────────────────────────────────────────────
+// âââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
 function tentarLogin() {
     const val = document.getElementById('login-input').value.trim();
     if (!val) return;
@@ -90,7 +90,7 @@ function tentarLogin() {
         return;
     }
 
-    // Verifica se é matrícula válida
+    // Verifica se Ã© matrÃ­cula vÃ¡lida
     const op = (EMBEDDED_DATA.adm || []).find(o => o.matricula === val);
     if (op) {
         sessionStorage.setItem('po_sessao', JSON.stringify({ isAdmin: false, matricula: val }));
@@ -103,9 +103,9 @@ function tentarLogin() {
     setTimeout(() => { errEl.style.display = 'none'; }, 3000);
 }
 
-// ─────────────────────────────────────────────────────────
-//  AGENDAMENTO DIÁRIO E INICIAR APP
-// ─────────────────────────────────────────────────────────
+// âââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+//  AGENDAMENTO DIÃRIO E INICIAR APP
+// âââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
 function agendarAtualizacaoDiaria() {
     const agora = new Date();
     // Agendado para as 07:55:00
@@ -131,17 +131,17 @@ function iniciarApp(isAdmin, matricula) {
     document.getElementById('loading-screen').style.display = 'none';
     document.getElementById('app-wrapper').style.display    = 'flex';
 
-    // Info do usuário na sidebar
+    // Info do usuÃ¡rio na sidebar
     atualizarInfoUsuario();
 
-    // Oculta elementos admin-only se não for admin
+    // Oculta elementos admin-only se nÃ£o for admin
     document.querySelectorAll('.admin-only').forEach(el => {
         el.style.display = isAdmin ? '' : 'none';
     });
 
-    // Navegação (admin vê dashboard + operadores; operador só vê seu card)
+    // NavegaÃ§Ã£o (admin vÃª dashboard + operadores; operador sÃ³ vÃª seu card)
     if (!isAdmin) {
-        // Força view operadores e não exibe sidebar de dashboard
+        // ForÃ§a view operadores e nÃ£o exibe sidebar de dashboard
         document.getElementById('view-operadores').style.display = 'block';
         document.getElementById('view-dashboard').style.display  = 'none';
         document.getElementById('page-title').textContent = 'Meu Desempenho';
@@ -150,7 +150,7 @@ function iniciarApp(isAdmin, matricula) {
         document.querySelector('[data-view="operadores"]').classList.add('active');
     }
 
-    // Eventos de navegação
+    // Eventos de navegaÃ§Ã£o
     document.querySelectorAll('.nav-links li').forEach(li => {
         li.addEventListener('click', () => {
             if (!isAdmin && li.classList.contains('admin-only')) return;
@@ -164,7 +164,7 @@ function iniciarApp(isAdmin, matricula) {
         });
     });
 
-    // Filtros globais (Mês e Feriados disponíveis para operadores também)
+    // Filtros globais (MÃªs e Feriados disponÃ­veis para operadores tambÃ©m)
     buildMesMap();
     buildSelectores();
     registrarEventosFiltros();
@@ -176,9 +176,9 @@ function iniciarApp(isAdmin, matricula) {
     iniciarAutoUpdate();
 }
 
-// ─────────────────────────────────────────────────────────
+// âââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
 //  AUTO UPDATE (POLLING)
-// ─────────────────────────────────────────────────────────
+// âââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
 function iniciarAutoUpdate() {
     if (pollInterval) clearInterval(pollInterval);
     lastUpdatedAt = EMBEDDED_DATA.updated_at;
@@ -193,17 +193,17 @@ function verificarNovosDados() {
     script.src = 'data_embedded.js?t=' + Date.now();
     script.onload = () => {
         if (lastUpdatedAt && EMBEDDED_DATA.updated_at !== lastUpdatedAt) {
-            console.log('🔄 Dados atualizados detectados em: ' + EMBEDDED_DATA.updated_at);
+            console.log('ð Dados atualizados detectados em: ' + EMBEDDED_DATA.updated_at);
             lastUpdatedAt = EMBEDDED_DATA.updated_at;
             
             // Re-processa e re-renderiza tudo
             buildOperadores();
             renderTudo();
             
-            // Atualiza o texto de "Última atualização" na sidebar
+            // Atualiza o texto de "Ãltima atualizaÃ§Ã£o" na sidebar
             atualizarInfoUsuario();
             
-            // Feedback visual rápido no botão de atualizar
+            // Feedback visual rÃ¡pido no botÃ£o de atualizar
             const btn = document.getElementById('btn-atualizar');
             if (btn) {
                 btn.style.transform = 'rotate(360deg)';
@@ -222,26 +222,26 @@ function atualizarInfoUsuario() {
     const lastUpd = dt.toLocaleDateString('pt-BR') + ' ' + dt.toLocaleTimeString('pt-BR');
 
     if (G.isAdmin) {
-        document.getElementById('user-info').textContent = '👤 Admin | Atualizado: ' + lastUpd;
+        document.getElementById('user-info').textContent = 'ð¤ Admin | Atualizado: ' + lastUpd;
     } else {
         const op = (EMBEDDED_DATA.adm || []).find(o => o.matricula === G.currentMatricula);
         document.getElementById('user-info').textContent = (op ? op.nome : 'Operador ' + G.currentMatricula) + ' | ' + lastUpd;
     }
 }
 
-// ─────────────────────────────────────────────────────────
+// âââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
 //  MAPEAMENTO DE MESES
-// ─────────────────────────────────────────────────────────
+// âââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
 function buildMesMap() {
     const metaKeys = Object.keys(EMBEDDED_DATA.meta || {});
     metaKeys.forEach(k => {
-        // Tenta extrair o mês do nome da aba (ex: METAS ABRIL2026)
-        const match = k.match(/METAS\s+(JANEIRO|FEVEREIRO|MARCO|MARÇO|ABRIL|MAIO|JUNHO|JULHO|AGOSTO|SETEMBRO|OUTUBRO|NOVEMBRO|DEZEMBRO)(\d{4})?/i);
+        // Tenta extrair o mÃªs do nome da aba (ex: METAS ABRIL2026)
+        const match = k.match(/METAS\s+(JANEIRO|FEVEREIRO|MARCO|MARÃO|ABRIL|MAIO|JUNHO|JULHO|AGOSTO|SETEMBRO|OUTUBRO|NOVEMBRO|DEZEMBRO)(\d{4})?/i);
         if (match) {
             const mesNome = match[1].toUpperCase();
             const ano = match[2] || '2026';
             const meses = {
-                'JANEIRO': '01', 'FEVEREIRO': '02', 'MARCO': '03', 'MARÇO': '03',
+                'JANEIRO': '01', 'FEVEREIRO': '02', 'MARCO': '03', 'MARÃO': '03',
                 'ABRIL': '04', 'MAIO': '05', 'JUNHO': '06', 'JULHO': '07',
                 'AGOSTO': '08', 'SETEMBRO': '09', 'OUTUBRO': '10', 'NOVEMBRO': '11', 'DEZEMBRO': '12'
             };
@@ -249,7 +249,7 @@ function buildMesMap() {
         }
     });
     
-    // Atualiza o seletor de meses no HTML se necessário
+    // Atualiza o seletor de meses no HTML se necessÃ¡rio
     const selMes = document.getElementById('mes-filter');
     if (selMes) {
         selMes.innerHTML = '';
@@ -263,9 +263,9 @@ function buildMesMap() {
     }
 }
 
-// ─────────────────────────────────────────────────────────
+// âââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
 //  SELECTORES
-// ─────────────────────────────────────────────────────────
+// âââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
 function buildSelectores() {
     const ops = EMBEDDED_DATA.operacoes || [];
     const selOp = document.getElementById('op-filter');
@@ -286,9 +286,9 @@ function buildSelectores() {
 
 
 
-// ─────────────────────────────────────────────────────────
+// âââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
 //  EVENTOS FILTROS
-// ─────────────────────────────────────────────────────────
+// âââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
 function registrarEventosFiltros() {
     document.getElementById('mes-filter').addEventListener('change', e => {
         G.mesSelecionado = e.target.value;
@@ -312,9 +312,9 @@ function registrarEventosFiltros() {
 
 }
 
-// ─────────────────────────────────────────────────────────
+// âââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
 //  MONTA OPERADORES
-// ─────────────────────────────────────────────────────────
+// âââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
 const COMPENSACAO_FERIADO = 26400; // 07:20:00 em segundos
 
 function buildOperadores() {
@@ -339,12 +339,12 @@ function buildOperadores() {
         const nNorm = op.nome_norm;
         const tempoMes = temposIdx[nNorm + '|' + G.mesStr] || null;
         
-        // Saldo do mês vs Saldo Acumulado
+        // Saldo do mÃªs vs Saldo Acumulado
         const bh = G.mesSelecionado ? 
                    (tempoMes ? { credito: tempoMes.credito_sec, deficit: tempoMes.deficit_sec } : { credito: 0, deficit: 0 }) :
                    (bhTotal[nNorm] || { credito: 0, deficit: 0 });
 
-        // Captura o Saldo Inicial do RESUMO (que é um débito histórico)
+        // Captura o Saldo Inicial do RESUMO (que Ã© um dÃ©bito histÃ³rico)
         const bhResumo = EMBEDDED_DATA.resumo ? (EMBEDDED_DATA.resumo[nNorm] || 0) : 0;
 
         const metasMap = {};
@@ -371,11 +371,11 @@ function rebuildTempoMes() {
     G.operadores.forEach(op => { op.tempoMes = temposIdx[op.nomeNorm + '|' + G.mesStr] || null; });
 }
 
-// ─────────────────────────────────────────────────────────
+// âââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
 //  FILTRO COMUM
-// ─────────────────────────────────────────────────────────
+// âââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
 function operadoresFiltrados() {
-    // Se operador logado, mostra só o dele
+    // Se operador logado, mostra sÃ³ o dele
     if (!G.isAdmin && G.currentMatricula) {
         return G.operadores.filter(o => o.matricula === G.currentMatricula);
     }
@@ -395,7 +395,7 @@ function calcDebitosExtras(op) {
     const admDate = op.admissao ? new Date(op.admissao + 'T12:00:00') : null;
     let compensaSec = 0;
 
-    // Datas de Compensa (DÉBITO de 07:12:00 cada - Faltas a compensar)
+    // Datas de Compensa (DÃBITO de 07:12:00 cada - Faltas a compensar)
     const datasCompensa = (EMBEDDED_DATA.compensa || {})[op.nomeNorm] || [];
     datasCompensa.forEach(dataISO => {
         const d = new Date(dataISO + 'T12:00:00');
@@ -404,7 +404,7 @@ function calcDebitosExtras(op) {
         }
     });
 
-    // Retorna como penalidades (valores que serão subtraídos do saldo)
+    // Retorna como penalidades (valores que serÃ£o subtraÃ­dos do saldo)
     return { 
         total: compensaSec,
         compensaSec, 
@@ -412,9 +412,9 @@ function calcDebitosExtras(op) {
     };
 }
 
-// ─────────────────────────────────────────────────────────
+// âââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
 //  RENDER TUDO
-// ─────────────────────────────────────────────────────────
+// âââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
 function renderTudo() {
     rebuildTempoMes();
     if (G.isAdmin) renderDashboard();
@@ -423,9 +423,9 @@ function renderTudo() {
     renderOperadores();
 }
 
-// ─────────────────────────────────────────────────────────
+// âââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
 //  DASHBOARD
-// ─────────────────────────────────────────────────────────
+// âââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
 function renderDashboard() {
     const sheet    = (EMBEDDED_DATA.meta || {})[G.mesSelecionado] || {};
     const du       = sheet.du || 22;
@@ -443,18 +443,18 @@ function renderDashboard() {
     const atingPct  = totalMeta > 0 ? (totalProm / totalMeta * 100) : 0;
     const qualMedia = qualCnt   > 0 ? qualSum / qualCnt : 0;
 
-    // Absenteísmo: usa dados da planilha TRATADO-ABS
+    // AbsenteÃ­smo: usa dados da planilha TRATADO-ABS
     const absData = EMBEDDED_DATA.abs_data || {};
     const absGeralUlt3 = absData.geral_ultimos_3 || 0;
     const absGeralMes = (absData.geral_por_mes || {})[G.mesStr] || null;
 
     const comTempo   = lista.filter(o => o.tempoMes);
-    // Cálculo ponderado de pausas do time (Total Pausas / Total Tempo Logado)
+    // CÃ¡lculo ponderado de pausas do time (Total Pausas / Total Tempo Logado)
     const totalPausasSec = comTempo.reduce((a,o) => a + ((o.tempoMes.media_pausas_total_sec || 0) * o.tempoMes.dias_trabalhados), 0);
     const totalTempoSec  = comTempo.reduce((a,o) => a + ((o.tempoMes.media_tempo_sec || 0) * o.tempoMes.dias_trabalhados), 0);
     const pausaMedia     = totalTempoSec > 0 ? (totalPausasSec / totalTempoSec * 100) : 0;
     
-    // Média Tempo Logado: usa dados globais mensais da planilha
+    // MÃ©dia Tempo Logado: usa dados globais mensais da planilha
     const tempoMediaGlobal = (EMBEDDED_DATA.tempo_logado_media_mensal || {})[G.mesStr] || 0;
 
     setKpi('kpi-atingimento', atingPct.toFixed(1)+'%',
@@ -462,7 +462,7 @@ function renderDashboard() {
     setKpi('kpi-promessas-det', `${totalProm.toLocaleString('pt-BR')} / ${totalMeta.toLocaleString('pt-BR')} promessas`);
     setKpi('kpi-qualidade',    qualMedia.toFixed(1)+'%',  cor(qualMedia,  95));
     
-    // ABS: mostra o mês selecionado como valor principal
+    // ABS: mostra o mÃªs selecionado como valor principal
     const absDisplay = absGeralMes !== null ? absGeralMes : 0;
     setKpi('kpi-abs', absDisplay.toFixed(2)+'%', cor(absDisplay, 2, false));
     // Subtexto: Volta a ser a meta
@@ -485,13 +485,13 @@ function renderDashboard() {
     document.getElementById('dash-info').textContent =
         `| ${du} D.U | ${lista.length} operadores`;
 
-    // ABS por operação
+    // ABS por operaÃ§Ã£o
     renderAbsPorOperacao();
 }
 
-// ─────────────────────────────────────────────────────────
-//  ABS POR OPERAÇÃO (Dashboard)
-// ─────────────────────────────────────────────────────────
+// âââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+//  ABS POR OPERAÃÃO (Dashboard)
+// âââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
 function renderAbsPorOperacao() {
     const container = document.getElementById('abs-operacao-grid');
     if (!container) return;
@@ -500,7 +500,7 @@ function renderAbsPorOperacao() {
     const opsAbs = (absData.por_operacao_mes || {})[G.mesStr] || [];
     
     if (!opsAbs.length) {
-        container.innerHTML = '<p style="color:var(--text-muted);font-size:13px;padding:8px;">Sem dados de ABS por operação neste mês.</p>';
+        container.innerHTML = '<p style="color:var(--text-muted);font-size:13px;padding:8px;">Sem dados de ABS por operaÃ§Ã£o neste mÃªs.</p>';
         return;
     }
     
@@ -513,20 +513,20 @@ function renderAbsPorOperacao() {
     }).join('');
 }
 
-// Helper: retorna ABS individual de um operador no mês selecionado
+// Helper: retorna ABS individual de um operador no mÃªs selecionado
 function getIndividualAbs(nomeNorm) {
     const absData = EMBEDDED_DATA.abs_data || {};
     const indMes = absData.individual_mes || {};
-    // Usa estritamente o mês selecionado no filtro
+    // Usa estritamente o mÃªs selecionado no filtro
     const lista = indMes[G.mesStr] || [];
     const found = lista.find(i => i.nome_norm === nomeNorm);
     if (found) return { ...found, mes: G.mesStr };
     return null;
 }
 
-// ─────────────────────────────────────────────────────────
+// âââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
 //  CARDS DE OPERADORES
-// ─────────────────────────────────────────────────────────
+// âââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
 function renderOperadores() {
     const grid = document.getElementById('operadores-grid');
     grid.innerHTML = '';
@@ -550,7 +550,7 @@ function renderOperadores() {
         if (pnl) pnl.style.display = 'none';
     }
 
-    // Ordena: meta batida primeiro (só admin vê todos)
+    // Ordena: meta batida primeiro (sÃ³ admin vÃª todos)
     if (G.isAdmin) {
         lista = [...lista].sort((a, b) => {
             const rA = a.metasMap[G.mesSelecionado], rB = b.metasMap[G.mesSelecionado];
@@ -661,15 +661,15 @@ function renderOperadores() {
                         if (is4Quartil) {
                             if (dispersao >= 50) {
                                 clr = '#10b981';
-                                subHtml = `<div class="metric-sub" style="color:#10b981; font-weight:600;">✅ Meta atingida</div>`;
+                                subHtml = `<div class="metric-sub" style="color:#10b981; font-weight:600;">â Meta atingida</div>`;
                             } else {
                                 clr = '#ef4444';
-                                subHtml = `<div class="metric-sub" style="color:#ef4444; font-weight:600;">⚠️ Mín. 50% de disp.</div>`;
+                                subHtml = `<div class="metric-sub" style="color:#ef4444; font-weight:600;">â ï¸ MÃ­n. 50% de disp.</div>`;
                             }
                         }
                         return `
                         <div class="metric-item">
-                            <div class="metric-label">Dispersão</div>
+                            <div class="metric-label">DispersÃ£o</div>
                             <div class="metric-val" ${clr ? `style="color:${clr}"` : ''}>${dispersao.toFixed(1)}%</div>
                             ${subHtml}
                         </div>
@@ -704,32 +704,32 @@ function renderOperadores() {
         const quoteCard = document.createElement('div');
         quoteCard.className = 'quote-card';
         quoteCard.innerHTML = `
-            <img src="${quoteObj.image}" class="quote-img" alt="Motivação">
+            <img src="${quoteObj.image}" class="quote-img" alt="MotivaÃ§Ã£o">
             <div class="quote-text">"${quoteObj.text}"</div>
         `;
         grid.appendChild(quoteCard);
     }
 }
 
-// ─────────────────────────────────────────────────────────
+// âââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
 //  MOTIVACIONAL E STATUS DO OPERADOR
-// ─────────────────────────────────────────────────────────
+// âââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
 const MOTIVATIONAL_QUOTES = [
-    { text: "O trabalho dignifica o homem, mas o boleto pago em dia dignifica a alma. Vamos à luta!", image: "motivation_1.png" },
-    { text: "Dizem que o dinheiro não compra felicidade... mas paga a internet e a luz que a gente usa para trabalhar. Disciplina no foco, galera!", image: "motivation_2.png" },
-    { text: "Que a nossa vontade de trabalhar hoje seja igual à nossa vontade de receber o salário. Foco total!", image: "motivation_3.png" },
-    { text: "A responsabilidade é igual à gravidade: não dá para ignorar, senão a queda é certa. Bora produzir para não cair!", image: "motivation_4.png" },
-    { text: "Disciplina é fazer o que precisa ser feito, mesmo quando a sua cama está gritando o seu nome em espanhol. Foco no prazo!", image: "motivation_5.png" },
-    { text: "Rir é o melhor remédio... depois de um relatório entregue no prazo e sem erros. Vamos garantir esse combo hoje?", image: "motivation_6.png" },
+    { text: "O trabalho dignifica o homem, mas o boleto pago em dia dignifica a alma. Vamos Ã  luta!", image: "motivation_1.png" },
+    { text: "Dizem que o dinheiro nÃ£o compra felicidade... mas paga a internet e a luz que a gente usa para trabalhar. Disciplina no foco, galera!", image: "motivation_2.png" },
+    { text: "Que a nossa vontade de trabalhar hoje seja igual Ã  nossa vontade de receber o salÃ¡rio. Foco total!", image: "motivation_3.png" },
+    { text: "A responsabilidade Ã© igual Ã  gravidade: nÃ£o dÃ¡ para ignorar, senÃ£o a queda Ã© certa. Bora produzir para nÃ£o cair!", image: "motivation_4.png" },
+    { text: "Disciplina Ã© fazer o que precisa ser feito, mesmo quando a sua cama estÃ¡ gritando o seu nome em espanhol. Foco no prazo!", image: "motivation_5.png" },
+    { text: "Rir Ã© o melhor remÃ©dio... depois de um relatÃ³rio entregue no prazo e sem erros. Vamos garantir esse combo hoje?", image: "motivation_6.png" },
     { text: "Status do dia: Com o senso de humor intacto e a lista de tarefas assustadora. Um olho no peixe e o outro no prazo!", image: "motivation_7.png" },
-    { text: "Cobrar é uma arte, fazer o cliente atender é quase um milagre, mas registrar o acordo é pura disciplina! Bora zerar essa fila!", image: "motivation_8.png" },
-    { text: "Quem avisa amigo é, mas quem liga cobrando é anjo da guarda financeiro. Vamos ajudar esse povo a limpar o nome hoje!", image: "motivation_9.png" },
-    { text: "Se a pessoa sumiu, não chame o Sherlock Holmes, chame o operador de cobrança focado na meta! Responsabilidade e persistência hoje, galera.", image: "motivation_10.png" },
-    { text: "O 'vou ver com meu marido' a gente já conhece. O 'estou sem sinal' a gente já domina. Agora, o 'acordo fechado' a gente vai conquistar na base da nossa competência!", image: "motivation_11.png" },
-    { text: "Mais focados do que operador de cobrança fingindo que acredita na desculpa do cliente para conseguir fechar a negociação. Disciplina no script!", image: "motivation_12.png" },
-    { text: "O cliente pode até tentar fugir, mas a nossa responsabilidade em bater a meta corre mais rápido. Telefone no ouvido e foco no fechamento!", image: "motivation_13.png" },
-    { text: "Status do dia: Com a paciência de um monge, a lábia de um diplomata e a meta de cobrança de um guerreiro. Vamos ligar!", image: "motivation_14.png" },
-    { text: "Dinheiro não traz felicidade, mas trazer o dinheiro de volta para a empresa traz comissão! Responsabilidade e foco em cada ligação hoje!", image: "motivation_15.png" }
+    { text: "Cobrar Ã© uma arte, fazer o cliente atender Ã© quase um milagre, mas registrar o acordo Ã© pura disciplina! Bora zerar essa fila!", image: "motivation_8.png" },
+    { text: "Quem avisa amigo Ã©, mas quem liga cobrando Ã© anjo da guarda financeiro. Vamos ajudar esse povo a limpar o nome hoje!", image: "motivation_9.png" },
+    { text: "Se a pessoa sumiu, nÃ£o chame o Sherlock Holmes, chame o operador de cobranÃ§a focado na meta! Responsabilidade e persistÃªncia hoje, galera.", image: "motivation_10.png" },
+    { text: "O 'vou ver com meu marido' a gente jÃ¡ conhece. O 'estou sem sinal' a gente jÃ¡ domina. Agora, o 'acordo fechado' a gente vai conquistar na base da nossa competÃªncia!", image: "motivation_11.png" },
+    { text: "Mais focados do que operador de cobranÃ§a fingindo que acredita na desculpa do cliente para conseguir fechar a negociaÃ§Ã£o. Disciplina no script!", image: "motivation_12.png" },
+    { text: "O cliente pode atÃ© tentar fugir, mas a nossa responsabilidade em bater a meta corre mais rÃ¡pido. Telefone no ouvido e foco no fechamento!", image: "motivation_13.png" },
+    { text: "Status do dia: Com a paciÃªncia de um monge, a lÃ¡bia de um diplomata e a meta de cobranÃ§a de um guerreiro. Vamos ligar!", image: "motivation_14.png" },
+    { text: "Dinheiro nÃ£o traz felicidade, mas trazer o dinheiro de volta para a empresa traz comissÃ£o! Responsabilidade e foco em cada ligaÃ§Ã£o hoje!", image: "motivation_15.png" }
 ];
 
 function getMotivationalDayIndex() {
@@ -784,9 +784,9 @@ function getOperatorStatusAndDetails(op) {
         if (is4Quartil) {
             if (metaRow.dispersao < 50) {
                 isBad = true;
-                badList.push('Dispersão');
+                badList.push('DispersÃ£o');
             } else {
-                goodList.push('Dispersão');
+                goodList.push('DispersÃ£o');
             }
         }
     }
@@ -804,28 +804,28 @@ function renderMotivational(status, details) {
     
     let title = "", imgSrc = "", cls = "";
     if (status === 'good') {
-        title = "Excelente Trabalho! 🏆";
+        title = "Excelente Trabalho! ð";
         imgSrc = "status_good.png";
         cls = "good";
     } else if (status === 'alert') {
-        title = "Atenção: Foco nos indicadores! 🧭";
+        title = "AtenÃ§Ã£o: Foco nos indicadores! ð§­";
         imgSrc = "status_alert.png";
         cls = "alert";
     } else {
-        title = "Aviso: Precisamos melhorar! 📢";
+        title = "Aviso: Precisamos melhorar! ð¢";
         imgSrc = "status_bad.png";
         cls = "bad";
     }
     
     let detailsHtml = "";
     if (details.good.length > 0) {
-        detailsHtml += `<span><strong class="status-good-text">✅ Excelente em:</strong> ${details.good.join(', ')}</span>`;
+        detailsHtml += `<span><strong class="status-good-text">â Excelente em:</strong> ${details.good.join(', ')}</span>`;
     }
     if (details.bad.length > 0) {
-        detailsHtml += `<span><strong class="status-bad-text">⚠️ Precisamos melhorar:</strong> ${details.bad.join(', ')}</span>`;
+        detailsHtml += `<span><strong class="status-bad-text">â ï¸ Precisamos melhorar:</strong> ${details.bad.join(', ')}</span>`;
     }
     if (detailsHtml === "") {
-        detailsHtml = `<span>Ainda não há dados suficientes neste mês.</span>`;
+        detailsHtml = `<span>Ainda nÃ£o hÃ¡ dados suficientes neste mÃªs.</span>`;
     }
     
     pnl.className = 'motivational-container';

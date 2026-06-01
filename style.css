@@ -245,6 +245,7 @@ body {
    ================================================ */
 .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
 .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+.grid-5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 18px; }
 
 /* STANDARD CARD */
 .card {
@@ -614,7 +615,7 @@ select:focus, input[type="text"]:focus {
 }
 
 @media (max-width: 768px) {
-  .grid-2, .grid-4 {
+  .grid-2, .grid-4, .grid-5 {
     grid-template-columns: 1fr;
   }
   
