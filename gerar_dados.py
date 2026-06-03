@@ -872,10 +872,12 @@ def process_excel():
 
                 carteira_stats = {
                     "operacao": op_name,
+                    "total_ho": sum([x.get('ho', 0) or 0 for x in validos]),
                     "media_ho": media([x.get('ho') for x in validos]),
                     "media_dispersao_ho": media([x.get('_disp_ho') for x in validos if '_disp_ho' in x]),
                     "ho_quartil_disp": ho_disp,
                     "ho_quartil_prod": ho_prod,
+                    "total_promessas": sum([x.get('promessas', 0) or 0 for x in validos_prom]),
                     "media_promessas": media([x.get('promessas') for x in validos_prom]),
                     "media_dispersao_promessas": media([x.get('_disp_prom') for x in validos_prom if '_disp_prom' in x]),
                     "prom_quartil_disp": prom_disp,

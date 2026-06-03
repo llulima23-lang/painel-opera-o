@@ -135,8 +135,8 @@ window.initQuartil = function() {
 
         // Sort by Quartil_HO first, then by Dispersao_HO descending within each quartile
         const getQuartileScore = (qStr) => {
-            if (!qStr || qStr === 'â') return 10;
-            const match = qStr.match(/(\d+)Âº/);
+            if (!qStr || qStr === '—') return 10;
+            const match = qStr.match(/(\d+)º/);
             return match ? parseInt(match[1]) : 10;
         };
 
@@ -159,7 +159,7 @@ window.initQuartil = function() {
         // === Q4 PAGE UPDATES ===
         const q4Agents = allAgents.filter(item => {
             const matchOp = opVal === 'all' || item.Operacao === opVal;
-            const isQ4 = (item.Quartil_HO || "").includes('4\u00ba');
+            const isQ4 = (item.Quartil_HO || "").includes('4º');
             return matchOp && isQ4;
         });
 
@@ -174,18 +174,18 @@ window.initQuartil = function() {
             q4TotalOperadores.textContent = q4Agents.length;
             const q4Dispersions = q4Agents.filter(item => item.Dispersao_HO !== null).map(item => item.Dispersao_HO);
             const avgQ4Disp = q4Dispersions.length > 0 ? (q4Dispersions.reduce((x, y) => x + y, 0) / q4Dispersions.length) : 0;
-            q4MediaDispersao.textContent = q4Dispersions.length > 0 ? `${avgQ4Disp.toFixed(1)}%` : "â";
+            q4MediaDispersao.textContent = q4Dispersions.length > 0 ? `${avgQ4Disp.toFixed(1)}%` : "—";
 
             if (q4Dispersions.length === 0) {
-                q4StatusMeta.textContent = "â";
+                q4StatusMeta.textContent = "—";
                 q4StatusMeta.className = "kpi-value";
-                q4StatusMetaSub.textContent = "Sem lanÃ§amentos";
+                q4StatusMetaSub.textContent = "Sem lançamentos";
             } else if (avgQ4Disp >= 50) {
-                q4StatusMeta.textContent = "Atingida â";
+                q4StatusMeta.textContent = "Atingida ✅";
                 q4StatusMeta.className = "kpi-value text-success";
-                q4StatusMetaSub.textContent = "MÃ©dia de dispersÃ£o â¥ 50%";
+                q4StatusMetaSub.textContent = "Média de dispersão ≥ 50%";
             } else {
-                q4StatusMeta.textContent = "Abaixo â";
+                q4StatusMeta.textContent = "Abaixo ❌";
                 q4StatusMeta.className = "kpi-value text-danger";
                 q4StatusMetaSub.textContent = `Falta ${(50 - avgQ4Disp).toFixed(1)}% para a meta`;
             }
@@ -227,22 +227,22 @@ window.initQuartil = function() {
                 q4OperatorsTableBody.innerHTML = `
                     <tr>
                         <td colspan="3" style="text-align: center; padding: 40px; color: var(--muted); font-weight: 600;">
-                            ð Excelente! Nenhum operador no 4\u00ba Quartil nesta operaÃ§Ã£o.
+                            🎉 Excelente! Nenhum operador no 4\u00ba Quartil nesta operação.
                         </td>
                     </tr>
                 `;
             } else {
                 q4OperatorsTableBody.innerHTML = q4AgentsSorted.map(itm => {
-                    const hoValStr = itm.HO !== null ? itm.HO.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) : "â";
+                    const hoValStr = itm.HO !== null ? itm.HO.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) : "—";
                     const dispVal = itm.Dispersao_HO !== null ? itm.Dispersao_HO : 0;
-                    const dispStr = itm.Dispersao_HO !== null ? itm.Dispersao_HO.toFixed(1) + "%" : "â";
+                    const dispStr = itm.Dispersao_HO !== null ? itm.Dispersao_HO.toFixed(1) + "%" : "—";
                     const dispColor = dispVal < 50 ? "text-danger" : "text-success";
                     
                     return `
                         <tr>
                             <td style="padding: 12px 8px; border-bottom: 1px solid #eef7f2;">
                                 <div style="font-weight: 600; color: var(--text);">${itm.Agente}</div>
-                                <div style="font-size: 0.7rem; color: var(--muted);">MatrÃ­cula: ${itm.Matricula}</div>
+                                <div style="font-size: 0.7rem; color: var(--muted);">Matrícula: ${itm.Matricula}</div>
                             </td>
                             <td style="padding: 12px 8px; border-bottom: 1px solid #eef7f2;">
                                 <span class="agent-card-op-badge" style="margin-top:0; max-width: 150px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" title="${itm.Operacao}">${itm.Operacao}</span>
@@ -262,10 +262,12 @@ window.initQuartil = function() {
         if (carteirasGrid && originalStats.carteiras) {
             const filteredCarteiras = originalStats.carteiras.filter(c => opVal === 'all' || c.operacao === opVal);
             carteirasGrid.innerHTML = filteredCarteiras.map(c => {
+                const hoTotalStr = c.total_ho.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
                 const hoProdStr = c.media_ho.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
                 const hoDispStr = c.media_dispersao_ho.toFixed(1) + "%";
                 const hoFillWidth = c.media_dispersao_ho;
                 
+                const promTotalStr = Math.round(c.total_promessas).toLocaleString('pt-BR');
                 const promProdStr = Math.round(c.media_promessas).toLocaleString('pt-BR');
                 const promDispStr = c.media_dispersao_promessas.toFixed(1) + "%";
                 const promFillWidth = c.media_dispersao_promessas;
@@ -289,17 +291,17 @@ window.initQuartil = function() {
 
                 const renderQDisp = (qMap, qKey) => {
                     const val = qMap ? qMap[qKey] : null;
-                    return val !== null && val !== undefined ? `${val.toFixed(1)}%` : "â";
+                    return val !== null && val !== undefined ? `${val.toFixed(1)}%` : "—";
                 };
 
                 const renderQProdHO = (qMap, qKey) => {
                     const val = qMap ? qMap[qKey] : null;
-                    return val !== null && val !== undefined ? val.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL', maximumFractionDigits: 0 }) : "â";
+                    return val !== null && val !== undefined ? val.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL', maximumFractionDigits: 0 }) : "—";
                 };
 
                 const renderQProdProm = (qMap, qKey) => {
                     const val = qMap ? qMap[qKey] : null;
-                    return val !== null && val !== undefined ? Math.round(val).toLocaleString('pt-BR') : "â";
+                    return val !== null && val !== undefined ? Math.round(val).toLocaleString('pt-BR') : "—";
                 };
 
                 const getQClass = (qMap, qKey, defaultClass) => {
@@ -307,46 +309,47 @@ window.initQuartil = function() {
                     return val !== null && val !== undefined ? defaultClass : "empty";
                 };
 
-                const hoQ1 = renderQDisp(c.ho_quartil_disp, "1\u00ba Quartil");
-                const hoQ2 = renderQDisp(c.ho_quartil_disp, "2\u00ba Quartil");
-                const hoQ3 = renderQDisp(c.ho_quartil_disp, "3\u00ba Quartil");
-                const hoQ4 = renderQDisp(c.ho_quartil_disp, "4\u00ba Quartil");
+                const hoQ1 = renderQDisp(c.ho_quartil_disp, "1º Quartil");
+                const hoQ2 = renderQDisp(c.ho_quartil_disp, "2º Quartil");
+                const hoQ3 = renderQDisp(c.ho_quartil_disp, "3º Quartil");
+                const hoQ4 = renderQDisp(c.ho_quartil_disp, "4º Quartil");
 
-                const hoProdQ1 = renderQProdHO(c.ho_quartil_prod, "1\u00ba Quartil");
-                const hoProdQ2 = renderQProdHO(c.ho_quartil_prod, "2\u00ba Quartil");
-                const hoProdQ3 = renderQProdHO(c.ho_quartil_prod, "3\u00ba Quartil");
-                const hoProdQ4 = renderQProdHO(c.ho_quartil_prod, "4\u00ba Quartil");
+                const hoProdQ1 = renderQProdHO(c.ho_quartil_prod, "1º Quartil");
+                const hoProdQ2 = renderQProdHO(c.ho_quartil_prod, "2º Quartil");
+                const hoProdQ3 = renderQProdHO(c.ho_quartil_prod, "3º Quartil");
+                const hoProdQ4 = renderQProdHO(c.ho_quartil_prod, "4º Quartil");
 
-                const promQ1 = renderQDisp(c.prom_quartil_disp, "1\u00ba Quartil");
-                const promQ2 = renderQDisp(c.prom_quartil_disp, "2\u00ba Quartil");
-                const promQ3 = renderQDisp(c.prom_quartil_disp, "3\u00ba Quartil");
-                const promQ4 = renderQDisp(c.prom_quartil_disp, "4\u00ba Quartil");
+                const promQ1 = renderQDisp(c.prom_quartil_disp, "1º Quartil");
+                const promQ2 = renderQDisp(c.prom_quartil_disp, "2º Quartil");
+                const promQ3 = renderQDisp(c.prom_quartil_disp, "3º Quartil");
+                const promQ4 = renderQDisp(c.prom_quartil_disp, "4º Quartil");
 
-                const promProdQ1 = renderQProdProm(c.prom_quartil_prod, "1\u00ba Quartil");
-                const promProdQ2 = renderQProdProm(c.prom_quartil_prod, "2\u00ba Quartil");
-                const promProdQ3 = renderQProdProm(c.prom_quartil_prod, "3\u00ba Quartil");
-                const promProdQ4 = renderQProdProm(c.prom_quartil_prod, "4\u00ba Quartil");
+                const promProdQ1 = renderQProdProm(c.prom_quartil_prod, "1º Quartil");
+                const promProdQ2 = renderQProdProm(c.prom_quartil_prod, "2º Quartil");
+                const promProdQ3 = renderQProdProm(c.prom_quartil_prod, "3º Quartil");
+                const promProdQ4 = renderQProdProm(c.prom_quartil_prod, "4º Quartil");
 
                 return `
                     <div class="carteira-card card">
                         <div class="carteira-header">
-                            <span class="carteira-icon">ð¼</span>
+                            <span class="carteira-icon">💼</span>
                             <div style="display:flex; flex-direction:column;">
                                 <h4 class="carteira-title">${carteiraNomeAmigavel}</h4>
-                                <span style="font-size: 0.68rem; color: var(--muted); font-weight: 500;">${c.operacao} Â· ${c.qtd_agentes} operadores ativos</span>
+                                <span style="font-size: 0.68rem; color: var(--muted); font-weight: 500;">${c.operacao} · ${c.qtd_agentes} operadores ativos</span>
                             </div>
                         </div>
                         <div class="carteira-body">
                             <!-- H.O Column -->
                             <div class="carteira-col">
-                                <div class="indicator-title">HonorÃ¡rios (H.O)</div>
+                                <div class="indicator-title">Honorários (H.O)</div>
                                 <div class="indicator-stats">
-                                    <div class="stat-item">
-                                        <span class="stat-label">ProduÃ§Ã£o MÃ©dia:</span>
-                                        <span class="stat-val" style="color: var(--navy);">${hoProdStr}</span>
+                                    <div class="stat-item" style="flex-direction: column; align-items: flex-start;">
+                                        <span class="stat-label">Valor Total:</span>
+                                        <span class="stat-val" style="color: var(--navy); font-size: 1.2rem;">${hoTotalStr}</span>
+                                        <span style="font-size: 0.75rem; color: var(--muted); margin-top: 2px;">Média: ${hoProdStr}</span>
                                     </div>
-                                    <div class="stat-item" style="margin-top: 4px;">
-                                        <span class="stat-label">DispersÃ£o MÃ©dia:</span>
+                                    <div class="stat-item" style="margin-top: 8px;">
+                                        <span class="stat-label">Dispersão Média:</span>
                                         <span class="stat-val ${c.media_dispersao_ho < 50 ? 'text-danger' : 'text-success'}">${hoDispStr}</span>
                                     </div>
                                 </div>
@@ -355,19 +358,19 @@ window.initQuartil = function() {
                                         <div class="disp-bar-fill ${hoDispClass}" style="width: ${hoFillWidth}%"></div>
                                     </div>
                                 </div>
-                                <div style="font-size: 0.62rem; color: var(--muted); font-weight: 700; text-transform: uppercase; margin-top: 14px; border-top: 1.5px solid #eef7f2; padding-top: 8px; letter-spacing: 0.03em;">MÃ©dia de DispersÃ£o por Quartil</div>
+                                <div style="font-size: 0.62rem; color: var(--muted); font-weight: 700; text-transform: uppercase; margin-top: 14px; border-top: 1.5px solid #eef7f2; padding-top: 8px; letter-spacing: 0.03em;">Média de Dispersão por Quartil</div>
                                 <div class="quartil-disp-breakdown">
-                                    <span class="q-mini-badge ${getQClass(c.ho_quartil_disp, "1\u00ba Quartil", "q1")}" title="1\u00ba Quartil H.O">Q1: ${hoQ1}</span>
-                                    <span class="q-mini-badge ${getQClass(c.ho_quartil_disp, "2\u00ba Quartil", "q2")}" title="2\u00ba Quartil H.O">Q2: ${hoQ2}</span>
-                                    <span class="q-mini-badge ${getQClass(c.ho_quartil_disp, "3\u00ba Quartil", "q3")}" title="3\u00ba Quartil H.O">Q3: ${hoQ3}</span>
-                                    <span class="q-mini-badge ${getQClass(c.ho_quartil_disp, "4\u00ba Quartil", "q4")}" title="4\u00ba Quartil H.O">Q4: ${hoQ4}</span>
+                                    <span class="q-mini-badge ${getQClass(c.ho_quartil_disp, "1º Quartil", "q1")}" title="1º Quartil H.O">Q1: ${hoQ1}</span>
+                                    <span class="q-mini-badge ${getQClass(c.ho_quartil_disp, "2º Quartil", "q2")}" title="2º Quartil H.O">Q2: ${hoQ2}</span>
+                                    <span class="q-mini-badge ${getQClass(c.ho_quartil_disp, "3º Quartil", "q3")}" title="3º Quartil H.O">Q3: ${hoQ3}</span>
+                                    <span class="q-mini-badge ${getQClass(c.ho_quartil_disp, "4º Quartil", "q4")}" title="4º Quartil H.O">Q4: ${hoQ4}</span>
                                 </div>
-                                <div style="font-size: 0.62rem; color: var(--muted); font-weight: 700; text-transform: uppercase; margin-top: 10px; border-top: 1.5px solid #eef7f2; padding-top: 8px; letter-spacing: 0.03em;">MÃ©dia de ProduÃ§Ã£o por Quartil</div>
+                                <div style="font-size: 0.62rem; color: var(--muted); font-weight: 700; text-transform: uppercase; margin-top: 10px; border-top: 1.5px solid #eef7f2; padding-top: 8px; letter-spacing: 0.03em;">Média de Produção por Quartil</div>
                                 <div class="quartil-disp-breakdown" style="margin-top: 6px;">
-                                    <span class="q-mini-badge ${getQClass(c.ho_quartil_prod, "1\u00ba Quartil", "q1")}" title="1\u00ba Quartil H.O ProduÃ§Ã£o">Q1: ${hoProdQ1}</span>
-                                    <span class="q-mini-badge ${getQClass(c.ho_quartil_prod, "2\u00ba Quartil", "q2")}" title="2\u00ba Quartil H.O ProduÃ§Ã£o">Q2: ${hoProdQ2}</span>
-                                    <span class="q-mini-badge ${getQClass(c.ho_quartil_prod, "3\u00ba Quartil", "q3")}" title="3\u00ba Quartil H.O ProduÃ§Ã£o">Q3: ${hoProdQ3}</span>
-                                    <span class="q-mini-badge ${getQClass(c.ho_quartil_prod, "4\u00ba Quartil", "q4")}" title="4\u00ba Quartil H.O ProduÃ§Ã£o">Q4: ${hoProdQ4}</span>
+                                    <span class="q-mini-badge ${getQClass(c.ho_quartil_prod, "1º Quartil", "q1")}" title="1º Quartil H.O Produção">Q1: ${hoProdQ1}</span>
+                                    <span class="q-mini-badge ${getQClass(c.ho_quartil_prod, "2º Quartil", "q2")}" title="2º Quartil H.O Produção">Q2: ${hoProdQ2}</span>
+                                    <span class="q-mini-badge ${getQClass(c.ho_quartil_prod, "3º Quartil", "q3")}" title="3º Quartil H.O Produção">Q3: ${hoProdQ3}</span>
+                                    <span class="q-mini-badge ${getQClass(c.ho_quartil_prod, "4º Quartil", "q4")}" title="4º Quartil H.O Produção">Q4: ${hoProdQ4}</span>
                                 </div>
                             </div>
                             
@@ -375,12 +378,13 @@ window.initQuartil = function() {
                             <div class="carteira-col">
                                 <div class="indicator-title">Promessas de Pagamento</div>
                                 <div class="indicator-stats">
-                                    <div class="stat-item">
-                                        <span class="stat-label">ProduÃ§Ã£o MÃ©dia:</span>
-                                        <span class="stat-val" style="color: var(--navy);">${promProdStr} <span style="font-size:0.75rem; font-weight:500; color:var(--muted)">prom.</span></span>
+                                    <div class="stat-item" style="flex-direction: column; align-items: flex-start;">
+                                        <span class="stat-label">Valor Total:</span>
+                                        <span class="stat-val" style="color: var(--navy); font-size: 1.2rem;">${promTotalStr} <span style="font-size:0.75rem; font-weight:500; color:var(--muted)">prom.</span></span>
+                                        <span style="font-size: 0.75rem; color: var(--muted); margin-top: 2px;">Média: ${promProdStr}</span>
                                     </div>
-                                    <div class="stat-item" style="margin-top: 4px;">
-                                        <span class="stat-label">DispersÃ£o MÃ©dia:</span>
+                                    <div class="stat-item" style="margin-top: 8px;">
+                                        <span class="stat-label">Dispersão Média:</span>
                                         <span class="stat-val ${c.media_dispersao_promessas < 50 ? 'text-danger' : 'text-success'}">${promDispStr}</span>
                                     </div>
                                 </div>
@@ -389,19 +393,19 @@ window.initQuartil = function() {
                                         <div class="disp-bar-fill ${promDispClass}" style="width: ${promFillWidth}%"></div>
                                     </div>
                                 </div>
-                                <div style="font-size: 0.62rem; color: var(--muted); font-weight: 700; text-transform: uppercase; margin-top: 14px; border-top: 1.5px solid #eef7f2; padding-top: 8px; letter-spacing: 0.03em;">MÃ©dia de DispersÃ£o por Quartil</div>
+                                <div style="font-size: 0.62rem; color: var(--muted); font-weight: 700; text-transform: uppercase; margin-top: 14px; border-top: 1.5px solid #eef7f2; padding-top: 8px; letter-spacing: 0.03em;">Média de Dispersão por Quartil</div>
                                 <div class="quartil-disp-breakdown">
-                                    <span class="q-mini-badge ${getQClass(c.prom_quartil_disp, "1\u00ba Quartil", "q1")}" title="1\u00ba Quartil Promessas">Q1: ${promQ1}</span>
-                                    <span class="q-mini-badge ${getQClass(c.prom_quartil_disp, "2\u00ba Quartil", "q2")}" title="2\u00ba Quartil Promessas">Q2: ${promQ2}</span>
-                                    <span class="q-mini-badge ${getQClass(c.prom_quartil_disp, "3\u00ba Quartil", "q3")}" title="3\u00ba Quartil Promessas">Q3: ${promQ3}</span>
-                                    <span class="q-mini-badge ${getQClass(c.prom_quartil_disp, "4\u00ba Quartil", "q4")}" title="4\u00ba Quartil Promessas">Q4: ${promQ4}</span>
+                                    <span class="q-mini-badge ${getQClass(c.prom_quartil_disp, "1º Quartil", "q1")}" title="1º Quartil Promessas">Q1: ${promQ1}</span>
+                                    <span class="q-mini-badge ${getQClass(c.prom_quartil_disp, "2º Quartil", "q2")}" title="2º Quartil Promessas">Q2: ${promQ2}</span>
+                                    <span class="q-mini-badge ${getQClass(c.prom_quartil_disp, "3º Quartil", "q3")}" title="3º Quartil Promessas">Q3: ${promQ3}</span>
+                                    <span class="q-mini-badge ${getQClass(c.prom_quartil_disp, "4º Quartil", "q4")}" title="4º Quartil Promessas">Q4: ${promQ4}</span>
                                 </div>
-                                <div style="font-size: 0.62rem; color: var(--muted); font-weight: 700; text-transform: uppercase; margin-top: 10px; border-top: 1.5px solid #eef7f2; padding-top: 8px; letter-spacing: 0.03em;">MÃ©dia de ProduÃ§Ã£o por Quartil</div>
+                                <div style="font-size: 0.62rem; color: var(--muted); font-weight: 700; text-transform: uppercase; margin-top: 10px; border-top: 1.5px solid #eef7f2; padding-top: 8px; letter-spacing: 0.03em;">Média de Produção por Quartil</div>
                                 <div class="quartil-disp-breakdown" style="margin-top: 6px;">
-                                    <span class="q-mini-badge ${getQClass(c.prom_quartil_prod, "1\u00ba Quartil", "q1")}" title="1\u00ba Quartil Promessas ProduÃ§Ã£o">Q1: ${promProdQ1}</span>
-                                    <span class="q-mini-badge ${getQClass(c.prom_quartil_prod, "2\u00ba Quartil", "q2")}" title="2\u00ba Quartil Promessas ProduÃ§Ã£o">Q2: ${promProdQ2}</span>
-                                    <span class="q-mini-badge ${getQClass(c.prom_quartil_prod, "3\u00ba Quartil", "q3")}" title="3\u00ba Quartil Promessas ProduÃ§Ã£o">Q3: ${promProdQ3}</span>
-                                    <span class="q-mini-badge ${getQClass(c.prom_quartil_prod, "4\u00ba Quartil", "q4")}" title="4\u00ba Quartil Promessas ProduÃ§Ã£o">Q4: ${promProdQ4}</span>
+                                    <span class="q-mini-badge ${getQClass(c.prom_quartil_prod, "1º Quartil", "q1")}" title="1º Quartil Promessas Produção">Q1: ${promProdQ1}</span>
+                                    <span class="q-mini-badge ${getQClass(c.prom_quartil_prod, "2º Quartil", "q2")}" title="2º Quartil Promessas Produção">Q2: ${promProdQ2}</span>
+                                    <span class="q-mini-badge ${getQClass(c.prom_quartil_prod, "3º Quartil", "q3")}" title="3º Quartil Promessas Produção">Q3: ${promProdQ3}</span>
+                                    <span class="q-mini-badge ${getQClass(c.prom_quartil_prod, "4º Quartil", "q4")}" title="4º Quartil Promessas Produção">Q4: ${promProdQ4}</span>
                                 </div>
                             </div>
                         </div>
@@ -417,14 +421,14 @@ window.initQuartil = function() {
         const validHOs = filtered.filter(item => item.HO !== null).map(item => item.HO);
         const sumHO = validHOs.length > 0 ? validHOs.reduce((a, b) => a + b, 0) : 0;
         const avgHO = validHOs.length > 0 ? (sumHO / validHOs.length) : 0;
-        kpiMediaHO.textContent = avgHO > 0 ? avgHO.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) : "â";
+        kpiMediaHO.textContent = avgHO > 0 ? avgHO.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) : "—";
         if (kpiTotalHO) {
-            kpiTotalHO.textContent = sumHO > 0 ? sumHO.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) : "â";
+            kpiTotalHO.textContent = sumHO > 0 ? sumHO.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) : "—";
         }
 
         const validProms = filtered.filter(item => item.Promessas !== null).map(item => item.Promessas);
         const avgProm = validProms.length > 0 ? (validProms.reduce((a, b) => a + b, 0) / validProms.length) : 0;
-        kpiMediaPromessas.textContent = avgProm > 0 ? Math.round(avgProm).toLocaleString('pt-BR') : "â";
+        kpiMediaPromessas.textContent = avgProm > 0 ? Math.round(avgProm).toLocaleString('pt-BR') : "—";
 
         const uniqueOps = [...new Set(filtered.map(item => item.Operacao))];
         kpiTotalOperacoes.textContent = uniqueOps.length;
@@ -461,7 +465,7 @@ window.initQuartil = function() {
         if (filtered.length === 0) {
             agentsGrid.innerHTML = `
                 <div style="grid-column: 1 / -1; text-align: center; color: var(--muted); padding: 40px; background: var(--card); border: 1px solid var(--border); border-radius: 14px;">
-                    <div style="font-size: 2rem; margin-bottom: 8px;">ð</div>
+                    <div style="font-size: 2rem; margin-bottom: 8px;">🔍 </div>
                     <p style="font-weight: 600;">Nenhum operador encontrado com os filtros selecionados.</p>
                 </div>
             `;
@@ -472,26 +476,26 @@ window.initQuartil = function() {
             const hoClass = getQuartileClass(item.Quartil_HO);
             const promClass = getQuartileClass(item.Quartil_Promessas);
 
-            const hoValStr = item.HO !== null ? item.HO.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) : "â";
-            const hoDispStr = item.Dispersao_HO !== null ? item.Dispersao_HO.toFixed(1) + "%" : "â";
+            const hoValStr = item.HO !== null ? item.HO.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) : "—";
+            const hoDispStr = item.Dispersao_HO !== null ? item.Dispersao_HO.toFixed(1) + "%" : "—";
             const hoFillWidth = item.Dispersao_HO !== null ? item.Dispersao_HO : 0;
-            const hoFillClass = item.Quartil_HO !== "â" ? hoClass : "q-empty";
+            const hoFillClass = item.Quartil_HO !== "—" ? hoClass : "q-empty";
 
-            const promValStr = item.Promessas !== null ? item.Promessas.toLocaleString('pt-BR') : "â";
-            const promDispStr = item.Dispersao_Promessas !== null ? item.Dispersao_Promessas.toFixed(1) + "%" : "â";
+            const promValStr = item.Promessas !== null ? item.Promessas.toLocaleString('pt-BR') : "—";
+            const promDispStr = item.Dispersao_Promessas !== null ? item.Dispersao_Promessas.toFixed(1) + "%" : "—";
             const promFillWidth = item.Dispersao_Promessas !== null ? item.Dispersao_Promessas : 0;
-            const promFillClass = item.Quartil_Promessas !== "â" ? promClass : "q-empty";
+            const promFillClass = item.Quartil_Promessas !== "—" ? promClass : "q-empty";
 
             const isQ4 = (item.Quartil_HO || "").includes("4\u00ba") || (item.Quartil_Promessas || "").includes("4\u00ba");
             const nameClass = isQ4 ? "agent-card-name q4-highlighted-name" : "agent-card-name";
-            const nameBadge = isQ4 ? ` <span class="q4-alert-badge" title="Operador no 4\u00ba Quartil em pelo menos um indicador">â ï¸ 4\u00ba Q</span>` : "";
+            const nameBadge = isQ4 ? ` <span class="q4-alert-badge" title="Operador no 4\u00ba Quartil em pelo menos um indicador">⚠️ 4\u00ba Q</span>` : "";
 
             return `
                 <div class="agent-card">
                     <div class="agent-card-header">
                         <div class="agent-card-info">
                             <div class="${nameClass}">${item.Agente}${nameBadge}</div>
-                            <div class="agent-card-matricula">MatrÃ­cula: ${item.Matricula}</div>
+                            <div class="agent-card-matricula">Matrícula: ${item.Matricula}</div>
                         </div>
                     </div>
                     <div class="agent-card-op-badge" title="${item.Operacao}">${item.Operacao}</div>
@@ -500,7 +504,7 @@ window.initQuartil = function() {
                         <!-- H.O Metric Group -->
                         <div class="agent-metric-row">
                             <div class="agent-metric-header">
-                                <span class="agent-metric-title">HonorÃ¡rios (H.O)</span>
+                                <span class="agent-metric-title">Honorários (H.O)</span>
                                 <span class="q-badge ${hoFillClass}">${item.Quartil_HO}</span>
                             </div>
                             <div class="agent-metric-value-box">
@@ -508,7 +512,7 @@ window.initQuartil = function() {
                             </div>
                             <div class="dispersion-wrap">
                                 <div class="dispersion-header-row">
-                                    <span>DispersÃ£o</span>
+                                    <span>Dispersão</span>
                                     <span class="dispersion-value">${hoDispStr}</span>
                                 </div>
                                 <div class="disp-bar-track">
@@ -529,7 +533,7 @@ window.initQuartil = function() {
                             </div>
                             <div class="dispersion-wrap">
                                 <div class="dispersion-header-row">
-                                    <span>DispersÃ£o</span>
+                                    <span>Dispersão</span>
                                     <span class="dispersion-value">${promDispStr}</span>
                                 </div>
                                 <div class="disp-bar-track">
